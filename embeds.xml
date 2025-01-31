@@ -1,0 +1,312 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Include file="Libs\Ace3\CallbackHandler-1.0\CallbackHandler-1.0.xml" />
+	<Include file="Libs\Ace3\AceAddon-3.0\AceAddon-3.0.xml" />
+	<Include file="Libs\Ace3\AceConsole-3.0\AceConsole-3.0.xml" />
+	<Include file="Libs\Ace3\AceEvent-3.0\AceEvent-3.0.xml" />
+	<Include file="Libs\Ace3\AceGUI-3.0\AceGUI-3.0.xml" />
+	<Include file="Libs\Ace3\AceConfig-3.0\AceConfigRegistry-3.0\AceConfigRegistry-3.0.xml" />
+	<Include file="Libs\Ace3\AceConfig-3.0\AceConfigDialog-3.0\AceConfigDialog-3.0.xml" />
+	<Script file="localization\localization.lua"/>
+	<Script file="localization\localization_frFR.lua"/>
+	<Script file="embeds.lua"/>
+	<Script file="MountMania.lua"/>
+	<Script file="MountMania_Frame.lua"/>
+	<Script file="MountMania_Business.lua"/>
+	<Script file="MountManiaOptions.lua"/>
+
+	<FontString name="MountManiaPlayerLabelTemplate" inherits="GameFontHighlightSmall" virtual="true" justifyH="LEFT">
+		<Size x="150" y="15" />
+	</FontString>
+	<FontString name="MountManiaPlayerSuccessesTemplate" inherits="GameFontHighlightSmall" virtual="true" justifyH="RIGHT">
+		<Size x="30" y="15" />
+	</FontString>
+	<Button name="MountManiaButtonTemplate" mixin="TalentButtonArtMixin" virtual="true">
+		<KeyValues>
+			<KeyValue key="GetEdgeDiameterOffset" value="TalentButtonArtMixin.GetCircleEdgeDiameterOffset" type="global"/>
+			<KeyValue key="artSet" value="TalentButtonArtMixin.ArtSet.Circle" type="global"/>
+		</KeyValues>
+		<Size x="40" y="40"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Shadow">
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER">
+				<Texture parentKey="Icon" file="Interface\Icons\achievement_guildperk_mountup.blp">
+					<Size x="36" y="36"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER" textureSubLevel="1">
+				<Texture parentKey="DisabledOverlay" hidden="true">
+					<Size x="36" y="36"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<Color r="0" g="0" b="0" a="1"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture parentKey="StateBorder" texelSnappingBias="0.0" snapToPixelGrid="false">
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="StateBorderHover" texelSnappingBias="0.0" snapToPixelGrid="false" alphaMode="ADD" hidden="true">
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="2">
+				<FontString parentKey="SpendText" inherits="SystemFont16_Shadow_ThickOutline" justifyH="CENTER">
+					<Anchors>
+						<Anchor point="BOTTOM" x="11" y="4"/>
+					</Anchors>
+				</FontString>
+				<Texture parentKey="SelectableIcon" atlas="talents-icon-learnableplus" useAtlasSize="true" hidden="true">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="-3" y="-3"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK" textureSubLevel="1">
+				<FontString parentKey="SpendTextShadow1" inherits="SystemFont16_Shadow_ThickOutline" justifyH="CENTER" parentArray="spendTextShadows">
+					<Color r="0" g="0" b="0"/>
+					<Anchors>
+						<Anchor point="CENTER" relativeKey="$parent.SpendText" relativePoint="CENTER" x="-1" y="1"/>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="SpendTextShadow2" inherits="SystemFont16_Shadow_ThickOutline" justifyH="CENTER" parentArray="spendTextShadows">
+					<Color r="0" g="0" b="0"/>
+					<Anchors>
+							<Anchor point="CENTER" relativeKey="$parent.SpendText" relativePoint="CENTER" x="1" y="1"/>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="SpendTextShadow3" inherits="SystemFont16_Shadow_ThickOutline" justifyH="CENTER" parentArray="spendTextShadows">
+					<Color r="0" g="0" b="0"/>
+					<Anchors>
+							<Anchor point="CENTER" relativeKey="$parent.SpendText" relativePoint="CENTER" x="-1" y="-1"/>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="SpendTextShadow4" inherits="SystemFont16_Shadow_ThickOutline" justifyH="CENTER" parentArray="spendTextShadows">
+					<Color r="0" g="0" b="0"/>
+					<Anchors>
+							<Anchor point="CENTER" relativeKey="$parent.SpendText" relativePoint="CENTER" x="1" y="-1"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="3">
+				<MaskTexture parentKey="IconMask" hWrapMode="CLAMPTOBLACKADDITIVE" vWrapMode="CLAMPTOBLACKADDITIVE">
+					<Size x="36" y="36"/>
+					<Anchors>
+						<Anchor point="CENTER" relativeKey="$parent.Icon" relativePoint="CENTER"/>
+					</Anchors>
+					<MaskedTextures>
+						<MaskedTexture childKey="Icon"/>
+					</MaskedTextures>
+				</MaskTexture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<MaskTexture parentKey="DisabledOverlayMask" atlas="UI-Frame-IconMask" hWrapMode="CLAMPTOBLACKADDITIVE" vWrapMode="CLAMPTOBLACKADDITIVE">
+					<Size x="36" y="36"/>
+					<Anchors>
+						<Anchor point="CENTER" relativeKey="$parent.DisabledOverlay" relativePoint="CENTER"/>
+					</Anchors>
+					<MaskedTextures>
+						<MaskedTexture childKey="DisabledOverlay"/>
+					</MaskedTextures>
+				</MaskTexture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture parentKey="Glow" hidden="true" alphaMode="ADD" atlas="talents-node-square-greenglow">
+					<Size x="62" y="62"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<Animations>
+						<AnimationGroup parentKey="Anim" looping="REPEAT" setToFinalAlpha="true">
+							<Alpha fromAlpha="0" toAlpha="1" duration="0.36" order="1" smoothing="OUT"/>
+							<Alpha fromAlpha="1" toAlpha="0" duration="0.36" order="2" smoothing="IN"/>
+						</AnimationGroup>
+					</Animations>
+					<Scripts>
+						<OnShow>
+							self.Anim:Play();
+						</OnShow>
+						<OnHide>
+							self.Anim:Stop();
+						</OnHide>
+					</Scripts>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture parentKey="Ghost" texelSnappingBias="0.0" snapToPixelGrid="false" alpha="0.8" hidden="true">
+					<Size x="48" y="48"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Cooldown name="$parentCooldown" parentKey="Cooldown" inherits="CooldownFrameTemplate">
+				<SwipeTexture file="Interface\PVPFrame\PVP-Separation-Circle-Cooldown-overlay">
+					<Color r="0" g="0" b="0" a="0.8"/>
+				</SwipeTexture>
+				<Scripts>
+					<OnCooldownDone>
+						C_Timer.After(1.5, function()
+							-- TODO
+						end)
+					</OnCooldownDone>
+				</Scripts>
+			</Cooldown>
+		</Frames>
+		<Scripts>
+			<OnLoad method="OnLoad" />
+			<OnEnter>
+				self:OnEnterVisuals()
+				MountManiaButtonEnter(self)
+			</OnEnter>
+			<OnLeave>
+				self:OnLeaveVisuals()
+				MountManiaButtonLeave(self)
+			</OnLeave>
+		</Scripts>
+	</Button>
+	<FontString name="MountManiaWindowTitleTemplate" inherits="GameFontNormal" virtual="true">
+		<Size x="400" y="20" />
+	</FontString>
+	<Button name="MountManiaLineTemplate" virtual="true">
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture parentKey="Selected" atlas="groupfinder-highlightbar-yellow" alpha="0.4" alphaMode="ADD" setAllPoints="true" hidden="true"/>
+			</Layer>
+		</Layers>
+		<HighlightTexture file="Interface\FriendsFrame\UI-FriendsFrame-HighlightBar-Blue" alpha="0.4" alphaMode="ADD" setAllPoints="true"/>
+	</Button>
+	<CheckButton name="MountManiaLockTemplate" virtual="true">
+		<Size x="16" y="16"/>
+		<Anchors>
+			<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Inset" relativePoint="TOPRIGHT" x="0" y="0"/>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+				local locked = MountManiaWindow[self:GetParent():GetAttribute("LockOptionParam")]
+				self:SetChecked(locked)
+				self:GetParent().canMove = not locked
+				self:GetParent():EnableMouse(not locked)
+			</OnLoad>
+			<OnClick>
+				local locked = self:GetChecked()
+				self:GetParent().canMove = not locked
+				self:GetParent():EnableMouse(not locked)
+				self:GetParent().alphaFunc()
+				MountManiaWindow[self:GetParent():GetAttribute("LockOptionParam")] = locked
+				MountMania_PlaySound(SOUNDKIT.UI_70_ARTIFACT_FORGE_APPEARANCE_LOCKED, "SFX", true)
+			</OnClick>
+			<OnEnter>
+				MountManiaButtonEnter(self)
+			</OnEnter>
+			<OnLeave>
+				MountManiaButtonLeave(self)
+			</OnLeave>
+		</Scripts>
+		<NormalTexture file="Interface\AddOns\MountMania\art\lock" setAllPoints="true">
+			<TexCoords left=".5" right="1" top="0" bottom="1" />
+		</NormalTexture>
+		<PushedTexture file="Interface\AddOns\MountMania\art\lock" setAllPoints="true">
+			<TexCoords left="0" right=".5" top="0" bottom="1" />
+		</PushedTexture>
+		<CheckedTexture file="Interface\AddOns\MountMania\art\lock" setAllPoints="true">
+			<TexCoords left="0" right=".5" top="0" bottom="1" />
+		</CheckedTexture>
+	</CheckButton>
+	<Frame name="MountManiaFrameTemplate" virtual="true" hidden="true" movable="true" resizable="true" clampedToScreen="true" frameStrata="BACKGROUND">
+		<Size x="145" y="145" />
+		<Attributes>
+			<Attribute name="LockOptionParam" value="MountManiaWindowLocked"/>
+		</Attributes>
+		<Anchors>
+			<Anchor point="CENTER" x="0" y="0" />
+		</Anchors>
+		<Frames>
+			<Frame name="$parentInset" parentKey="Inset">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="5" y="-26"/>
+					<Anchor point="BOTTOMRIGHT" x="-5" y="26"/>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND" textureSubLevel="-5">
+						<!-- TODO: Convert this to atlas -->
+						<Texture parentKey="Bg" file="Interface\FrameGeneral\UI-Background-Marble" horizTile="true" vertTile="true" setAllPoints="true"/>
+					</Layer>
+				</Layers>
+			</Frame>
+			<CheckButton name="$parentLock" parentKey="Lock" inherits="MountManiaLockTemplate">
+				<Size x="12" y="12"/>
+			</CheckButton>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForDrag("LeftButton")
+			</OnLoad>
+			<OnShow>
+				applyMountManiaWindowOptions()
+				MountManiaWindow_OnShow(self)
+			</OnShow>
+			<OnHide function="MountManiaWindow_OnHide" />
+			<OnDragStart>
+				if(self.canMove) then
+					self.moving = true
+					self:SetFrameStrata("DIALOG")
+					--TODO dpSetHelpTipFramesStrata("TOOLTIP")
+					self:StartMoving()
+				end
+			</OnDragStart>
+			<OnDragStop>
+				if( self.canMove and self.moving ) then
+					self.moving = false
+					self:StopMovingOrSizing()
+					self:SetFrameStrata("BACKGROUND")
+					--TODO dpSetHelpTipFramesStrata("LOW")
+					MountManiaSaveWindowPosition()
+				end
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+	
+	<Button name="MountManiaMountSummoner" parent="UIParent" inherits="MountManiaButtonTemplate" hidden="true">
+		<Scripts>
+			<OnShow function="MountManiaMountSummoner_OnLoad" />
+			<OnClick>
+				if self.Cooldown:GetCooldownDuration() == 0 then
+					MountManiaSummonMount()
+					MountManiaButton_UpdateCooldown(self)
+					MountManiaButton_UpdateCooldown(MountManiaEnder)
+				end
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	<Button name="MountManiaEnder" parent="UIParent" inherits="MountManiaButtonTemplate" hidden="true">
+		<Scripts>
+			<OnShow function="MountManiaEnder_OnLoad" />
+			<OnClick>
+				if self.Cooldown:GetCooldownDuration() == 0 then
+					MountManiaButton_UpdateCooldown(self)
+					MountManiaButton_UpdateCooldown(MountManiaMountSummoner)
+					MountManiaEndGame()
+				end
+			</OnClick>
+		</Scripts>
+	</Button>
+	
+	<GameTooltip name="MountManiaTooltip" frameStrata="TOOLTIP" hidden="true" parent="UIParent" inherits="GameTooltipTemplate" />
+</Ui>

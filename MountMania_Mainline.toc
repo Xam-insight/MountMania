@@ -1,0 +1,13 @@
+## Interface: 110007, 110100
+## Title: MountMania
+## IconTexture: Interface\Icons\ability_evoker_prescience.blp
+## AddonCompartmentFunc: MountMania_OpenOptions
+## Version: 1.0.0
+## Author: Xam_insight
+## SavedVariables: MountManiaOptionsData, MountManiaWindow
+
+Libs\Ace3\LibStub\LibStub.lua
+Libs\Ace3\AceLocale-3.0\AceLocale-3.0.xml
+Libs\EZBlizzardUiPopups\EZBlizzardUiPopups.lua
+
+embeds.xml
