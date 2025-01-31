@@ -98,7 +98,7 @@ local function RecordPlayerData(unitGUID, playerName, classFileName)
     playerMountData[unitGUID].successes = playerMountData[unitGUID].successes + 1
 
     -- Print a message with the updated information
-    print("|cFF00FF00[Info]: " .. playerName .. " has now matched " .. playerMountData[unitGUID].successes .. " mount(s) with you!|r")
+    MountMania:Print(playerName .. " has now matched " .. playerMountData[unitGUID].successes .. " mount(s) with you!")
 	
 	-- Update the frame with the new data
     updateMountManiaFrame()
@@ -144,7 +144,7 @@ end
 function MountManiaSummonMount()
     -- Check if the player is in an environment where mounting is allowed
     if not IsOutdoors() or UnitOnTaxi("player") then
-        print("|cFFFF0000[Alert]: You cannot summon a mount in this environment!|r")
+        MountMania:Print("You cannot summon a mount in this environment!")
         return
     end
 
@@ -161,6 +161,10 @@ function MountManiaSummonMount()
 
     -- Summon a random mount if any are usable
     if #usableMounts > 0 then
+		if not IsInGroup() and not IsInRaid() then
+			MountMania:Print("You are not in a party or raid. Only your target or focus can be detected for this challenge.")
+		end
+	
         local randomIndex = math.random(1, #usableMounts)
         C_MountJournal.SummonByID(usableMounts[randomIndex])
 		local message = L["MOUNTMANIA_CATCH_GETREADY"]
@@ -173,9 +177,9 @@ function MountManiaSummonMount()
 		successCounted = {}
 		MountMania:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "CheckNearbyMounts") -- Detects successful spell casts
 		MountManiaSendChatMessage(message)
-        print("|cFF00FF00[Info]: Summoning a random mount!|r")
+        MountMania:Print("|cFF00FF00[Info]: Summoning a random mount!")
     else
-        print("|cFFFF0000[Alert]: You have no usable mounts!|r")
+        MountMania:Print("You have no usable mounts!")
     end
 end
 
