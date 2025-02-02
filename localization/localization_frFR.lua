@@ -2,7 +2,7 @@ local L = LibStub("AceLocale-3.0"):NewLocale("MountMania", "frFR", false)
 
 if L then
 
-L["MOUNTMANIA_WELCOME"] = "Tapez /mlf pour ouvrir les options de MountMania."
+L["MOUNTMANIA_WELCOME"] = "Tapez /mnt pour afficher/cacher MountMania."
 
 L["MOUNTMANIA_MOUNTSUMMONER"] = "Invoquer une monture"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "Invoquer une monture aléatoire pour mettre|nau défi les autres joueurs de votre groupe."
@@ -19,6 +19,9 @@ L["MOUNTMANIA_CATCH_WINNER"] = "Voyons qui a gagné !"
 L["MOUNTMANIA_CATCH_NEXT1"] = "Préparez-vous pour la prochaine monture !"
 L["MOUNTMANIA_CATCH_NEXT2"] = "Ensuite, nous avons..."
 L["MOUNTMANIA_CATCH_MOUNT"] = "%s !"
+
+L["ENABLE_MOUNTMANIA"] = "Affiche/Cache MountMania"
+L["ENABLE_MOUNTMANIA_DESC"] = "Affiche/Cache la fenêtre MountMania"
 
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Transparence de MountMania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define la transparence de MountMania"

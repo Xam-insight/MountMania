@@ -37,13 +37,15 @@ function getPlayerMountData(GUID, data)
 end
 
 function MountMania:OnEnable()
-	self:RegisterChatCommand("mlf", "MountManiaChatCommand")
+	self:RegisterChatCommand("mnt", "MountManiaChatCommand")
 	self:Print(L["MOUNTMANIA_WELCOME"])
 	
 	if not MountManiaFrame then
         createMountManiaFrame()
     end
-    MountManiaFrame:Show()
+	if not MountManiaWindow["MountManiaHidden"] then
+		MountManiaFrame:Show()
+	end
 	
 	MountManiaMountSummoner:Hide()
 	MountManiaMountSummoner:SetParent(MountManiaFrame)
@@ -68,8 +70,14 @@ end
 
 
 
-function MountMania:MountManiaChatCommand()
-	MountMania_OpenOptions()
+function MountMania:MountManiaChatCommand(param)
+	if param == "options" then
+		MountMania_OpenOptions()
+	elseif MountManiaFrame:IsShown() then
+		MountManiaFrame:Hide()
+	else
+		MountManiaFrame:Show()
+	end
 end
 
 function MountMania_OpenOptions()

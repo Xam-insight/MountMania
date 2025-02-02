@@ -1,6 +1,6 @@
 ## Interface: 110007, 110100
 ## Title: MountMania
-## IconTexture: Interface\Icons\ability_evoker_prescience.blp
+## IconTexture: Interface\Icons\achievement_guildperk_mountup.blp
 ## AddonCompartmentFunc: MountMania_OpenOptions
 ## Version: 1.0.0
 ## Author: Xam_insight

@@ -4,7 +4,7 @@ if L then
 
 L["SPACE_BEFORE_DOT"] = ""
 
-L["MOUNTMANIA_WELCOME"] = "Type /mtm to open MountMania options panel."
+L["MOUNTMANIA_WELCOME"] = "Type /mnt to toggle MountMania."
 
 L["MOUNTMANIA_MOUNTSUMMONER"] = "Summon Mount"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "Summon a random mount to challenge|nother players in your group."
@@ -21,6 +21,9 @@ L["MOUNTMANIA_CATCH_WINNER"] = "Let's see who won!"
 L["MOUNTMANIA_CATCH_NEXT1"] = "Get ready for the next mount!"
 L["MOUNTMANIA_CATCH_NEXT2"] = "Up next, we have..."
 L["MOUNTMANIA_CATCH_MOUNT"] = "%s!"
+
+L["ENABLE_MOUNTMANIA"] = "Toggle MountMania"
+L["ENABLE_MOUNTMANIA_DESC"] = "Show/Hide MountMania's frame"
 
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "MountMania alpha"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define MountMania's alpha"

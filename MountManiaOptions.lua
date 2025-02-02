@@ -16,8 +16,29 @@ function loadMountManiaOptions()
 				name = GENERAL,
 				inline = true,
 				args = {
-					enableSound = {
+					enableMountMania = {
 						type = "toggle", order = 1,
+						width = "full",
+						name = L["ENABLE_MOUNTMANIA"],
+						desc = L["ENABLE_MOUNTMANIA_DESC"],
+						set = function(info, val) 
+							MountManiaWindow["MountManiaHidden"] = not val
+							if val then
+								MountManiaFrame:Show()
+							else
+								MountManiaFrame:Hide()
+							end
+						end,
+						get = function(info)
+							local enabled = true
+							if MountManiaWindow["MountManiaHidden"] ~= nil then
+								enabled = not MountManiaWindow["MountManiaHidden"]
+							end
+							return enabled
+						end
+					},
+					enableSound = {
+						type = "toggle", order = 2,
 						width = "full",
 						name = ENABLE_SOUND,
 						desc = ENABLE_SOUND,
@@ -33,7 +54,7 @@ function loadMountManiaOptions()
 						end
 					},
 					alpha = {
-						type = "range", order = 2,
+						type = "range", order = 3,
 						width = "full", descStyle = "",
 						name = L["MOUNTMANIA_OPTIONS_ALPHA"],
 						desc = L["MOUNTMANIA_OPTIONS_ALPHA_DESC"],
