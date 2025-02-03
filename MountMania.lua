@@ -14,7 +14,6 @@ MountManiaAchievements = {
 function MountMania:OnInitialize()
 	-- Called when the addon is loaded
 	
-	--MountMania:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "CheckNearbyMounts") -- Detects successful spell casts
 end
 
 -- Table to track player mount matches
@@ -77,13 +76,6 @@ function MountMania:OnEnable()
 	end
 
 end
-
-
-	--MountManiaMountSummoner:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 35, -30)
-	--MountManiaMountSummoner:SetAlpha(MountManiaWindow["MountManiaFrameAlpha"])
-
-
-
 
 function MountMania:MountManiaChatCommand(param)
 	if param == "options" then
