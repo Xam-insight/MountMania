@@ -13,17 +13,17 @@ L["MOUNTMANIA_ENDER_TOOLTIP"] = "Terminer la partie et annoncer le(s) gagnant(s)
 L["LOCKBUTTON_TOOLTIP"] = "Verrouiller"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Vérouille / dévérouille la fenêtre."
 
-L["MOUNTMANIA_CATCH_GETREADY"] = "Préparez-vous à l’Aventure des Montures ! Invoquez rapidement la même que moi pour marquer !"
-L["MOUNTMANIA_CATCH_END"] = "Revenez plus tard pour une nouvelle Aventure des Montures !"
-L["MOUNTMANIA_CATCH_WINNER"] = "Voyons qui a gagné !"
-L["MOUNTMANIA_CATCH_NEXT1"] = "Préparez-vous pour la prochaine monture !"
-L["MOUNTMANIA_CATCH_NEXT2"] = "Ensuite, nous avons..."
-L["MOUNTMANIA_CATCH_MOUNT"] = "%s !"
-
 L["ENABLE_MOUNTMANIA"] = "Affiche/Cache MountMania"
 L["ENABLE_MOUNTMANIA_DESC"] = "Affiche/Cache la fenêtre MountMania"
 
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Transparence de MountMania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define la transparence de MountMania"
+
+L["MOUNTMANIA_QUOTE_GETREADY"] = "Préparez-vous à l’Aventure des Montures ! Invoquez rapidement la même que moi pour marquer !"
+L["MOUNTMANIA_QUOTE_END"] = "Revenez plus tard pour une nouvelle Aventure des Montures !"
+L["MOUNTMANIA_QUOTE_WINNER"] = "Voyons qui a gagné !"
+L["MOUNTMANIA_QUOTE_NEXT1"] = "Préparez-vous pour la prochaine monture !"
+L["MOUNTMANIA_QUOTE_NEXT2"] = "Ensuite, nous avons..."
+L["MOUNTMANIA_QUOTE_MOUNT"] = "%s !"
 
 end

@@ -8,6 +8,13 @@
 	<Include file="Libs\Ace3\AceConfig-3.0\AceConfigDialog-3.0\AceConfigDialog-3.0.xml" />
 	<Script file="localization\localization.lua"/>
 	<Script file="localization\localization_frFR.lua"/>
+	<Script file="localization\localization_ruRU.lua"/>
+	<Script file="localization\localization_deDE.lua"/>
+	<Script file="localization\localization_esES.lua"/>
+	<Script file="localization\localization_itIT.lua"/>
+	<Script file="localization\localization_koKR.lua"/>
+	<Script file="localization\localization_ptBR.lua"/>
+	<Script file="localization\localization_zhCN.lua"/>
 	<Script file="embeds.lua"/>
 	<Script file="MountMania.lua"/>
 	<Script file="MountMania_Frame.lua"/>
