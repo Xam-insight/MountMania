@@ -1,4 +1,4 @@
-local L = LibStub("AceLocale-3.0"):NewLocale("MountMania", "deDE", true)
+local L = LibStub("AceLocale-3.0"):NewLocale("MountMania", "deDE", false)
 
 if L then
 
@@ -30,5 +30,8 @@ L["MOUNTMANIA_QUOTE_WINNER"] = "Mal sehen, wer gewinnt!"
 L["MOUNTMANIA_QUOTE_NEXT1"] = "Gleich kommt das nächste Reittier!"
 L["MOUNTMANIA_QUOTE_NEXT2"] = "Und das nächste..."
 L["MOUNTMANIA_QUOTE_MOUNT"] = "%s!"
+
+L["DEADPOOL_ACHIEVEMENT_WINS"] = "We have a winner!"
+L["DEADPOOL_ACHIEVEMENT_WINS_DESC"] = "Win a Mount Mania game."
 
 end

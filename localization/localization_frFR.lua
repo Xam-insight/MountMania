@@ -31,4 +31,7 @@ L["MOUNTMANIA_QUOTE_NEXT1"] = "Préparez-vous pour la prochaine monture !"
 L["MOUNTMANIA_QUOTE_NEXT2"] = "Ensuite, nous avons..."
 L["MOUNTMANIA_QUOTE_MOUNT"] = "%s !"
 
+L["DEADPOOL_ACHIEVEMENT_WINS"] = "We have a winner!"
+L["DEADPOOL_ACHIEVEMENT_WINS_DESC"] = "Win a Mount Mania game."
+
 end
