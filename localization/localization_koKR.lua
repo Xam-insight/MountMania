@@ -31,7 +31,7 @@ L["MOUNTMANIA_QUOTE_NEXT1"] = "다음 탈것 갑니다!"
 L["MOUNTMANIA_QUOTE_NEXT2"] = "이번 탈것은 바로..."
 L["MOUNTMANIA_QUOTE_MOUNT"] = "%s!"
 
-L["DEADPOOL_ACHIEVEMENT_WINS"] = "We have a winner!"
-L["DEADPOOL_ACHIEVEMENT_WINS_DESC"] = "Win a Mount Mania game."
+L["MOUNTMANIA_ACHIEVEMENT_WINS"] = "We have a winner!"
+L["MOUNTMANIA_ACHIEVEMENT_WINS_DESC"] = "Win a Mount Mania game."
 
 end

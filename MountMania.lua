@@ -4,6 +4,13 @@ local ACD = LibStub("AceConfigDialog-3.0")
 
 MountManiaGlobal_CommPrefix = "MountMania"
 
+MOUNTMANIA_WINS = "Wins"
+
+MountManiaAchievements = {
+	[MOUNTMANIA_WINS] = { ["value"] = 1, ["label"] = L["MOUNTMANIA_ACHIEVEMENT_WINS"], ["desc"] = L["MOUNTMANIA_ACHIEVEMENT_WINS_DESC"], ["icon"] = 413588, ["points"] = 10 },
+	--[MOUNTMANIA_WINS]        = { ["value"] = 1, ["label"] = L["MOUNTMANIA_ACHIEVEMENT_WINS"], ["desc"] = string.format(L["MOUNTMANIA_ACHIEVEMENT_WINS_DESC"], 1), ["icon"] = 134211, ["points"] = 10 },
+}
+
 function MountMania:OnInitialize()
 	-- Called when the addon is loaded
 	
@@ -61,6 +68,14 @@ function MountMania:OnEnable()
 	MountManiaEnder:SetScale(0.5)
 	MountManiaEnder:SetPoint("LEFT", MountManiaMountSummoner, "RIGHT", MountManiaGlobal_BetweenObjectsGap, 0)
 	MountManiaEnder:SetAlpha(1.0)
+	
+	if CustomAchiever then
+		CustAc_CreateOrUpdateCategory("MountMania", nil, "Mount Mania")
+		for k,v in pairs(MountManiaAchievements) do
+			CustAc_CreateOrUpdateAchievement(k, "MountMania", v["icon"], v["points"], v["label"], v["desc"])
+		end
+	end
+
 end
 
 
