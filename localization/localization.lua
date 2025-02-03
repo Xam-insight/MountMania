@@ -19,6 +19,11 @@ L["ENABLE_MOUNTMANIA_DESC"] = "Show/Hide MountMania's frame"
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "MountMania alpha"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define MountMania's alpha"
 
+L["MOUNTMANIA_WARN_ENVIRONMENT"] = "You cannot summon a mount in this environment!"
+L["MOUNTMANIA_WARN_PARTY"] = "You are not in a party or raid. Only your target or focus can be detected for this challenge."
+L["MOUNTMANIA_WARN_RANDOM"] = "Summoning a random mount!"
+L["MOUNTMANIA_WARN_NOMOUNT"] = "You have no usable mounts!"
+
 L["MOUNTMANIA_QUOTE_GETREADY"] = "Get ready for a Mount Mania! Quickly summon the same mount as me to earn points!"
 L["MOUNTMANIA_QUOTE_END"] = "Come back later for another round of Mount Mania!"
 L["MOUNTMANIA_QUOTE_WINNER"] = "Let's see who won!"

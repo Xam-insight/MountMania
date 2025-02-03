@@ -19,6 +19,11 @@ L["ENABLE_MOUNTMANIA_DESC"] = "MountMania 창을 표시하거나 숨깁니다."
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "MountMania 투명도"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "MountMania의 투명도를 정의합니다."
 
+L["MOUNTMANIA_WARN_ENVIRONMENT"] = "이 환경에서는 탈것을 소환할 수 없습니다!"
+L["MOUNTMANIA_WARN_PARTY"] = "파티나 공격대에 없습니다. 이 도전은 대상 또는 집중을 통해서만 감지할 수 있습니다."
+L["MOUNTMANIA_WARN_RANDOM"] = "무작위 탈것을 소환합니다!"
+L["MOUNTMANIA_WARN_NOMOUNT"] = "사용할 수 있는 탈것이 없습니다!"
+
 L["MOUNTMANIA_QUOTE_GETREADY"] = "Mount Mania 준비하세요! 저와 동일한 탈것을 빠르게 소환하여 점수를 얻으세요!"
 L["MOUNTMANIA_QUOTE_END"] = "나중에 다시 와서 또 다른 라운드의 Mount Mania를 즐기세요!"
 L["MOUNTMANIA_QUOTE_WINNER"] = "우승자를 확인해 보죠!"

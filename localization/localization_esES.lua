@@ -19,6 +19,11 @@ L["ENABLE_MOUNTMANIA_DESC"] = "Mostrar/Ocultar la ventana de MountMania."
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Transparencia de MountMania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define la transparencia de MountMania."
 
+L["MOUNTMANIA_WARN_ENVIRONMENT"] = "¡No puede invocar una montura en este entorno!"
+L["MOUNTMANIA_WARN_PARTY"] = "No está en un grupo o banda. Solo su objetivo o foco pueden ser detectados para este desafío."
+L["MOUNTMANIA_WARN_RANDOM"] = "¡Invocando una montura aleatoria!"
+L["MOUNTMANIA_WARN_NOMOUNT"] = "¡No tiene monturas utilizables!"
+
 L["MOUNTMANIA_QUOTE_GETREADY"] = "¡Prepárate para una Locura por la montura! ¡Invoca rápidamente el mismo montura que yo para ganar puntos!"
 L["MOUNTMANIA_QUOTE_END"] = "¡Volved luego para otra ronda de Locura por la montura!"
 L["MOUNTMANIA_QUOTE_WINNER"] = "¡Veamos quién ha ganado!"

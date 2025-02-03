@@ -19,6 +19,11 @@ L["ENABLE_MOUNTMANIA_DESC"] = "Mostrar/Ocultar a janela do MountMania."
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Transparência do MountMania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Defina a transparência do MountMania."
 
+L["MOUNTMANIA_WARN_ENVIRONMENT"] = "Você não pode invocar uma montaria neste ambiente!"
+L["MOUNTMANIA_WARN_PARTY"] = "Você não está em um grupo ou raid. Apenas seu alvo ou foco podem ser detectados para este desafio."
+L["MOUNTMANIA_WARN_RANDOM"] = "Invocando uma montaria aleatória!"
+L["MOUNTMANIA_WARN_NOMOUNT"] = "Você não tem montarias utilizáveis!"
+
 L["MOUNTMANIA_QUOTE_GETREADY"] = "A Mania de Montaria vai começar! Evoque a mesma montaria que eu para ganhar pontos!"
 L["MOUNTMANIA_QUOTE_END"] = "Logo, mais uma rodada de Mania de Montaria!"
 L["MOUNTMANIA_QUOTE_WINNER"] = "Vamos ver quem ganhou!"

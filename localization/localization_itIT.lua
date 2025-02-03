@@ -19,6 +19,11 @@ L["ENABLE_MOUNTMANIA_DESC"] = "Mostra/Nasconde la finestra di MountMania."
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Trasparenza di MountMania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Definisci la trasparenza di MountMania."
 
+L["MOUNTMANIA_WARN_ENVIRONMENT"] = "Non puoi evocare una cavalcatura in questo ambiente!"
+L["MOUNTMANIA_WARN_PARTY"] = "Non sei in un gruppo o in una raid. Solo il tuo obiettivo o focus possono essere rilevati per questa sfida."
+L["MOUNTMANIA_WARN_RANDOM"] = "Evocazione di una cavalcatura casuale!"
+L["MOUNTMANIA_WARN_NOMOUNT"] = "Non hai cavalcature utilizzabili!"
+
 L["MOUNTMANIA_QUOTE_GETREADY"] = "Prepara per una Cavalca-Mania! Evoca rapidamente lo stesso cavalcatura che ho evocato io per guadagnare punti!"
 L["MOUNTMANIA_QUOTE_END"] = "Torna più tardi per un'altra manche di Cavalca-Mania!"
 L["MOUNTMANIA_QUOTE_WINNER"] = "Vediamo chi ha vinto!"

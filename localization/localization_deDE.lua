@@ -19,6 +19,11 @@ L["ENABLE_MOUNTMANIA_DESC"] = "MountMania-Fenster ein-/ausblenden"
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "MountMania-Transparenz"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Legt die Transparenz von MountMania fest."
 
+L["MOUNTMANIA_WARN_ENVIRONMENT"] = "Sie können in dieser Umgebung kein Reittier beschwören!"
+L["MOUNTMANIA_WARN_PARTY"] = "Sie befinden sich nicht in einer Gruppe oder einem Schlachtzug. Nur Ihr Ziel oder Fokus können für diese Herausforderung erkannt werden!"
+L["MOUNTMANIA_WARN_RANDOM"] = "Ein zufälliges Reittier wird beschworen!"
+L["MOUNTMANIA_WARN_NOMOUNT"] = "Sie haben keine verwendbaren Reittiere!"
+
 L["MOUNTMANIA_QUOTE_GETREADY"] = "Macht Euch bereit für den Reittierrausch! Beschwört schnell dasselbe Reittier wie ich, um Punkte zu erhalten!"
 L["MOUNTMANIA_QUOTE_END"] = "Kommt später für eine weitere Runde Reittierrausch zurück!"
 L["MOUNTMANIA_QUOTE_WINNER"] = "Mal sehen, wer gewinnt!"

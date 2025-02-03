@@ -19,6 +19,11 @@ L["ENABLE_MOUNTMANIA_DESC"] = "Affiche/Cache la fenêtre MountMania"
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Transparence de MountMania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define la transparence de MountMania"
 
+L["MOUNTMANIA_WARN_ENVIRONMENT"] = "Vous ne pouvez pas invoquer une monture dans cet environnement !"
+L["MOUNTMANIA_WARN_PARTY"] = "Vous n'êtes pas dans un groupe ou un raid. Seul votre cible ou focus peut être détecté pour ce défi."
+L["MOUNTMANIA_WARN_RANDOM"] = "Invocation d'une monture aléatoire !"
+L["MOUNTMANIA_WARN_NOMOUNT"] = "Vous n'avez pas de montures utilisables !"
+
 L["MOUNTMANIA_QUOTE_GETREADY"] = "Préparez-vous à l’Aventure des Montures ! Invoquez rapidement la même que moi pour marquer !"
 L["MOUNTMANIA_QUOTE_END"] = "Revenez plus tard pour une nouvelle Aventure des Montures !"
 L["MOUNTMANIA_QUOTE_WINNER"] = "Voyons qui a gagné !"

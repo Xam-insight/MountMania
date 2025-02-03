@@ -152,7 +152,7 @@ end
 function MountManiaSummonMount()
     -- Check if the player is in an environment where mounting is allowed
     if not IsOutdoors() or UnitOnTaxi("player") then
-        MountMania:Print("You cannot summon a mount in this environment!")
+        MountMania:Print(L["MOUNTMANIA_WARN_ENVIRONMENT"])
         return
     end
 
@@ -170,7 +170,7 @@ function MountManiaSummonMount()
     -- Summon a random mount if any are usable
     if #usableMounts > 0 then
 		if not IsInGroup() and not IsInRaid() then
-			MountMania:Print("You are not in a party or raid. Only your target or focus can be detected for this challenge.")
+			MountMania:Print(L["MOUNTMANIA_WARN_PARTY"])
 		end
 	
         local randomIndex = math.random(1, #usableMounts)
@@ -185,9 +185,9 @@ function MountManiaSummonMount()
 		successCounted = {}
 		MountMania:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "CheckNearbyMounts") -- Detects successful spell casts
 		MountManiaSendChatMessage(message)
-        MountMania:Print("|cFF00FF00[Info]: Summoning a random mount!")
+        MountMania:Print(L["MOUNTMANIA_WARN_RANDOM"])
     else
-        MountMania:Print("You have no usable mounts!")
+        MountMania:Print(L["MOUNTMANIA_WARN_NOMOUNT"])
     end
 end
 
