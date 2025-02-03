@@ -89,6 +89,7 @@ end
 
 -- Variable to store the player's current mount ID
 local myCurrentMountID = nil
+local alreadySummoned = {}
 local successCounted = {}
 
 -- Function to record data when a player summons the same mount
@@ -133,6 +134,7 @@ function MountMania:CheckNearbyMounts(event, unit, _, spellID)
 			successCounted[unitGUID] = true
 			if unit == "player" or unitGUID == UnitGUID("player") then
 				MountManiaSendChatMessage(string.format(L["MOUNTMANIA_QUOTE_MOUNT"], GetMountNameByMountID(mountID)))
+				alreadySummoned[myCurrentMountID] = true
 				C_Timer.After(2, function()
 					DoEmote("MOUNTSPECIAL")
 				end)
@@ -160,13 +162,20 @@ function MountManiaSummonMount()
     local mountIDs = C_MountJournal.GetMountIDs()
     local usableMounts = {}
 
+	local usableCount = 0
+	local alreadySummonedCount = 0
     for _, mountID in ipairs(mountIDs) do
-        local _, _, _, _, isUsable, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(mountID)
-        if (not myCurrentMountID or myCurrentMountID ~= mountID) and isUsable and isCollected then
-            table.insert(usableMounts, mountID)
-        end
+		local _, _, _, _, isUsable, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(mountID)
+		if isUsable and isCollected then
+			usableCount = usableCount + 1
+			if alreadySummoned[mountID] then
+				alreadySummonedCount = alreadySummonedCount + 1
+			else
+				table.insert(usableMounts, mountID)
+			end
+		end
     end
-
+	
     -- Summon a random mount if any are usable
     if #usableMounts > 0 then
 		if not IsInGroup() and not IsInRaid() then
@@ -188,6 +197,9 @@ function MountManiaSummonMount()
         MountMania:Print(L["MOUNTMANIA_WARN_RANDOM"])
     else
         MountMania:Print(L["MOUNTMANIA_WARN_NOMOUNT"])
+		if alreadySummonedCount > 0 and alreadySummonedCount == usableCount then
+			alreadySummoned = {}
+		end
     end
 end
 
@@ -213,6 +225,7 @@ end
 
 function MountManiaEndGame()
 	myCurrentMountID = nil
+	alreadySummoned = {}
 	MountManiaEnder:Hide()
 	MountMania:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 	sendTopSuccessesMessage()

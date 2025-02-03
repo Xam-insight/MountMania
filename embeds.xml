@@ -273,7 +273,6 @@
 				if(self.canMove) then
 					self.moving = true
 					self:SetFrameStrata("DIALOG")
-					--TODO dpSetHelpTipFramesStrata("TOOLTIP")
 					self:StartMoving()
 				end
 			</OnDragStart>
@@ -282,7 +281,6 @@
 					self.moving = false
 					self:StopMovingOrSizing()
 					self:SetFrameStrata("BACKGROUND")
-					--TODO dpSetHelpTipFramesStrata("LOW")
 					MountManiaSaveWindowPosition()
 				end
 			</OnDragStop>
