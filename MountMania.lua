@@ -162,7 +162,7 @@ function MountManiaSummonMount()
 
     for _, mountID in ipairs(mountIDs) do
         local _, _, _, _, isUsable, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(mountID)
-        if isUsable and isCollected then
+        if (not myCurrentMountID or myCurrentMountID ~= mountID) and isUsable and isCollected then
             table.insert(usableMounts, mountID)
         end
     end
@@ -201,8 +201,14 @@ function getChatChannel()
     end
 end
 
+function MountManiaSendChatMessageSecure(message, chatChannel)
+    if chatChannel and  chatChannel ~= "SAY" then
+        SendChatMessage(message, chatChannel)
+    end
+end
+
 function MountManiaSendChatMessage(message)
-	SendChatMessage(message, getChatChannel())
+    MountManiaSendChatMessageSecure(message, getChatChannel())
 end
 
 function MountManiaEndGame()
@@ -236,27 +242,27 @@ function sendTopSuccessesMessage()
 
     -- Send the title as a separate line
     local message = L["MOUNTMANIA_QUOTE_WINNER"]
-    SendChatMessage(message, chatChannel)
+    MountManiaSendChatMessageSecure(message, chatChannel)
 	
 	C_Timer.After(5, function()
 		-- Send the separator as a separate line
 		message = "----------------------------"
-		SendChatMessage(message, chatChannel)
+		MountManiaSendChatMessageSecure(message, chatChannel)
 
 		-- Add and send each player's data as a separate message
 		for _, player in ipairs(topSuccesses) do
 			message = player.name .. " - " .. player.successes
-			SendChatMessage(message, chatChannel)
+			MountManiaSendChatMessageSecure(message, chatChannel)
 		end
 
 		-- Send the closing separator as a separate line
 		message = "----------------------------"
-		SendChatMessage(message, chatChannel)
+		MountManiaSendChatMessageSecure(message, chatChannel)
 	end)
 
 	C_Timer.After(10, function()
 		-- Send the final message of encouragement
 		message = L["MOUNTMANIA_QUOTE_END"]
-		SendChatMessage(message, chatChannel)
+		MountManiaSendChatMessageSecure(message, chatChannel)
 	end)
 end
