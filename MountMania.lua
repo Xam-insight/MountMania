@@ -132,7 +132,7 @@ function MountMania:CheckNearbyMounts(event, unit, _, spellID)
 		if not successCounted[unitGUID] then
 			successCounted[unitGUID] = true
 			if unit == "player" or unitGUID == UnitGUID("player") then
-				MountManiaSendChatMessage(string.format(L["MOUNTMANIA_CATCH_MOUNT"], GetMountNameByMountID(mountID)))
+				MountManiaSendChatMessage(string.format(L["MOUNTMANIA_QUOTE_MOUNT"], GetMountNameByMountID(mountID)))
 				C_Timer.After(2, function()
 					DoEmote("MOUNTSPECIAL")
 				end)
@@ -175,11 +175,11 @@ function MountManiaSummonMount()
 	
         local randomIndex = math.random(1, #usableMounts)
         C_MountJournal.SummonByID(usableMounts[randomIndex])
-		local message = L["MOUNTMANIA_CATCH_GETREADY"]
+		local message = L["MOUNTMANIA_QUOTE_GETREADY"]
 		if myCurrentMountID == nil then
 			playerMountData = {}
 		else
-			message = L["MOUNTMANIA_CATCH_NEXT"..math.random(1, 2)]
+			message = L["MOUNTMANIA_QUOTE_NEXT"..math.random(1, 2)]
 		end
 		myCurrentMountID = usableMounts[randomIndex]
 		successCounted = {}
@@ -235,7 +235,7 @@ function sendTopSuccessesMessage()
 	local chatChannel = getChatChannel()
 
     -- Send the title as a separate line
-    local message = L["MOUNTMANIA_CATCH_WINNER"]
+    local message = L["MOUNTMANIA_QUOTE_WINNER"]
     SendChatMessage(message, chatChannel)
 	
 	C_Timer.After(5, function()
@@ -256,7 +256,7 @@ function sendTopSuccessesMessage()
 
 	C_Timer.After(10, function()
 		-- Send the final message of encouragement
-		message = L["MOUNTMANIA_CATCH_END"]
+		message = L["MOUNTMANIA_QUOTE_END"]
 		SendChatMessage(message, chatChannel)
 	end)
 end
