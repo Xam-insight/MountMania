@@ -61,6 +61,15 @@ function MountMania_countTableElements(table)
 	return count
 end
 
+function MountMania_doTableContainsElements(table)
+	if table then
+		for _ in pairs(table) do
+			return true
+		end
+	end
+	return false
+end
+
 function MountMania_PlaySound(soundID, channel, forcePlay)
 	if forcePlay or not MountManiaOptionsData or not MountManiaOptionsData["MountManiaSoundsDisabled"] or not (MountManiaOptionsData["MountManiaSoundsDisabled"] == true) then
 		PlaySound(soundID, channel)

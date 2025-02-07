@@ -4,8 +4,11 @@ if L then
 
 L["MOUNTMANIA_WELCOME"] = "/mnt 입력하여 MountMania를 전환하세요."
 
+L["MOUNTMANIA_GAME_MASTER"] = "%s's game"
+
 L["MOUNTMANIA_MOUNTSUMMONER"] = "탈것 소환"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "무작위 탈것을 소환하여|n그룹 내 다른 플레이어들과 경쟁하세요."
+L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Warning, a MountMania game is already in progress."
 
 L["MOUNTMANIA_ENDER"] = "게임 종료"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "게임을 종료하고 승자(들)를 발표합니다."
@@ -13,13 +16,15 @@ L["MOUNTMANIA_ENDER_TOOLTIP"] = "게임을 종료하고 승자(들)를 발표합
 L["LOCKBUTTON_TOOLTIP"] = "잠금"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "창을 잠그거나 잠금을 해제합니다."
 
+L["MOUNTMANIA_MATCHER"] = "Match mount"
+L["MOUNTMANIA_MATCHER_TOOLTIP"] = "Summon %s."
+
 L["ENABLE_MOUNTMANIA"] = "MountMania 활성화"
 L["ENABLE_MOUNTMANIA_DESC"] = "MountMania 창을 표시하거나 숨깁니다."
 
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "MountMania 투명도"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "MountMania의 투명도를 정의합니다."
 
-L["MOUNTMANIA_WARN_ENVIRONMENT"] = "이 환경에서는 탈것을 소환할 수 없습니다!"
 L["MOUNTMANIA_WARN_PARTY"] = "파티나 공격대에 없습니다. 이 도전은 대상 또는 집중을 통해서만 감지할 수 있습니다."
 L["MOUNTMANIA_WARN_RANDOM"] = "무작위 탈것을 소환합니다!"
 L["MOUNTMANIA_WARN_NOMOUNT"] = "사용할 수 있는 탈것이 없습니다!"
@@ -31,7 +36,13 @@ L["MOUNTMANIA_QUOTE_NEXT1"] = "다음 탈것 갑니다!"
 L["MOUNTMANIA_QUOTE_NEXT2"] = "이번 탈것은 바로..."
 L["MOUNTMANIA_QUOTE_MOUNT"] = "%s!"
 
-L["MOUNTMANIA_ACHIEVEMENT_WINS"] = "We have a winner!"
-L["MOUNTMANIA_ACHIEVEMENT_WINS_DESC"] = "Win a Mount Mania game."
+L["MOUNTMANIA_ACHIEVEMENT_WINS"] = "승리자가 나왔다!"
+L["MOUNTMANIA_ACHIEVEMENT_WINS_DESC"] = "Mount Mania 게임에서 승리하기."
+L["MOUNTMANIA_ACHIEVEMENT_xWINS"] = "수집가"
+L["MOUNTMANIA_ACHIEVEMENT_xWINS_DESC"] = "Mount Mania 게임에서 %s번 승리하기."
+L["MOUNTMANIA_ACHIEVEMENT_MOUNT"] = "이거 있어!"
+L["MOUNTMANIA_ACHIEVEMENT_MOUNT_DESC"] = "Mount Mania 게임에서 탈것을 맞추기."
+L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"] = "탈것의 대가"
+L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS_DESC"] = "Mount Mania 게임에서 %s개의 탈것을 맞추기."
 
 end

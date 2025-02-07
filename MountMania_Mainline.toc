@@ -4,7 +4,7 @@
 ## AddonCompartmentFunc: MountMania_OpenOptions
 ## Version: 1.0.0
 ## Author: Xam_insight
-## SavedVariables: MountManiaOptionsData, MountManiaWindow
+## SavedVariables: MountManiaOptionsData, MountManiaWindow, MountManiaAchievementsData
 
 Libs\Ace3\LibStub\LibStub.lua
 Libs\Ace3\AceLocale-3.0\AceLocale-3.0.xml

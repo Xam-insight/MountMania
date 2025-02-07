@@ -4,11 +4,17 @@ if L then
 
 L["MOUNTMANIA_WELCOME"] = "Escribe /mnt para activar o desactivar MountMania."
 
+L["MOUNTMANIA_GAME_MASTER"] = "%s's game"
+
 L["MOUNTMANIA_MOUNTSUMMONER"] = "Invocar montura"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "Invoca una montura aleatoria para desafiar|na otros jugadores de tu grupo."
+L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Warning, a MountMania game is already in progress."
 
 L["MOUNTMANIA_ENDER"] = "Terminar partida"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "Termina la partida y anuncia al/los ganador(es)."
+
+L["MOUNTMANIA_MATCHER"] = "Match mount"
+L["MOUNTMANIA_MATCHER_TOOLTIP"] = "Summon %s."
 
 L["LOCKBUTTON_TOOLTIP"] = "Bloquear"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Bloquea / desbloquea la ventana."
@@ -19,7 +25,6 @@ L["ENABLE_MOUNTMANIA_DESC"] = "Mostrar/Ocultar la ventana de MountMania."
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Transparencia de MountMania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define la transparencia de MountMania."
 
-L["MOUNTMANIA_WARN_ENVIRONMENT"] = "¡No puede invocar una montura en este entorno!"
 L["MOUNTMANIA_WARN_PARTY"] = "No está en un grupo o banda. Solo su objetivo o foco pueden ser detectados para este desafío."
 L["MOUNTMANIA_WARN_RANDOM"] = "¡Invocando una montura aleatoria!"
 L["MOUNTMANIA_WARN_NOMOUNT"] = "¡No tiene monturas utilizables!"
@@ -31,7 +36,13 @@ L["MOUNTMANIA_QUOTE_NEXT1"] = "¡Ahora, la siguiente montura!"
 L["MOUNTMANIA_QUOTE_NEXT2"] = "Y ahora toca..."
 L["MOUNTMANIA_QUOTE_MOUNT"] = "¡%s!"
 
-L["MOUNTMANIA_ACHIEVEMENT_WINS"] = "We have a winner!"
-L["MOUNTMANIA_ACHIEVEMENT_WINS_DESC"] = "Win a Mount Mania game."
+L["MOUNTMANIA_ACHIEVEMENT_WINS"] = "¡Tenemos un ganador!"
+L["MOUNTMANIA_ACHIEVEMENT_WINS_DESC"] = "Ganar una partida de Mount Mania."
+L["MOUNTMANIA_ACHIEVEMENT_xWINS"] = "El Coleccionista"
+L["MOUNTMANIA_ACHIEVEMENT_xWINS_DESC"] = "Ganar %s partidas de Mount Mania."
+L["MOUNTMANIA_ACHIEVEMENT_MOUNT"] = "¡Esa la tengo!"
+L["MOUNTMANIA_ACHIEVEMENT_MOUNT_DESC"] = "Emparejar una montura durante una partida de Mount Mania."
+L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"] = "Maestro de monturas"
+L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS_DESC"] = "Emparejar %s monturas durante partidas de Mount Mania."
 
 end

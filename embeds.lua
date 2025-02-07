@@ -61,11 +61,19 @@ function MountManiaEnder_OnLoad(self)
 	MountManiaButton_UpdateStatus(self)
 end
 
+function MountManiaMatcher_OnLoad(self)
+	self:SetAttribute("tooltip", L["MOUNTMANIA_MATCHER"])
+	
+	MountManiaButton_UpdateStatus(self)
+end
+
 function MountManiaButton_UpdateStatus(self)
-	if true then
-		self:ApplyVisualState(TalentButtonUtil.BaseVisualState.Normal)
-	else
+	if self:GetAttribute("Status") == "Warning" then
+		self:ApplyVisualState(TalentButtonUtil.BaseVisualState.RefundInvalid)
+	elseif self:GetAttribute("Status") == "Disabled" then
 		self:ApplyVisualState(TalentButtonUtil.BaseVisualState.Disabled)
+	else
+		self:ApplyVisualState(TalentButtonUtil.BaseVisualState.Normal)
 	end
 end
 

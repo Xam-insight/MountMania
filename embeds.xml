@@ -6,6 +6,8 @@
 	<Include file="Libs\Ace3\AceGUI-3.0\AceGUI-3.0.xml" />
 	<Include file="Libs\Ace3\AceConfig-3.0\AceConfigRegistry-3.0\AceConfigRegistry-3.0.xml" />
 	<Include file="Libs\Ace3\AceConfig-3.0\AceConfigDialog-3.0\AceConfigDialog-3.0.xml" />
+	<Include file="Libs\Ace3\AceComm-3.0\AceComm-3.0.xml" />
+	<Include file="Libs\Ace3\AceSerializer-3.0\AceSerializer-3.0.xml" />
 	<Script file="localization\localization.lua"/>
 	<Script file="localization\localization_frFR.lua"/>
 	<Script file="localization\localization_ruRU.lua"/>
@@ -20,6 +22,7 @@
 	<Script file="MountMania_Frame.lua"/>
 	<Script file="MountMania_Business.lua"/>
 	<Script file="MountManiaOptions.lua"/>
+	<Script file="Sharing.lua"/>
 
 	<FontString name="MountManiaPlayerLabelTemplate" inherits="GameFontHighlightSmall" virtual="true" justifyH="LEFT">
 		<Size x="150" y="15" />
@@ -313,5 +316,14 @@
 		</Scripts>
 	</Button>
 	
+	<Button name="MountManiaMatcher" parent="UIParent" inherits="MountManiaButtonTemplate" hidden="true">
+		<Scripts>
+			<OnShow function="MountManiaMatcher_OnLoad" />
+			<OnClick>
+				MountManiaSummonMatchingMount(self:GetAttribute("CurrentMount"))
+			</OnClick>
+		</Scripts>
+	</Button>
+
 	<GameTooltip name="MountManiaTooltip" frameStrata="TOOLTIP" hidden="true" parent="UIParent" inherits="GameTooltipTemplate" />
 </Ui>

@@ -45,6 +45,7 @@ function createMountManiaFrame()
 	end
 end
 
+local currentGame = ""
 function updateMountManiaList(playerData)
 	if playerData then
 		-- Characters sorting
@@ -55,7 +56,8 @@ function updateMountManiaList(playerData)
 		table.sort(charNames)
 
 		MountManiaList = {}
-
+		currentGame = getMountManiaGameTitle() or currentGame
+		table.insert(MountManiaList, currentGame)
 		for k,v in pairs(charNames) do
 			local successes, charName, charId = strsplit("#", v, 3)
 				table.insert(MountManiaList, charId)
@@ -63,7 +65,9 @@ function updateMountManiaList(playerData)
 	end
 end
 
+local maxSuccesses = 0
 function updateMountManiaFrame()
+	maxSuccesses = 0
 	if MountManiaFrame and MountManiaFrame:IsShown() then
 		updateMountManiaList(getPlayerMountData())
 		local numItems = MountMania_countTableElements(MountManiaList)
@@ -75,17 +79,24 @@ function updateMountManiaFrame()
 	
 		local nbLignes = 0
 		for index,aMountManiaLine in pairs(MountManiaLines) do
-			if aMountManiaLine and MountManiaList[index] then
-				aMountManiaLine:SetHeight(MountManiaLineHeight)
-				createMountManiaLine(index, MountManiaList[index], aMountManiaLine)
+			if nbLignes == 0 then
+				createMountManiaTitleLine(index, MountManiaList[index], aMountManiaLine)
 				aMountManiaLine:Show()
 				nbLignes = nbLignes + 1
 			else
-				aMountManiaLine:Hide()
+				if aMountManiaLine and MountManiaList[index] then
+					aMountManiaLine:SetHeight(MountManiaLineHeight)
+					createMountManiaLine(index, MountManiaList[index], aMountManiaLine)
+					aMountManiaLine:Show()
+					nbLignes = nbLignes + 1
+				else
+					aMountManiaLine:Hide()
+				end
 			end
 		end
 		MountManiaFrame:SetHeight(58 + nbLignes * MountManiaLineHeight)
 	end
+	MountManiaManageButtons()
 end
 
 function getFontStringFromMountManiaFramePool(id, name, template, aMountManiaLine)
@@ -98,7 +109,6 @@ function getFontStringFromMountManiaFramePool(id, name, template, aMountManiaLin
 	return MountManiaFramePool[id][name]
 end
 
-local maxSuccesses = 0
 local function GetSuccessColor(successes)
     local clampedSuccesses = math.max(0, math.min(successes, maxSuccesses)) -- Ensure the value is between 0 and maxSuccesses
     local color = {
@@ -109,9 +119,22 @@ local function GetSuccessColor(successes)
     return color
 end
 
-function createMountManiaLine(indexCharac, GUID, aMountManiaLine)
+function createMountManiaTitleLine(indexCharac, title, aMountManiaLine)
+
+	aMountManiaLine:SetAttribute("GUID", nil)
 	
-	local ligneWidth = MountMania_ALLCOLS_WIDTH
+	local fontstringLabel = "PlayerLabel"
+	local fontstring = getFontStringFromMountManiaFramePool(indexCharac, fontstringLabel, "MountManiaPlayerLabelTemplate", aMountManiaLine)
+	--fontstring:SetTextColor(color.r, color.g, color.b, 1.0)
+	fontstring:SetText(title)
+	fontstring:SetJustifyH("CENTER")
+	fontstring:SetPoint("LEFT", aMountManiaLine, "LEFT", MountManiaGlobal_BetweenObjectsGap, 0)
+	fontstring:SetWidth(MountMania_ALLCOLS_WIDTH)
+
+	aMountManiaLine:SetWidth(MountMania_ALLCOLS_WIDTH)
+end
+
+function createMountManiaLine(indexCharac, GUID, aMountManiaLine)
 
 	aMountManiaLine:SetAttribute("GUID", GUID)
 	
@@ -132,7 +155,7 @@ function createMountManiaLine(indexCharac, GUID, aMountManiaLine)
 	fontstringSuccesses:SetText(successes)
 	fontstringSuccesses:SetPoint("RIGHT", aMountManiaLine, "RIGHT", 0, 0)
 
-	aMountManiaLine:SetWidth(ligneWidth)
+	aMountManiaLine:SetWidth(MountMania_ALLCOLS_WIDTH)
 end
 
 function callbackMountManiaWindow(aFrame)

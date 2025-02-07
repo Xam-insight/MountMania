@@ -4,11 +4,17 @@ if L then
 
 L["MOUNTMANIA_WELCOME"] = "Type /mnt to toggle MountMania."
 
+L["MOUNTMANIA_GAME_MASTER"] = "%s's game"
+
 L["MOUNTMANIA_MOUNTSUMMONER"] = "Summon Mount"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "Summon a random mount to challenge|nother players in your group."
+L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Warning, a MountMania game is already in progress."
 
 L["MOUNTMANIA_ENDER"] = "End Game"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "End the game and announce the winner(s)."
+
+L["MOUNTMANIA_MATCHER"] = "Match mount"
+L["MOUNTMANIA_MATCHER_TOOLTIP"] = "Summon %s."
 
 L["LOCKBUTTON_TOOLTIP"] = "Lock"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Locks / unlocks the window."
@@ -19,7 +25,6 @@ L["ENABLE_MOUNTMANIA_DESC"] = "Show/Hide MountMania's frame"
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "MountMania alpha"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define MountMania's alpha"
 
-L["MOUNTMANIA_WARN_ENVIRONMENT"] = "You cannot summon a mount in this environment!"
 L["MOUNTMANIA_WARN_PARTY"] = "You are not in a party or raid. Only your target or focus can be detected for this challenge."
 L["MOUNTMANIA_WARN_RANDOM"] = "Summoning a random mount!"
 L["MOUNTMANIA_WARN_NOMOUNT"] = "You have no usable mounts!"
@@ -33,5 +38,11 @@ L["MOUNTMANIA_QUOTE_MOUNT"] = "%s!"
 
 L["MOUNTMANIA_ACHIEVEMENT_WINS"] = "We have a winner!"
 L["MOUNTMANIA_ACHIEVEMENT_WINS_DESC"] = "Win a Mount Mania game."
+L["MOUNTMANIA_ACHIEVEMENT_xWINS"] = "The Collector"
+L["MOUNTMANIA_ACHIEVEMENT_xWINS_DESC"] = "Win %s Mount Mania games."
+L["MOUNTMANIA_ACHIEVEMENT_MOUNT"] = "I Have That One!"
+L["MOUNTMANIA_ACHIEVEMENT_MOUNT_DESC"] = "Match a mount during a Mount Mania game."
+L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"] = "Mount Master"
+L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS_DESC"] = "Match %s mounts during Mount Mania games."
 
 end
