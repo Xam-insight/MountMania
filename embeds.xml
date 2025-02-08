@@ -201,6 +201,14 @@
 		</Layers>
 		<HighlightTexture file="Interface\FriendsFrame\UI-FriendsFrame-HighlightBar-Blue" alpha="0.4" alphaMode="ADD" setAllPoints="true"/>
 	</Button>
+	<Button name="MountManiaOptionsButtonTemplate" frameStrata="HIGH" virtual="true">
+		<Size x="16" y="16" />
+		<Scripts>
+			<OnClick function="MountMania_OpenOptions"/>
+			<OnEnter function="MountManiaButtonEnter"/>
+			<OnLeave function="MountManiaButtonLeave"/>
+		</Scripts>
+	</Button>
 	<CheckButton name="MountManiaLockTemplate" virtual="true">
 		<Size x="16" y="16"/>
 		<Anchors>

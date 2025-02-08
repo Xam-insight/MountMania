@@ -18,6 +18,26 @@ MountManiaAchievements = {
 	[MOUNTMANIA_50MOUNTS] = { ["value"] = 50, ["label"] = L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"], ["desc"] = string.format(L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS_DESC"], 50), ["icon"] = 652305, ["points"] = 50, ["title"] = L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"] },
 }
 
+MountManiaAbigailQuotes = {
+	["getready"] = { quote = L["MOUNTMANIA_QUOTE_GETREADY"], sound = 6023952 },
+	["comeback"] = { quote = L["MOUNTMANIA_QUOTE_END"],      sound = 6023956 },
+	["whowon"]   = { quote = L["MOUNTMANIA_QUOTE_WINNER"],   sound = 6023955 },
+	["1"]        = { quote = L["MOUNTMANIA_QUOTE_NEXT1"],    sound = 6023953 },
+	["2"]        = { quote = L["MOUNTMANIA_QUOTE_NEXT2"],    sound = 6023954 },
+}
+
+function MountManiaQuote(quote, talkingHead, sound)
+	if talkingHead then
+		EZBlizzUiPop_npcDialog("ABIGAIL", MountManiaAbigailQuotes[quote].quote)
+	end
+	if sound then
+		local willPlay -- [Sound is absent] = MountMania_PlaySoundFileId(MountManiaAbigailQuotes[quote].sound, "Dialog")
+		if not willPlay then
+			MountMania_PlaySoundFile(MountManiaAbigailQuotes[quote].sound, "Dialog")
+		end
+	end
+end
+
 function MountMania:OnInitialize()
 	-- Called when the addon is loaded
 	self:RegisterComm(MountManiaGlobal_CommPrefix, "ReceiveDataFrame_OnEvent")
@@ -87,23 +107,22 @@ function MountMania:OnEnable()
 	MountManiaMatcher:SetParent(MountManiaFrame)
 	MountManiaMatcher:ClearAllPoints()
 	MountManiaMatcher:SetScale(0.5)
-	MountManiaMatcher:SetPoint("TOPRIGHT", MountManiaFrame, "TOPRIGHT", -30, -5)
+	MountManiaMatcher:SetPoint("TOPRIGHT", MountManiaFrame, "TOPRIGHT", -35, -5)
 	MountManiaMatcher:SetAlpha(1.0)
 	
 	updateMountManiaFrame()
 	
-	if CustomAchiever then
+	if CustomAchieverData then
 		CustAc_CreateOrUpdateCategory("MountMania", nil, "Mount Mania")
 		for k,v in pairs(MountManiaAchievements) do
 			CustAc_CreateOrUpdateAchievement(k, "MountMania", v.icon, v.points, v.label, v.desc, v.title, v.title ~= nil)
 		end
+		
+		local achievement = MountMania_GetAchievementDetails(40985) -- I Have That One! (1 Mount)
+		CustAc_CreateOrUpdateAchievement(MOUNTMANIA_MOUNT, "MountMania", achievement.icon, nil, achievement.name)
+		achievement = MountMania_GetAchievementDetails(40986) -- Mount Master (20 Mounts)
+		CustAc_CreateOrUpdateAchievement(MOUNTMANIA_20MOUNTS, "MountMania", achievement.icon, nil, achievement.name)
 	end
-	
-	local achievement = MountMania_GetAchievementDetails(40985) -- I Have That One! (1 Mount)
-	CustAc_CreateOrUpdateAchievement(MOUNTMANIA_MOUNT, "MountMania", achievement.icon, nil, achievement.name)
-	achievement = MountMania_GetAchievementDetails(40986) -- Mount Master (20 Mounts)
-	CustAc_CreateOrUpdateAchievement(MOUNTMANIA_20MOUNTS, "MountMania", achievement.icon, nil, achievement.name)
-
 end
 
 function MountMania:MountManiaChatCommand(param)
@@ -131,7 +150,7 @@ function incrementMountManiaAchievementsData(player, achievementsData)
 		local maxValue = MountManiaAchievements[achievementsData].value
 		local newValue = min(maxValue +1, (MountManiaAchievementsData[player][achievementsData] or 0) + 1) -- +1 To limit saved value
 		MountManiaAchievementsData[player][achievementsData] = newValue
-		if CustomAchiever and newValue == maxValue then
+		if CustomAchieverData and newValue == maxValue then
 			CustAc_AddOnAwardPlayer(player, achievementsData)
 		end
 	end
@@ -250,7 +269,7 @@ function MountManiaSummonMount()
 		end
 		-- Player starts their own new game
 		if playerMountDataMaster and not MountMania_isPlayerCharacter(playerMountDataMaster) then
-			playerMountData = {}
+			currentMountForMountManiaID = nil
 		end
 		playerMountDataMaster = MountMania_playerCharacter()
 		C_Timer.After(wait, function()
@@ -260,8 +279,11 @@ function MountManiaSummonMount()
 		local message = L["MOUNTMANIA_QUOTE_GETREADY"]
 		if currentMountForMountManiaID == nil then
 			playerMountData = {}
+			MountManiaQuote("getready", false, true)
 		else
-			message = L["MOUNTMANIA_QUOTE_NEXT"..math.random(1, 2)]
+			local randomQuote = ""..math.random(1, 2)
+			message = L["MOUNTMANIA_QUOTE_NEXT"..randomQuote]
+			MountManiaQuote(randomQuote, false, false)
 		end
 		currentMountForMountManiaID = mountToSummon
 		successCounted = {}
@@ -338,8 +360,9 @@ local function MountManiaSendTopSuccessesMessage()
 	local chatChannel = getChatChannel()
 
     -- Send the title as a separate line
-    local message = L["MOUNTMANIA_QUOTE_WINNER"]
+    local message = MountManiaAbigailQuotes["whowon"].quote
     MountManiaSendChatMessageSecure(message, chatChannel)
+	MountManiaQuote("whowon", false, true)
 	
 	C_Timer.After(5, function()
 		-- Send the separator as a separate line
@@ -361,8 +384,9 @@ local function MountManiaSendTopSuccessesMessage()
 
 	C_Timer.After(10, function()
 		-- Send the final message of encouragement
-		message = L["MOUNTMANIA_QUOTE_END"]
+		message = MountManiaAbigailQuotes["comeback"].quote
 		MountManiaSendChatMessageSecure(message, chatChannel)
+		MountManiaQuote("comeback", false, false)
 	end)
 end
 
@@ -405,6 +429,8 @@ function UpdateMountManiaButton(mountID)
 
 	-- Store the mount ID for the click action
 	MountManiaMatcher:SetAttribute("CurrentMount", mountID)
+	
+	updateMountManiaFrame()
 end
 
 -- Function to summon the selected mount
@@ -438,6 +464,7 @@ function MountManiaProcessReceivedMount(sender, mountID)
 	MountMania:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "CheckNearbyMounts")
 	UpdateMountManiaButton(mountID)
 	if not playerMountDataMaster then
+		MountManiaQuote("getready", false, true)
 		playerMountDataMaster = sender
 	end
 	if playerMountDataMaster == sender then
@@ -458,6 +485,7 @@ end
 
 function MountManiaProcessReceivedEnd(sender)
 	if playerMountDataMaster == sender then
+		MountManiaQuote("whowon", false, true)
 		playerMountDataMaster = nil
 		currentMountForMountManiaID = nil
 		MountMania:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")

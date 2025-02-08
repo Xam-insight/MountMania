@@ -18,6 +18,22 @@ MountManiaLineHeight = 15
 MountManiaList = {}
 local MountManiaLines = {}
 
+function createMountManiaOptionsButton(parent)
+	local name = "MountManiaOptionsButton"
+	local iconPath = "Interface\\GossipFrame\\BinderGossipIcon"
+	local tooltip = OPTIONS
+	local tooltipDetail = OPTIONS_MENU
+
+	local optionsButton = CreateFrame("Button", name, parent, "MountManiaOptionsButtonTemplate")
+	optionsButton:SetScale(0.7)
+	optionsButton:SetPoint("BOTTOM", parent.Lock, "TOP", 0, 0)
+	optionsButton:SetNormalTexture(iconPath)
+	optionsButton:SetAttribute("tooltip", tooltip)
+	optionsButton:SetAttribute("tooltipDetail", { tooltipDetail })
+
+	return optionsButton
+end
+
 function createMountManiaFrame()
 	--NewMountManiaFrame
 	MountManiaFrame = CreateFrame("Frame", "MountManiaFrame", UIParent, "MountManiaFrameTemplate")
@@ -30,6 +46,8 @@ function createMountManiaFrame()
 
 	MountManiaFrame.Lock:SetAttribute("tooltip", L["LOCKBUTTON_TOOLTIP"])
 	MountManiaFrame.Lock:SetAttribute("tooltipDetail", { L["LOCKBUTTON_TOOLTIPDETAIL"] })
+	
+	createMountManiaOptionsButton(MountManiaFrame)
 
 	for i = 1, MountMania_NUM_LINES do
 		local line = CreateFrame("Button", "MountManiaLine"..i, MountManiaFrame.Inset, "MountManiaLineTemplate")
@@ -123,7 +141,7 @@ function createMountManiaTitleLine(indexCharac, title, aMountManiaLine)
 
 	aMountManiaLine:SetAttribute("GUID", nil)
 	
-	local fontstringLabel = "PlayerLabel"
+	local fontstringLabel = "MountManiaTitleLabel"
 	local fontstring = getFontStringFromMountManiaFramePool(indexCharac, fontstringLabel, "MountManiaPlayerLabelTemplate", aMountManiaLine)
 	--fontstring:SetTextColor(color.r, color.g, color.b, 1.0)
 	fontstring:SetText(title)
@@ -138,7 +156,7 @@ function createMountManiaLine(indexCharac, GUID, aMountManiaLine)
 
 	aMountManiaLine:SetAttribute("GUID", GUID)
 	
-	local fontstringLabel = "PlayerLabel"
+	local fontstringLabel = "MountManiaPlayerLabel"
 	local fontstring = getFontStringFromMountManiaFramePool(indexCharac, fontstringLabel, "MountManiaPlayerLabelTemplate", aMountManiaLine)
 	local color = RAID_CLASS_COLORS[getPlayerMountData(GUID, "classFileName")]
 	fontstring:SetTextColor(color.r, color.g, color.b, 1.0)

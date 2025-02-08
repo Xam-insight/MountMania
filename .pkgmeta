@@ -36,6 +36,7 @@ ignore:
 	- Libs/EZBlizzardUiPopups/CHANGELOG.txt
 	- ../CustomAchiever/Libs/EZBlizzardUiPopups/EZBlizzardUiPopups.toc
 	- ../CustomAchiever/Libs/EZBlizzardUiPopups/CHANGELOG.txt
+	- sound/6023952_original.ogg
 
 
 manual-changelog:
