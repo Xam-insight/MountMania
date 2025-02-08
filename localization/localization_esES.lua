@@ -2,13 +2,13 @@ local L = LibStub("AceLocale-3.0"):NewLocale("MountMania", "esES", false)
 
 if L then
 
-L["MOUNTMANIA_WELCOME"] = "Escribe /mnt para activar o desactivar MountMania."
+L["MOUNTMANIA_WELCOME"] = "Escribe /mnt para activar o desactivar Mount Mania."
 
 L["MOUNTMANIA_GAME_MASTER"] = "Partida de %s"
 
 L["MOUNTMANIA_MOUNTSUMMONER"] = "Invocar montura"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "Invoca una montura aleatoria para desafiar|na otros jugadores de tu grupo."
-L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Warning, a MountMania game is already in progress."
+L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Atención, una partida de Mount Mania ya está en curso."
 
 L["MOUNTMANIA_ENDER"] = "Terminar partida"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "Termina la partida y anuncia al/los ganador(es)."
@@ -19,12 +19,12 @@ L["MOUNTMANIA_MATCHER_TOOLTIP"] = "Invocar %s."
 L["LOCKBUTTON_TOOLTIP"] = "Bloquear"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Bloquea / desbloquea la ventana."
 
-L["ENABLE_MOUNTMANIA"] = "Activar MountMania"
-L["ENABLE_MOUNTMANIA_DESC"] = "Mostrar/Ocultar la ventana de MountMania."
+L["ENABLE_MOUNTMANIA"] = "Activar Mount Mania"
+L["ENABLE_MOUNTMANIA_DESC"] = "Mostrar/Ocultar la ventana de Mount Mania."
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES"] = "Mensajes de chat"
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES_DESC"] = "Enviar mensajes de chat al jugar Mount Mania."
-L["MOUNTMANIA_OPTIONS_ALPHA"] = "Transparencia de MountMania"
-L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define la transparencia de MountMania."
+L["MOUNTMANIA_OPTIONS_ALPHA"] = "Transparencia de Mount Mania"
+L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define la transparencia de Mount Mania."
 
 L["MOUNTMANIA_WARN_PARTY"] = "No está en un grupo o banda. Solo su objetivo o foco pueden ser detectados para este desafío."
 L["MOUNTMANIA_WARN_RANDOM"] = "¡Invocando una montura aleatoria!"

@@ -2,13 +2,13 @@ local L = LibStub("AceLocale-3.0"):NewLocale("MountMania", "zhCN", false)
 
 if L then
 
-L["MOUNTMANIA_WELCOME"] = "输入 /mnt 切换 MountMania。"
+L["MOUNTMANIA_WELCOME"] = "输入 /mnt 切换 Mount Mania。"
 
 L["MOUNTMANIA_GAME_MASTER"] = "%s 的游戏"
 
 L["MOUNTMANIA_MOUNTSUMMONER"] = "召唤坐骑"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "召唤一个随机坐骑，与|n你小队中的其他玩家进行挑战。"
-L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Warning, a MountMania game is already in progress."
+L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "警告，Mount Mania 游戏已在进行中。"
 
 L["MOUNTMANIA_ENDER"] = "结束游戏"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "结束游戏并宣布获胜者。"
@@ -19,12 +19,12 @@ L["MOUNTMANIA_MATCHER_TOOLTIP"] = "召唤 %s。"
 L["LOCKBUTTON_TOOLTIP"] = "锁定"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "锁定/解锁窗口。"
 
-L["ENABLE_MOUNTMANIA"] = "切换 MountMania"
-L["ENABLE_MOUNTMANIA_DESC"] = "显示/隐藏 MountMania 窗口"
+L["ENABLE_MOUNTMANIA"] = "切换 Mount Mania"
+L["ENABLE_MOUNTMANIA_DESC"] = "显示/隐藏 Mount Mania 窗口"
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES"] = "聊天消息"
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES_DESC"] = "在玩 Mount Mania 时发送聊天消息。"
-L["MOUNTMANIA_OPTIONS_ALPHA"] = "MountMania 透明度"
-L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "定义 MountMania 的透明度"
+L["MOUNTMANIA_OPTIONS_ALPHA"] = "Mount Mania 透明度"
+L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "定义 Mount Mania 的透明度"
 
 L["MOUNTMANIA_WARN_PARTY"] = "您不在队伍或团队中。此挑战只能检测您的目标或焦点。"
 L["MOUNTMANIA_WARN_RANDOM"] = "召唤一个随机坐骑！"

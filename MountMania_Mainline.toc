@@ -1,5 +1,5 @@
 ## Interface: 110007, 110100
-## Title: MountMania
+## Title: Mount Mania
 ## IconTexture: Interface\Icons\achievement_guildperk_mountup.blp
 ## AddonCompartmentFunc: MountMania_OpenOptions
 ## Version: 1.0.0

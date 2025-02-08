@@ -2,13 +2,13 @@ local L = LibStub("AceLocale-3.0"):NewLocale("MountMania", "koKR", false)
 
 if L then
 
-L["MOUNTMANIA_WELCOME"] = "/mnt 입력하여 MountMania를 전환하세요."
+L["MOUNTMANIA_WELCOME"] = "/mnt 입력하여 Mount Mania를 전환하세요."
 
 L["MOUNTMANIA_GAME_MASTER"] = "%s의 게임"
 
 L["MOUNTMANIA_MOUNTSUMMONER"] = "탈것 소환"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "무작위 탈것을 소환하여|n그룹 내 다른 플레이어들과 경쟁하세요."
-L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Warning, a MountMania game is already in progress."
+L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "경고, Mount Mania 게임이 이미 진행 중입니다."
 
 L["MOUNTMANIA_ENDER"] = "게임 종료"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "게임을 종료하고 승자(들)를 발표합니다."
@@ -19,12 +19,12 @@ L["LOCKBUTTON_TOOLTIPDETAIL"] = "창을 잠그거나 잠금을 해제합니다."
 L["MOUNTMANIA_MATCHER"] = "탈것 맞추기"
 L["MOUNTMANIA_MATCHER_TOOLTIP"] = "%s 소환하기."
 
-L["ENABLE_MOUNTMANIA"] = "MountMania 활성화"
-L["ENABLE_MOUNTMANIA_DESC"] = "MountMania 창을 표시하거나 숨깁니다."
+L["ENABLE_MOUNTMANIA"] = "Mount Mania 활성화"
+L["ENABLE_MOUNTMANIA_DESC"] = "Mount Mania 창을 표시하거나 숨깁니다."
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES"] = "채팅 메시지"
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES_DESC"] = "Mount Mania를 플레이할 때 채팅 메시지를 보내기."
-L["MOUNTMANIA_OPTIONS_ALPHA"] = "MountMania 투명도"
-L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "MountMania의 투명도를 정의합니다."
+L["MOUNTMANIA_OPTIONS_ALPHA"] = "Mount Mania 투명도"
+L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Mount Mania의 투명도를 정의합니다."
 
 L["MOUNTMANIA_WARN_PARTY"] = "파티나 공격대에 없습니다. 이 도전은 대상 또는 집중을 통해서만 감지할 수 있습니다."
 L["MOUNTMANIA_WARN_RANDOM"] = "무작위 탈것을 소환합니다!"
