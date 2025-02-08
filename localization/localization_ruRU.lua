@@ -8,7 +8,7 @@ L["MOUNTMANIA_GAME_MASTER"] = "Игра %s"
 
 L["MOUNTMANIA_MOUNTSUMMONER"] = "Вызов средства передвижение"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "Призовите случайное средство передвижение, чтобы бросить вызов|nдругим игрокам в вашей группе."
-L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Warning, a MountMania game is already in progress."
+L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Внимание, игра Ездомания уже идет."
 
 L["MOUNTMANIA_ENDER"] = "Конец игры"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "Завершите игру и объявите победителя(ей)."
