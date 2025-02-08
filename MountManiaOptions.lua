@@ -53,8 +53,24 @@ function loadMountManiaOptions()
 							return enabled
 						end
 					},
+					enableChatMessages = {
+						type = "toggle", order = 3,
+						width = "full",
+						name = L["MOUNTMANIA_OPTIONS_CHATMESSAGES"],
+						desc = L["MOUNTMANIA_OPTIONS_CHATMESSAGES_DESC"],
+						set = function(info, val) 
+							MountManiaOptionsData["MountManiaChatMessagesDisabled"] = not val
+						end,
+						get = function(info)
+							local enabled = true
+							if MountManiaOptionsData["MountManiaChatMessagesDisabled"] ~= nil then
+								enabled = not MountManiaOptionsData["MountManiaChatMessagesDisabled"]
+							end
+							return enabled
+						end
+					},
 					alpha = {
-						type = "range", order = 3,
+						type = "range", order = 4,
 						width = "full", descStyle = "",
 						name = L["MOUNTMANIA_OPTIONS_ALPHA"],
 						desc = L["MOUNTMANIA_OPTIONS_ALPHA_DESC"],
@@ -79,5 +95,5 @@ function loadMountManiaOptions()
 	MountManiaOptionsLoaded = true
 	
 	ACD:AddToBlizOptions("MountMania", "MountMania")
-	ACD:SetDefaultSize("MountMania", 400, 222)
+	ACD:SetDefaultSize("MountMania", 400, 240)
 end

@@ -21,7 +21,8 @@ L["LOCKBUTTON_TOOLTIPDETAIL"] = "Locks / unlocks the window."
 
 L["ENABLE_MOUNTMANIA"] = "Toggle MountMania"
 L["ENABLE_MOUNTMANIA_DESC"] = "Show/Hide MountMania's frame"
-
+L["MOUNTMANIA_OPTIONS_CHATMESSAGES"] = "Chat messages"
+L["MOUNTMANIA_OPTIONS_CHATMESSAGES_DESC"] = "Send chat messages when playing MountMania."
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "MountMania alpha"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define MountMania's alpha"
 
@@ -40,7 +41,7 @@ L["MOUNTMANIA_ACHIEVEMENT_WINS"] = "We have a winner!"
 L["MOUNTMANIA_ACHIEVEMENT_WINS_DESC"] = "Win a Mount Mania game."
 L["MOUNTMANIA_ACHIEVEMENT_xWINS"] = "The Collector"
 L["MOUNTMANIA_ACHIEVEMENT_xWINS_DESC"] = "Win %s Mount Mania games."
-L["MOUNTMANIA_ACHIEVEMENT_MOUNT"] = "I Have That One!"
+
 L["MOUNTMANIA_ACHIEVEMENT_MOUNT_DESC"] = "Match a mount during a Mount Mania game."
 L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"] = "Mount Master"
 L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS_DESC"] = "Match %s mounts during Mount Mania games."

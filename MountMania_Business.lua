@@ -98,3 +98,13 @@ function MountMania_PlaySoundFileId(soundFileId, channel, forcePlay)
 	end
 	return soundHandle
 end
+
+function MountMania_GetAchievementDetails(achievementID)
+    local _, name, points, _, _, _, _, description, _, icon, _, _, _, _ = GetAchievementInfo(achievementID)
+    return {
+        name = name,
+        description = description,
+        icon = icon,
+        points = points
+    }
+end

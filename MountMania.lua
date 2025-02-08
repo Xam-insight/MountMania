@@ -7,13 +7,15 @@ MountManiaGlobal_CommPrefix = "MountMania"
 MOUNTMANIA_WINS     = "MountManiaWins"
 MOUNTMANIA_10WINS   = "MountMania10Wins"
 MOUNTMANIA_MOUNT    = "MountManiaMount"
+MOUNTMANIA_20MOUNTS = "MountMania20Mounts"
 MOUNTMANIA_50MOUNTS = "MountMania50Mounts"
 
 MountManiaAchievements = {
 	[MOUNTMANIA_WINS]     = { ["value"] = 1,  ["label"] = L["MOUNTMANIA_ACHIEVEMENT_WINS"],    ["desc"] = L["MOUNTMANIA_ACHIEVEMENT_WINS_DESC"],                       ["icon"] = 652303, ["points"] = 10 },
-	[MOUNTMANIA_10WINS]   = { ["value"] = 10, ["label"] = L["MOUNTMANIA_ACHIEVEMENT_xWINS"],   ["desc"] = string.format(L["MOUNTMANIA_ACHIEVEMENT_xWINS_DESC"], 10),   ["icon"] = 652304, ["points"] = 20, ["title"] = L["MOUNTMANIA_ACHIEVEMENT_xWINS"] },
-	[MOUNTMANIA_MOUNT]    = { ["value"] = 1,  ["label"] = L["MOUNTMANIA_ACHIEVEMENT_MOUNT"],   ["desc"] = string.format(L["MOUNTMANIA_ACHIEVEMENT_MOUNT_DESC"], 10),   ["icon"] = 652303, ["points"] = 10 },
-	[MOUNTMANIA_50MOUNTS] = { ["value"] = 10, ["label"] = L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"], ["desc"] = string.format(L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS_DESC"], 10), ["icon"] = 652305, ["points"] = 50, ["title"] = L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"] },
+	[MOUNTMANIA_10WINS]   = { ["value"] = 10, ["label"] = L["MOUNTMANIA_ACHIEVEMENT_xWINS"],   ["desc"] = string.format(L["MOUNTMANIA_ACHIEVEMENT_xWINS_DESC"], 10),   ["icon"] = 652304, ["points"] = 50, ["title"] = L["MOUNTMANIA_ACHIEVEMENT_xWINS"] },
+	[MOUNTMANIA_MOUNT]    = { ["value"] = 1,  ["label"] = "OFFICIALVALUE",                     ["desc"] = L["MOUNTMANIA_ACHIEVEMENT_MOUNT_DESC"],                      ["icon"] = 652303, ["points"] = 10 },
+	[MOUNTMANIA_20MOUNTS] = { ["value"] = 20, ["label"] = "OFFICIALVALUE",                     ["desc"] = string.format(L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS_DESC"], 20), ["icon"] = 652305, ["points"] = 20, ["title"] = L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"] },
+	[MOUNTMANIA_50MOUNTS] = { ["value"] = 50, ["label"] = L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"], ["desc"] = string.format(L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS_DESC"], 50), ["icon"] = 652305, ["points"] = 50, ["title"] = L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"] },
 }
 
 function MountMania:OnInitialize()
@@ -96,6 +98,11 @@ function MountMania:OnEnable()
 			CustAc_CreateOrUpdateAchievement(k, "MountMania", v.icon, v.points, v.label, v.desc, v.title, v.title ~= nil)
 		end
 	end
+	
+	local achievement = MountMania_GetAchievementDetails(40985) -- I Have That One! (1 Mount)
+	CustAc_CreateOrUpdateAchievement(MOUNTMANIA_MOUNT, "MountMania", achievement.icon, nil, achievement.name)
+	achievement = MountMania_GetAchievementDetails(40986) -- Mount Master (20 Mounts)
+	CustAc_CreateOrUpdateAchievement(MOUNTMANIA_20MOUNTS, "MountMania", achievement.icon, nil, achievement.name)
 
 end
 
@@ -121,9 +128,10 @@ function incrementMountManiaAchievementsData(player, achievementsData)
 		if not MountManiaAchievementsData[player] then
 			MountManiaAchievementsData[player] = {}
 		end
-		local newValue = (MountManiaAchievementsData[player][achievementsData] or 0) + 1
+		local maxValue = MountManiaAchievements[achievementsData].value
+		local newValue = min(maxValue +1, (MountManiaAchievementsData[player][achievementsData] or 0) + 1) -- +1 To limit saved value
 		MountManiaAchievementsData[player][achievementsData] = newValue
-		if CustomAchiever and newValue == MountManiaAchievements[achievementsData].value then
+		if CustomAchiever and newValue == maxValue then
 			CustAc_AddOnAwardPlayer(player, achievementsData)
 		end
 	end
@@ -148,10 +156,11 @@ local function RecordPlayerData(unitGUID, playerName, classFileName)
     -- Increment the number of successes
     playerMountData[unitGUID].successes = playerMountData[unitGUID].successes + 1
 	incrementMountManiaAchievementsData(playerName, MOUNTMANIA_MOUNT)
+	incrementMountManiaAchievementsData(playerName, MOUNTMANIA_20MOUNTS)
 	incrementMountManiaAchievementsData(playerName, MOUNTMANIA_50MOUNTS)
 
     -- Print a message with the updated information
-    MountMania:Print(playerName .. " has now matched " .. playerMountData[unitGUID].successes .. " mount(s) with you!")
+    --MountMania:Print(playerName .. " has now matched " .. playerMountData[unitGUID].successes .. " mount(s) with you!")
 	
 	-- Update the frame with the new data
     updateMountManiaFrame()
@@ -239,6 +248,10 @@ function MountManiaSummonMount()
 			wait = 1
 			Dismount()
 		end
+		-- Player starts their own new game
+		if playerMountDataMaster and not MountMania_isPlayerCharacter(playerMountDataMaster) then
+			playerMountData = {}
+		end
 		playerMountDataMaster = MountMania_playerCharacter()
 		C_Timer.After(wait, function()
 			MountMania_sendData(mountToSummon)
@@ -292,9 +305,9 @@ function getChatChannel()
     end
 end
 
-function MountManiaSendChatMessageSecure(message, chatChannel)
-    if chatChannel and  chatChannel ~= "SAY" then
-        SendChatMessage(message, chatChannel)
+function MountManiaSendChatMessageSecure(message, chatChannel, force)
+    if (not MountManiaOptionsData["MountManiaChatMessagesDisabled"] or force) and chatChannel and  chatChannel ~= "SAY" then
+        SendChatMessage(((force and "[MountMania] ") or "")..message, chatChannel)
     end
 end
 
@@ -336,7 +349,7 @@ local function MountManiaSendTopSuccessesMessage()
 		-- Add and send each player's data as a separate message
 		for _, player in ipairs(topSuccesses) do
 			message = player.name .. " - " .. player.successes
-			MountManiaSendChatMessageSecure(message, chatChannel)
+			MountManiaSendChatMessageSecure(message, chatChannel, MountManiaOptionsData["MountManiaChatMessagesDisabled"])
 			incrementMountManiaAchievementsData(player.name, MOUNTMANIA_WINS)
 			incrementMountManiaAchievementsData(player.name, MOUNTMANIA_10WINS)
 		end

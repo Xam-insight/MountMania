@@ -4,7 +4,7 @@ if L then
 
 L["MOUNTMANIA_WELCOME"] = "Digita /mnt per attivare o disattivare MountMania."
 
-L["MOUNTMANIA_GAME_MASTER"] = "%s's game"
+L["MOUNTMANIA_GAME_MASTER"] = "Partita di %s"
 
 L["MOUNTMANIA_MOUNTSUMMONER"] = "Evoca Cavalcatura"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "Evoca una cavalcatura casuale per sfidare|ngli altri giocatori del tuo gruppo."
@@ -16,12 +16,13 @@ L["MOUNTMANIA_ENDER_TOOLTIP"] = "Termina la partita e annuncia il/i vincitore/i.
 L["LOCKBUTTON_TOOLTIP"] = "Blocca"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Blocca / sblocca la finestra."
 
-L["MOUNTMANIA_MATCHER"] = "Match mount"
-L["MOUNTMANIA_MATCHER_TOOLTIP"] = "Summon %s."
+L["MOUNTMANIA_MATCHER"] = "Abbina cavalcatura"
+L["MOUNTMANIA_MATCHER_TOOLTIP"] = "Evocare %s."
 
 L["ENABLE_MOUNTMANIA"] = "Attiva MountMania"
 L["ENABLE_MOUNTMANIA_DESC"] = "Mostra/Nasconde la finestra di MountMania."
-
+L["MOUNTMANIA_OPTIONS_CHATMESSAGES"] = "Messaggi in chat"
+L["MOUNTMANIA_OPTIONS_CHATMESSAGES_DESC"] = "Inviare messaggi in chat mentre giochi a Mount Mania."
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Trasparenza di MountMania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Definisci la trasparenza di MountMania."
 
@@ -40,7 +41,7 @@ L["MOUNTMANIA_ACHIEVEMENT_WINS"] = "Abbiamo un vincitore!"
 L["MOUNTMANIA_ACHIEVEMENT_WINS_DESC"] = "Vincere una partita di Mount Mania."
 L["MOUNTMANIA_ACHIEVEMENT_xWINS"] = "Il Collezionista"
 L["MOUNTMANIA_ACHIEVEMENT_xWINS_DESC"] = "Vincere %s partite di Mount Mania."
-L["MOUNTMANIA_ACHIEVEMENT_MOUNT"] = "Ce l'ho anch'io!"
+
 L["MOUNTMANIA_ACHIEVEMENT_MOUNT_DESC"] = "Abbinare una cavalcatura durante una partita di Mount Mania."
 L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"] = "Maestro delle cavalcature"
 L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS_DESC"] = "Abbinare %s cavalcature durante le partite di Mount Mania."
