@@ -368,7 +368,7 @@ local function MountManiaSendTopSuccessesMessage()
         return
     end
 
-	local chatChannel = (MountManiaOptionsData["MountManiaChatMessagesInGroup"] and getChatChannel()) or "SAY"
+	local chatChannel = (IsInInstance() and "SAY") or getChatChannel()
 
     -- Send the title as a separate line
     local message = MountManiaAbigailQuotes["whowon"].quote
@@ -389,7 +389,7 @@ local function MountManiaSendTopSuccessesMessage()
 
 	-- Send the closing separator as a separate line
 	message = "----------------------------"
-	MountManiaSendChatMessage(message, chatChannel)
+	MountManiaSendChatMessage(message, chatChannel, 4.5)
 
 	-- Send the final message of encouragement
 	message = MountManiaAbigailQuotes["comeback"].quote
