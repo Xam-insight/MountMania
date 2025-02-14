@@ -209,9 +209,6 @@ function MountMania:CheckNearbyMounts(event, unit, _, spellID)
 				C_Timer.After(2, function()
 					DoEmote("MOUNTSPECIAL")
 				end)
-				if MountMania_isPlayerCharacter(playerMountDataMaster) then
-					MountManiaSendChatMessage(string.format(L["MOUNTMANIA_QUOTE_MOUNT"], GetMountNameByMountID(mountID)))
-				end
 			end
 			local playerName = MountMania_fullName(unit)
 			if playerName ~= playerMountDataMaster then
@@ -289,6 +286,7 @@ function MountManiaSummonMount()
 		successCounted = {}
 		MountMania:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "CheckNearbyMounts") -- Detects successful spell casts
 		MountManiaSendChatMessage(message)
+		MountManiaSendChatMessage(string.format(L["MOUNTMANIA_QUOTE_MOUNT"], GetMountNameByMountID(mountToSummon)), nil, wait + 1.5)
         MountMania:Print(L["MOUNTMANIA_WARN_RANDOM"])
     else
         MountMania:Print(L["MOUNTMANIA_WARN_NOMOUNT"])
@@ -318,7 +316,10 @@ function MountManiaManageButtons()
 end
 
 function getChatChannel()
-    if IsInRaid() then
+    -- Check if in a group using the Instance category (for LFG)
+    if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
+        return "INSTANCE_CHAT"
+    elseif IsInRaid() then
         return "RAID"
     elseif IsInGroup() then
         return "PARTY"
@@ -327,14 +328,24 @@ function getChatChannel()
     end
 end
 
-function MountManiaSendChatMessageSecure(message, chatChannel, force)
-    if (not MountManiaOptionsData["MountManiaChatMessagesDisabled"] or force) and chatChannel and  chatChannel ~= "SAY" then
-        SendChatMessage(((force and "[MountMania] ") or "")..message, chatChannel)
-    end
+local function MountManiaSendChatMessageNoDelay(message, channel, nameAddon)
+	SendChatMessage(((nameAddon and "[MountMania] ") or "")..message, channel)
 end
 
-function MountManiaSendChatMessage(message)
-    MountManiaSendChatMessageSecure(message, getChatChannel())
+function MountManiaSendChatMessage(message, channel, delay, forceMessage)
+	if forceMessage or not MountManiaOptionsData["MountManiaChatMessagesDisabled"] then
+		local chatChannel = channel or (IsInInstance() and "SAY")
+		if not chatChannel or (chatChannel == "SAY" and MountManiaOptionsData["MountManiaChatMessagesInGroup"]) then
+			chatChannel = getChatChannel()
+		end
+		if type(delay) == "number" and (chatChannel ~= "SAY" or IsInInstance()) then
+			C_Timer.After(delay, function()
+				MountManiaSendChatMessageNoDelay(message, chatChannel, forceMessage)
+			end)
+		else
+			MountManiaSendChatMessageNoDelay(message, chatChannel, forceMessage)
+		end
+	end
 end
 
 local function MountManiaSendTopSuccessesMessage()
@@ -357,37 +368,33 @@ local function MountManiaSendTopSuccessesMessage()
         return
     end
 
-	local chatChannel = getChatChannel()
+	local chatChannel = (MountManiaOptionsData["MountManiaChatMessagesInGroup"] and getChatChannel()) or "SAY"
 
     -- Send the title as a separate line
     local message = MountManiaAbigailQuotes["whowon"].quote
-    MountManiaSendChatMessageSecure(message, chatChannel)
+    MountManiaSendChatMessage(message, chatChannel)
 	MountManiaQuote("whowon", false, true)
 	
-	C_Timer.After(5, function()
-		-- Send the separator as a separate line
-		message = "----------------------------"
-		MountManiaSendChatMessageSecure(message, chatChannel)
+	-- Send the separator as a separate line
+	message = "----------------------------"
+	MountManiaSendChatMessage(message, chatChannel)
 
-		-- Add and send each player's data as a separate message
-		for _, player in ipairs(topSuccesses) do
-			message = player.name .. " - " .. player.successes
-			MountManiaSendChatMessageSecure(message, chatChannel, MountManiaOptionsData["MountManiaChatMessagesDisabled"])
-			incrementMountManiaAchievementsData(player.name, MOUNTMANIA_WINS)
-			incrementMountManiaAchievementsData(player.name, MOUNTMANIA_10WINS)
-		end
+	-- Add and send each player's data as a separate message
+	for _, player in ipairs(topSuccesses) do
+		message = player.name .. " - " .. player.successes
+		MountManiaSendChatMessage(message, chatChannel, 4, MountManiaOptionsData["MountManiaChatMessagesDisabled"])
+		incrementMountManiaAchievementsData(player.name, MOUNTMANIA_WINS)
+		incrementMountManiaAchievementsData(player.name, MOUNTMANIA_10WINS)
+	end
 
-		-- Send the closing separator as a separate line
-		message = "----------------------------"
-		MountManiaSendChatMessageSecure(message, chatChannel)
-	end)
+	-- Send the closing separator as a separate line
+	message = "----------------------------"
+	MountManiaSendChatMessage(message, chatChannel)
 
-	C_Timer.After(10, function()
-		-- Send the final message of encouragement
-		message = MountManiaAbigailQuotes["comeback"].quote
-		MountManiaSendChatMessageSecure(message, chatChannel)
-		MountManiaQuote("comeback", false, false)
-	end)
+	-- Send the final message of encouragement
+	message = MountManiaAbigailQuotes["comeback"].quote
+	MountManiaSendChatMessage(message, chatChannel, 8)
+	MountManiaQuote("comeback", false, false)
 end
 
 function MountManiaEndGame()

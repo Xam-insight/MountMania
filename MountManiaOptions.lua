@@ -53,24 +53,8 @@ function loadMountManiaOptions()
 							return enabled
 						end
 					},
-					enableChatMessages = {
-						type = "toggle", order = 3,
-						width = "full",
-						name = L["MOUNTMANIA_OPTIONS_CHATMESSAGES"],
-						desc = L["MOUNTMANIA_OPTIONS_CHATMESSAGES_DESC"],
-						set = function(info, val) 
-							MountManiaOptionsData["MountManiaChatMessagesDisabled"] = not val
-						end,
-						get = function(info)
-							local enabled = true
-							if MountManiaOptionsData["MountManiaChatMessagesDisabled"] ~= nil then
-								enabled = not MountManiaOptionsData["MountManiaChatMessagesDisabled"]
-							end
-							return enabled
-						end
-					},
 					alpha = {
-						type = "range", order = 4,
+						type = "range", order = 5,
 						width = "full", descStyle = "",
 						name = L["MOUNTMANIA_OPTIONS_ALPHA"],
 						desc = L["MOUNTMANIA_OPTIONS_ALPHA_DESC"],
@@ -87,6 +71,41 @@ function loadMountManiaOptions()
 					},
 				},
 			},
+			chatMessages = {
+				type = "group", order = 2,
+				name = L["MOUNTMANIA_OPTIONS_CHATMESSAGES"],
+				inline = true,
+				args = {
+					enableChatMessages = {
+						type = "toggle", order = 1,
+						width = "full",
+						name = L["MOUNTMANIA_OPTIONS_ALLCHATMESSAGES"],
+						desc = L["MOUNTMANIA_OPTIONS_ALLCHATMESSAGES_DESC"],
+						set = function(info, val) 
+							MountManiaOptionsData["MountManiaChatMessagesDisabled"] = not val
+						end,
+						get = function(info)
+							local enabled = true
+							if MountManiaOptionsData["MountManiaChatMessagesDisabled"] ~= nil then
+								enabled = not MountManiaOptionsData["MountManiaChatMessagesDisabled"]
+							end
+							return enabled
+						end
+					},
+					chatMessagesInGroup = {
+						type = "toggle", order = 2,
+						width = "full",
+						name = L["MOUNTMANIA_OPTIONS_CHATMESSAGES_INGROUP"],
+						desc = L["MOUNTMANIA_OPTIONS_CHATMESSAGES_INGROUP_DESC"],
+						set = function(info, val) 
+							MountManiaOptionsData["MountManiaChatMessagesInGroup"] = val
+						end,
+						get = function(info)
+							return MountManiaOptionsData["MountManiaChatMessagesInGroup"]
+						end
+					},
+				},
+			},
 		},
 	}
 
@@ -95,5 +114,5 @@ function loadMountManiaOptions()
 	MountManiaOptionsLoaded = true
 	
 	ACD:AddToBlizOptions("MountMania", "MountMania")
-	ACD:SetDefaultSize("MountMania", 400, 240)
+	ACD:SetDefaultSize("MountMania", 450, 315)
 end
