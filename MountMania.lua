@@ -47,9 +47,76 @@ end
 local defaultData = {
 	["name"] = "Unknown",
 	["classFileName"] = "ROGUE",
+	["successes"] = 0,
 }
 local playerMountDataMaster
 local playerMountData = {}
+
+function MountMania_Test()
+	local tempMaster = playerMountDataMaster
+	local tempData = playerMountData
+	
+	playerMountDataMaster = MountMania_playerCharacter()
+	playerMountData = {
+		["Xamhunter"] = {
+			["classFileName"] = "HUNTER",
+			["successes"] = 2,
+			["name"] = "Xamhunter",
+		},
+		["Xamwarlock"] = {
+			["classFileName"] = "WARLOCK",
+			["successes"] = 4,
+			["name"] = "Xamwarlock",
+		},
+		["Xampriest"] = {
+			["classFileName"] = "PRIEST",
+			["successes"] = 6,
+			["name"] = "Xampriest",
+		},
+		["Xampaladin"] = {
+			["classFileName"] = "PALADIN",
+			["successes"] = 3,
+			["name"] = "Xampaladin",
+			},
+		["Xammage"] = {
+			["classFileName"] = "MAGE",
+			["successes"] = 8,
+			["name"] = "Xammage",
+			},
+		["Xamrogue"] = {
+			["classFileName"] = "ROGUE",
+			["successes"] = 1,
+			["name"] = "Xamrogue",
+		},
+		["Xamdruid"] = {
+			["classFileName"] = "DRUID",
+			["successes"] = 2,
+			["name"] = "Xamdruid",
+		},
+		["Xamshaman"] = {
+			["classFileName"] = "SHAMAN",
+			["successes"] = 9,
+			["name"] = "Xamshaman",
+		},
+		["Xamwarriora"] = {
+			["classFileName"] = "WARRIOR",
+			["successes"] = 10,
+			["name"] = "Xamwarriora",
+		},
+		["Xamdeathknight"] = {
+			["classFileName"] = "DEATHKNIGHT",
+			["successes"] = 4,
+			["name"] = "Xamdeathknight",
+		},
+	}
+	updateMountManiaFrame()
+
+	C_Timer.After(20, function()
+		playerMountDataMaster = tempMaster
+		playerMountData = tempData
+		updateMountManiaFrame()
+	end)
+end
 
 function getMountManiaGameTitle()
 	if playerMountDataMaster then

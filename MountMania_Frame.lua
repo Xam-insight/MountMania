@@ -89,7 +89,7 @@ function updateMountManiaFrame()
 	if MountManiaFrame and MountManiaFrame:IsShown() then
 		updateMountManiaList(getPlayerMountData())
 		local numItems = MountMania_countTableElements(MountManiaList)
-		if numItems > 10 then
+		if numItems > 11 then
 			MountManiaLineHeight = 10
 		else
 			MountManiaLineHeight = 15
@@ -99,6 +99,7 @@ function updateMountManiaFrame()
 		for index,aMountManiaLine in pairs(MountManiaLines) do
 			if nbLignes == 0 then
 				createMountManiaTitleLine(index, MountManiaList[index], aMountManiaLine)
+				aMountManiaLine:SetHeight(MountManiaLineHeight)
 				aMountManiaLine:Show()
 				nbLignes = nbLignes + 1
 			else
