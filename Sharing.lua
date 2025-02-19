@@ -20,7 +20,7 @@ function MountMania_sendData(mountID, isTheEnd)
 	info.spell = spellID
 	info.isTheEnd = isTheEnd
 	info.data = getPlayerMountData()
-	local s = CustomAchiever:Serialize(info)
+	local s = MountMania:Serialize(info)
 	sendInfo(s, "Data")
 end
 

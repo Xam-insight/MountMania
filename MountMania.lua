@@ -352,7 +352,7 @@ function MountManiaSummonMount()
 		currentMountForMountManiaID = mountToSummon
 		successCounted = {}
 		MountMania:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "CheckNearbyMounts") -- Detects successful spell casts
-		MountManiaSendChatMessage(message)
+		MountManiaSendChatMessage(message, nil, nil, not IsInGroup() and not IsInRaid())
 		MountManiaSendChatMessage(string.format(L["MOUNTMANIA_QUOTE_MOUNT"], GetMountNameByMountID(mountToSummon)), nil, wait + 1.5)
         MountMania:Print(L["MOUNTMANIA_WARN_RANDOM"])
     else
@@ -409,7 +409,7 @@ function MountManiaSendChatMessage(message, channel, delay, forceMessage)
 			C_Timer.After(delay, function()
 				MountManiaSendChatMessageNoDelay(message, chatChannel, forceMessage)
 			end)
-		else
+		elseif IsInInstance() or forceMessage then
 			MountManiaSendChatMessageNoDelay(message, chatChannel, forceMessage)
 		end
 	end
@@ -449,7 +449,7 @@ local function MountManiaSendTopSuccessesMessage()
 	-- Add and send each player's data as a separate message
 	for _, player in ipairs(topSuccesses) do
 		message = player.name .. " - " .. player.successes
-		MountManiaSendChatMessage(message, chatChannel, 4, MountManiaOptionsData["MountManiaChatMessagesDisabled"])
+		MountManiaSendChatMessage(message, chatChannel, 4, MountManiaOptionsData["MountManiaChatMessagesDisabled"] or (not IsInGroup() and not IsInRaid()))
 		incrementMountManiaAchievementsData(player.name, MOUNTMANIA_WINS)
 		incrementMountManiaAchievementsData(player.name, MOUNTMANIA_10WINS)
 	end
