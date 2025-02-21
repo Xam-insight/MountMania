@@ -20,6 +20,13 @@ function MountMania_addRealm(aName, aRealm)
 	return aName
 end
 
+function MountMania_delRealm(aName)
+	if aName and string.match(aName, "-") then
+		aName = strsplit("-", aName)
+	end
+	return aName
+end
+
 function MountMania_fullName(unit)
 	local fullName = nil
 	if unit then

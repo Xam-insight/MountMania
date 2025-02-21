@@ -51,13 +51,17 @@ local defaultData = {
 }
 local playerMountDataMaster
 local playerMountData = {}
+playerMountData.players = {}
 
 function MountMania_Test()
 	local tempMaster = playerMountDataMaster
-	local tempData = playerMountData
+	local tempData = {}
+	tempData.difficulty = playerMountData.difficulty
+	tempData.players = playerMountData.players
 	
 	playerMountDataMaster = MountMania_playerCharacter()
-	playerMountData = {
+	playerMountData.difficulty = PLAYER_DIFFICULTY6
+	playerMountData.players = {
 		["Xamhunter"] = {
 			["classFileName"] = "HUNTER",
 			["successes"] = 2,
@@ -113,14 +117,26 @@ function MountMania_Test()
 
 	C_Timer.After(20, function()
 		playerMountDataMaster = tempMaster
-		playerMountData = tempData
+		playerMountData.difficulty = tempData.difficulty
+		playerMountData.players = tempData.players
 		updateMountManiaFrame()
 	end)
 end
 
+local difficultyColors = {
+	[PLAYER_DIFFICULTY1]            = ITEM_QUALITY_COLORS[2].hex,
+	[PLAYER_DIFFICULTY2]            = ITEM_QUALITY_COLORS[3].hex,
+	[PLAYER_DIFFICULTY6]            = ITEM_QUALITY_COLORS[4].hex,
+	[PLAYER_DIFFICULTY_MYTHIC_PLUS] = ITEM_QUALITY_COLORS[5].hex,
+}
+
 function getMountManiaGameTitle()
 	if playerMountDataMaster then
-		return string.format(L["MOUNTMANIA_GAME_MASTER"], playerMountDataMaster)
+		local title = string.format(L["MOUNTMANIA_GAME_MASTER"], MountMania_delRealm(playerMountDataMaster))
+		if playerMountData.difficulty then
+			title = difficultyColors[playerMountData.difficulty]..title.."|r ("..playerMountData.difficulty..")"
+		end
+		return title
 	end
 	return nil
 end
@@ -128,12 +144,12 @@ end
 function getPlayerMountData(GUID, data)
     if not GUID then
         -- If no GUID is provided, return the entire table
-        return playerMountData
+        return playerMountData.players
     end
 
     -- Return specific data for the given GUID if it exists
-    if playerMountData[GUID] and playerMountData[GUID][data] then
-        return playerMountData[GUID][data]
+    if playerMountData.players and playerMountData.players[GUID] and playerMountData.players[GUID][data] then
+        return playerMountData.players[GUID][data]
     end
     
     -- Return default data if available
@@ -142,6 +158,26 @@ function getPlayerMountData(GUID, data)
     end
     
     return nil
+end
+
+local isPlayerDruid = false
+local function MountMania_isPlayerDruid()
+	local _, class = UnitClass("player")
+
+    if class == "DRUID" then
+		isPlayerDruid = true
+	end
+end
+
+local function MountMania_isPlayerShapeShiftedDruid()
+	if isPlayerDruid then
+		local form = GetShapeshiftForm()
+		if form ~= 0 and form ~= 3 then
+			return true
+		end
+		
+	end
+	return false
 end
 
 function MountMania:OnEnable()
@@ -178,6 +214,8 @@ function MountMania:OnEnable()
 	MountManiaMatcher:SetAlpha(1.0)
 	
 	updateMountManiaFrame()
+	
+	MountMania_isPlayerDruid()
 	
 	if CustomAchieverData then
 		CustAc_CreateOrUpdateCategory("MountMania", nil, "Mount Mania")
@@ -231,8 +269,8 @@ local successCounted = {}
 -- Function to record data when a player summons the same mount
 local function RecordPlayerData(unitGUID, playerName, classFileName)
     -- Initialize player data if not already tracked
-    if not playerMountData[unitGUID] then
-        playerMountData[unitGUID] = {
+    if not playerMountData.players[unitGUID] then
+        playerMountData.players[unitGUID] = {
             name = playerName,
             successes = 0,
 			classFileName = classFileName,
@@ -240,13 +278,13 @@ local function RecordPlayerData(unitGUID, playerName, classFileName)
     end
 
     -- Increment the number of successes
-    playerMountData[unitGUID].successes = playerMountData[unitGUID].successes + 1
+    playerMountData.players[unitGUID].successes = playerMountData.players[unitGUID].successes + 1
 	incrementMountManiaAchievementsData(playerName, MOUNTMANIA_MOUNT)
 	incrementMountManiaAchievementsData(playerName, MOUNTMANIA_20MOUNTS)
 	incrementMountManiaAchievementsData(playerName, MOUNTMANIA_50MOUNTS)
 
     -- Print a message with the updated information
-    --MountMania:Print(playerName .. " has now matched " .. playerMountData[unitGUID].successes .. " mount(s) with you!")
+    --MountMania:Print(playerName .. " has now matched " .. playerMountData.players[unitGUID].successes .. " mount(s) with you!")
 	
 	-- Update the frame with the new data
     updateMountManiaFrame()
@@ -290,10 +328,41 @@ function MountMania:CheckNearbyMounts(event, unit, _, spellID)
 	updateMountManiaFrame()
 end
 
+local function MountMania_testPossibleSummonning()
+	if not IsOutdoors() or UnitOnTaxi("player") or IsFlying() then
+		return SPELL_FAILED_NO_MOUNTS_ALLOWED
+	end
+	if IsPlayerMoving() then
+		return ERR_NOT_WHILE_MOVING
+	end
+	if MountMania_isPlayerShapeShiftedDruid() then
+		return ERR_MOUNT_SHAPESHIFTED 
+	end
+	return nil
+end
+
+local function MountManiaSetDifficulty(usableMounts, totalMounts)
+	playerMountData.difficulty = nil
+	if usableMounts and totalMounts then
+		--local percent = usableMounts / totalMounts
+		if usableMounts < 250 then --percent < 0.18 then
+			playerMountData.difficulty = PLAYER_DIFFICULTY1
+		elseif usableMounts < 500 then --percent < 0.5 then
+			playerMountData.difficulty = PLAYER_DIFFICULTY2
+		elseif usableMounts < 750 then --percent < 0.8 then
+			playerMountData.difficulty = PLAYER_DIFFICULTY6
+		else
+			playerMountData.difficulty = PLAYER_DIFFICULTY_MYTHIC_PLUS
+		end
+	end
+end
+
 function MountManiaSummonMount()
     -- Check if the player is in an environment where mounting is allowed
-    if not IsOutdoors() or UnitOnTaxi("player") then
-        MountMania:Print(SPELL_FAILED_NO_MOUNTS_ALLOWED)
+	local alert = MountMania_testPossibleSummonning()
+    if alert then
+		UIErrorsFrame:AddMessage(alert, 1, 0, 0, 1)
+        MountMania:Print(alert)
         return
     end
 
@@ -338,11 +407,13 @@ function MountManiaSummonMount()
 		playerMountDataMaster = MountMania_playerCharacter()
 		C_Timer.After(wait, function()
 			MountMania_sendData(mountToSummon)
+			CancelShapeshiftForm()
 			C_MountJournal.SummonByID(mountToSummon)
 		end)
 		local message = L["MOUNTMANIA_QUOTE_GETREADY"]
 		if currentMountForMountManiaID == nil then
-			playerMountData = {}
+			playerMountData.players = {}
+			MountManiaSetDifficulty(#usableMounts, #mountIDs)
 			MountManiaQuote("getready", false, true)
 		else
 			local randomQuote = ""..math.random(1, 2)
@@ -376,7 +447,7 @@ function MountManiaManageButtons()
 	MountManiaButton_UpdateStatus(MountManiaMountSummoner)
 	
 	
-	MountManiaEnder:SetShown(playerMountDataMaster and MountMania_isPlayerCharacter(playerMountDataMaster) and MountMania_doTableContainsElements(playerMountData))
+	MountManiaEnder:SetShown(playerMountDataMaster and MountMania_isPlayerCharacter(playerMountDataMaster) and MountMania_doTableContainsElements(playerMountData.players))
 	
 	MountManiaMatcher:SetShown(playerMountDataMaster and MountManiaMatcher:GetAttribute("Mount"))
 	MountManiaButton_UpdateStatus(MountManiaMatcher)
@@ -420,8 +491,8 @@ local function MountManiaSendTopSuccessesMessage()
     local topSuccesses = {}
     local topSuccessCount = 0
 
-    -- Iterate through playerMountData to find the top success count
-    for GUID, data in pairs(playerMountData) do
+    -- Iterate through playerMountData.players to find the top success count
+    for GUID, data in pairs(playerMountData.players) do
         if data.successes > topSuccessCount then
             topSuccessCount = data.successes
             topSuccesses = { {name = data.name, successes = data.successes} }
@@ -511,8 +582,10 @@ end
 function MountManiaSummonMatchingMount(mountID)
     if not mountID then return end
 	
-	if not IsOutdoors() or UnitOnTaxi("player") then
-		MountMania:Print(SPELL_FAILED_NO_MOUNTS_ALLOWED)
+	local alert = MountMania_testPossibleSummonning()
+    if alert then
+		UIErrorsFrame:AddMessage(alert, 1, 0, 0, 1)
+		MountMania:Print(alert)
 		return
     end
 	
@@ -526,6 +599,7 @@ function MountManiaSummonMatchingMount(mountID)
 	end
 	
 	C_Timer.After(wait, function()
+		CancelShapeshiftForm()
 		C_MountJournal.SummonByID(mountID)
 	end)
 	
