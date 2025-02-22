@@ -26,6 +26,8 @@ L["MOUNTMANIA_OPTIONS_ALLCHATMESSAGES"] = "Todos los mensajes de chat"
 L["MOUNTMANIA_OPTIONS_ALLCHATMESSAGES_DESC"] = "Enviar todos los mensajes de chat al jugar Mount Mania."
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES_INGROUP"] = "Siempre en grupo"
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES_INGROUP_DESC"] = "Enviar siempre los mensajes de Mount Mania en el chat de grupo o banda si el jugador está en un grupo."
+L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES"] = "Ignorar juegos públicos"
+L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"] = "Ignora los juegos iniciados por jugadores cercanos."
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Transparencia de Mount Mania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define la transparencia de Mount Mania."
 

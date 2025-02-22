@@ -26,6 +26,8 @@ L["MOUNTMANIA_OPTIONS_ALLCHATMESSAGES"] = "Все сообщения чата"
 L["MOUNTMANIA_OPTIONS_ALLCHATMESSAGES_DESC"] = "Отправлять все сообщения чата во время игры в Ездоманию."
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES_INGROUP"] = "Всегда в группе"
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES_INGROUP_DESC"] = "Всегда отправлять сообщения Ездомании в групповой или рейдовый чат, если игрок находится в группе."
+L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES"] = "Игнорировать публичные игры"
+L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"] = "Игнорировать игры, запущенные ближайшими игроками."
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Ездомания альфа"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Определите альфу Ездомании"
 

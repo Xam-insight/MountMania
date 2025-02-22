@@ -85,7 +85,7 @@ function updateMountManiaList(playerData)
 		-- Characters sorting
 		local charNames = {}
 		for k in pairs(playerData) do
-			charNames[ #charNames + 1 ] = string.format("%03d", 1000-playerData[k]["successes"]).."#"..playerData[k]["name"].."#"..k
+			charNames[ #charNames + 1 ] = string.format("%03d", 1000-playerData[k]["successes"]).."#"..k
 		end
 		table.sort(charNames)
 
@@ -93,8 +93,8 @@ function updateMountManiaList(playerData)
 		currentGame = getMountManiaGameTitle() or (MountMania_HasPlayersData() and currentGame) or ""
 		table.insert(MountManiaList, currentGame)
 		for k,v in pairs(charNames) do
-			local successes, charName, charId = strsplit("#", v, 3)
-				table.insert(MountManiaList, charId)
+			local successes, charName = strsplit("#", v, 3)
+				table.insert(MountManiaList, charName)
 		end
 	end
 end
@@ -103,7 +103,7 @@ local maxSuccesses = 0
 function updateMountManiaFrame()
 	maxSuccesses = 0
 	if MountManiaFrame and MountManiaFrame:IsShown() then
-		updateMountManiaList(getPlayerMountData())
+		updateMountManiaList(getPlayerMountData().players)
 		local numItems = MountMania_countTableElements(MountManiaList)
 		if numItems > 11 then
 			MountManiaLineHeight = 10
@@ -117,7 +117,7 @@ function updateMountManiaFrame()
 				createMountManiaTitleLine(index, MountManiaList[index], aMountManiaLine)
 				aMountManiaLine:SetHeight(MountManiaLineHeight)
 				aMountManiaLine:Show()
-				if MountMania_PlayerIsMaster() or MountMania_HasPlayersData() then
+				if MountMania_PlayerMaster() then
 					MountManiaResetButton:Show()
 				else
 					MountManiaResetButton:Hide()
@@ -161,7 +161,7 @@ end
 
 function createMountManiaTitleLine(indexCharac, title, aMountManiaLine)
 
-	aMountManiaLine:SetAttribute("GUID", nil)
+	aMountManiaLine:SetAttribute("player", nil)
 	
 	local fontstringLabel = "MountManiaTitleLabel"
 	local fontstring = getFontStringFromMountManiaFramePool(indexCharac, fontstringLabel, "MountManiaPlayerLabelTemplate", aMountManiaLine)
@@ -174,19 +174,19 @@ function createMountManiaTitleLine(indexCharac, title, aMountManiaLine)
 	aMountManiaLine:SetWidth(MountMania_ALLCOLS_WIDTH)
 end
 
-function createMountManiaLine(indexCharac, GUID, aMountManiaLine)
+function createMountManiaLine(indexCharac, playerName, aMountManiaLine)
 
-	aMountManiaLine:SetAttribute("GUID", GUID)
+	aMountManiaLine:SetAttribute("player", playerName)
 	
 	local fontstringLabel = "MountManiaPlayerLabel"
 	local fontstring = getFontStringFromMountManiaFramePool(indexCharac, fontstringLabel, "MountManiaPlayerLabelTemplate", aMountManiaLine)
-	local color = RAID_CLASS_COLORS[getPlayerMountData(GUID, "classFileName")]
+	local color = RAID_CLASS_COLORS[getPlayerMountData(playerName, "classFileName")]
 	fontstring:SetTextColor(color.r, color.g, color.b, 1.0)
-	local charName = getPlayerMountData(GUID, "name")
+	local charName = playerName
 	fontstring:SetText(charName)
 	fontstring:SetPoint("LEFT", aMountManiaLine, "LEFT", MountManiaGlobal_BetweenObjectsGap, 0)
 
-	local successes = getPlayerMountData(GUID, "successes")
+	local successes = getPlayerMountData(playerName, "successes")
 	maxSuccesses = max(successes, maxSuccesses)
 	local fontstringLabelSuccesses = "SuccessesLabel"
 	local fontstringSuccesses = getFontStringFromMountManiaFramePool(indexCharac, fontstringLabelSuccesses, "MountManiaPlayerSuccessesTemplate", aMountManiaLine)

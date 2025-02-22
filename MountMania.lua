@@ -45,13 +45,13 @@ end
 
 -- Table to track player mount matches
 local defaultData = {
-	["name"] = "Unknown",
 	["classFileName"] = "ROGUE",
 	["successes"] = 0,
 }
 local playerMountDataMaster
 local playerMountData = {}
 playerMountData.players = {}
+MountDataInvitedPlayers = {}
 
 function MountMania_Test()
 	local tempMaster = playerMountDataMaster
@@ -65,52 +65,42 @@ function MountMania_Test()
 		["Xamhunter"] = {
 			["classFileName"] = "HUNTER",
 			["successes"] = 2,
-			["name"] = "Xamhunter",
 		},
 		["Xamwarlock"] = {
 			["classFileName"] = "WARLOCK",
 			["successes"] = 4,
-			["name"] = "Xamwarlock",
 		},
 		["Xampriest"] = {
 			["classFileName"] = "PRIEST",
 			["successes"] = 6,
-			["name"] = "Xampriest",
 		},
 		["Xampaladin"] = {
 			["classFileName"] = "PALADIN",
 			["successes"] = 3,
-			["name"] = "Xampaladin",
 			},
 		["Xammage"] = {
 			["classFileName"] = "MAGE",
 			["successes"] = 8,
-			["name"] = "Xammage",
 			},
 		["Xamrogue"] = {
 			["classFileName"] = "ROGUE",
 			["successes"] = 1,
-			["name"] = "Xamrogue",
 		},
 		["Xamdruid"] = {
 			["classFileName"] = "DRUID",
 			["successes"] = 2,
-			["name"] = "Xamdruid",
 		},
 		["Xamshaman"] = {
 			["classFileName"] = "SHAMAN",
 			["successes"] = 9,
-			["name"] = "Xamshaman",
 		},
 		["Xamwarriora"] = {
 			["classFileName"] = "WARRIOR",
 			["successes"] = 10,
-			["name"] = "Xamwarriora",
 		},
 		["Xamdeathknight"] = {
 			["classFileName"] = "DEATHKNIGHT",
 			["successes"] = 4,
-			["name"] = "Xamdeathknight",
 		},
 	}
 	updateMountManiaFrame()
@@ -130,12 +120,12 @@ local difficultyColors = {
 	[PLAYER_DIFFICULTY_MYTHIC_PLUS] = ITEM_QUALITY_COLORS[5].hex,
 }
 
-function MountMania_PlayerIsMaster()
-	return MountMania_isPlayerCharacter(playerMountDataMaster)
+function MountMania_PlayerMaster()
+	return playerMountDataMaster
 end
 
 function MountMania_HasPlayersData()
-	return next(playerMountData.players) ~= nil
+	return playerMountData.players and next(playerMountData.players) ~= nil
 end
 
 function getMountManiaGameTitle()
@@ -149,15 +139,15 @@ function getMountManiaGameTitle()
 	return nil
 end
 
-function getPlayerMountData(GUID, data)
-    if not GUID then
-        -- If no GUID is provided, return the entire table
-        return playerMountData.players
+function getPlayerMountData(player, data)
+    if not player then
+        -- If no player is provided, return the entire table
+        return playerMountData
     end
 
-    -- Return specific data for the given GUID if it exists
-    if playerMountData.players and playerMountData.players[GUID] and playerMountData.players[GUID][data] then
-        return playerMountData.players[GUID][data]
+    -- Return specific data for the given player if it exists
+    if playerMountData.players and playerMountData.players[player] and playerMountData.players[player][data] then
+        return playerMountData.players[player][data]
     end
     
     -- Return default data if available
@@ -236,6 +226,32 @@ function MountMania:OnEnable()
 		achievement = MountMania_GetAchievementDetails(40986) -- Mount Master (20 Mounts)
 		CustAc_CreateOrUpdateAchievement(MOUNTMANIA_20MOUNTS, "MountMania", achievement.icon, nil, achievement.name)
 	end
+	
+	if not MountManiaOptionsData["MountManiaIgnorePublicGames"] then
+		MountMania_AddChatFilter()
+	end
+end
+
+local publicGameJoined
+local function MountManiaChatFilter(self, event, msg, author, ...)
+	-- Check if the message starts with "[MountMania]"
+	if not MountMania_isPlayerCharacter(author) then
+		if string.match(msg, "^%[MountMania%]") then
+			MountMania_askToJoin(author)
+			publicGameJoined = author
+		end
+	end
+	return false -- Allow the message to be displayed in chat
+end
+	
+function MountMania_AddChatFilter()
+	-- Register the filter for the SAY channel
+	ChatFrame_AddMessageEventFilter("CHAT_MSG_SAY", MountManiaChatFilter)
+end
+
+function MountMania_RemoveChatFilter()
+	-- Unregister the filter for the SAY channel
+	ChatFrame_RemoveMessageEventFilter("CHAT_MSG_SAY", MountManiaChatFilter)
 end
 
 function MountMania:MountManiaChatCommand(param)
@@ -270,29 +286,47 @@ function incrementMountManiaAchievementsData(player, achievementsData)
 end
 
 -- Variable to store the player's current mount ID
-local currentMountForMountManiaID = nil
+local currentMountForMountManiaID = {}
 local alreadySummoned = {}
 local successCounted = {}
 
+local function setValue(aTable, master, value)
+	if aTable and master and value then
+		if not aTable[master] then
+			aTable[master]= {}
+		end
+		aTable[master][value] = true
+	end
+end
+
+local function getValue(aTable, master, value)
+	return aTable and master and aTable[master] and value and aTable[master][value]
+end
+
+local function resetTable(aTable, master)
+	if aTable and master then
+		aTable[master]= {}
+	end
+end
+
 -- Function to record data when a player summons the same mount
-local function RecordPlayerData(unitGUID, playerName, classFileName)
+function MountMania_RecordPlayerData(playerName, classFileName)
     -- Initialize player data if not already tracked
-    if not playerMountData.players[unitGUID] then
-        playerMountData.players[unitGUID] = {
-            name = playerName,
+    if not playerMountData.players[playerName] then
+        playerMountData.players[playerName] = {
             successes = 0,
 			classFileName = classFileName,
         }
     end
 
     -- Increment the number of successes
-    playerMountData.players[unitGUID].successes = playerMountData.players[unitGUID].successes + 1
+    playerMountData.players[playerName].successes = playerMountData.players[playerName].successes + 1
 	incrementMountManiaAchievementsData(playerName, MOUNTMANIA_MOUNT)
 	incrementMountManiaAchievementsData(playerName, MOUNTMANIA_20MOUNTS)
 	incrementMountManiaAchievementsData(playerName, MOUNTMANIA_50MOUNTS)
 
     -- Print a message with the updated information
-    --MountMania:Print(playerName .. " has now matched " .. playerMountData.players[unitGUID].successes .. " mount(s) with you!")
+    --MountMania:Print(playerName .. " has now matched " .. playerMountData.players[playerName].successes .. " mount(s) with you!")
 	
 	-- Update the frame with the new data
     updateMountManiaFrame()
@@ -305,36 +339,50 @@ function GetMountNameByMountID(mountID)
     return name or "Unknown Mount"
 end
 
--- Function to compare another player's mount with the player's current mount
-function MountMania:CheckNearbyMounts(event, unit, _, spellID)
-    if not currentMountForMountManiaID then
-        return -- Skip if the player has no mount currently set
-    end
-
+local function MountMania_CompareMountWithCurrent(master, playerName, mountID, currentMount, classFileName)
     -- Check if the spell cast is related to a mount
-    local mountID = C_MountJournal.GetMountFromSpell(spellID)
-	if mountID and mountID == currentMountForMountManiaID then
-		local unitGUID = UnitGUID(unit)
-		if not successCounted[unitGUID] then
-			successCounted[unitGUID] = true
-			if unit == "player" or unitGUID == UnitGUID("player") then
-				alreadySummoned[currentMountForMountManiaID] = true
+	if mountID and mountID == currentMount then
+		if not getValue(successCounted, master, playerName) then
+			setValue(successCounted, master, playerName)
+			local isPlayerCharacter = MountMania_isPlayerCharacter(playerName)
+			if isPlayerCharacter then
+				setValue(alreadySummoned, master, mountID)
 				C_Timer.After(2, function()
 					DoEmote("MOUNTSPECIAL")
 				end)
 			end
-			local playerName = MountMania_fullName(unit)
-			if playerName ~= playerMountDataMaster then
-				local _, englishClass = UnitClass(unit)
-				local classFileName = englishClass	
-
+			if playerMountDataMaster and playerMountDataMaster == master and playerName ~= playerMountDataMaster then
 				-- Record the player's data
-				RecordPlayerData(unitGUID, playerName, classFileName)
+				MountMania_RecordPlayerData(playerName, classFileName)
+			end
+			if publicGameJoined and publicGameJoined == master and playerName ~= publicGameJoined then
+				if isPlayerCharacter then
+					MountMania_sendPlayerSuccess(publicGameJoined)
+				end
 			end
 		end
 	end
+end
+
+-- Function to compare another player's mount with the player's current mount
+function MountMania:CheckNearbyMounts(event, unit, _, spellID)
+    if MountMania_countTableElements(currentMountForMountManiaID) == 0 then
+        return -- Skip if the player has no mount currently set
+    end
+
+    local mountID = C_MountJournal.GetMountFromSpell(spellID)
+	local playerName = MountMania_fullName(unit)
+	local classFileName
+	if playerName ~= playerMountDataMaster then
+		local _, englishClass = UnitClass(unit)
+		classFileName = englishClass
+	end
+	for k,v in pairs(currentMountForMountManiaID) do
+		MountMania_CompareMountWithCurrent(k, playerName, mountID, v, classFileName)
+	end
 	updateMountManiaFrame()
 end
+
 
 local function MountMania_testPossibleSummonning()
 	if not IsOutdoors() or UnitOnTaxi("player") or IsFlying() then
@@ -388,7 +436,7 @@ function MountManiaSummonMount()
 		end
 		if isUsable and isCollected then
 			usableCount = usableCount + 1
-			if alreadySummoned[mountID] then
+			if getValue(alreadySummoned, playerMountDataMaster, mountID) then
 				alreadySummonedCount = alreadySummonedCount + 1
 			else
 				table.insert(usableMounts, mountID)
@@ -408,10 +456,6 @@ function MountManiaSummonMount()
 			wait = 1
 			Dismount()
 		end
-		-- Player starts their own new game
-		if playerMountDataMaster and not MountMania_isPlayerCharacter(playerMountDataMaster) then
-			currentMountForMountManiaID = nil
-		end
 		playerMountDataMaster = MountMania_playerCharacter()
 		C_Timer.After(wait, function()
 			MountMania_sendData(mountToSummon)
@@ -419,8 +463,9 @@ function MountManiaSummonMount()
 			C_MountJournal.SummonByID(mountToSummon)
 		end)
 		local message = L["MOUNTMANIA_QUOTE_GETREADY"]
-		if currentMountForMountManiaID == nil then
+		if not currentMountForMountManiaID[playerMountDataMaster] then
 			playerMountData.players = {}
+			MountDataInvitedPlayers = {}
 			MountManiaSetDifficulty(#usableMounts, #mountIDs)
 			MountManiaQuote("getready", false, true)
 		else
@@ -428,16 +473,16 @@ function MountManiaSummonMount()
 			message = L["MOUNTMANIA_QUOTE_NEXT"..randomQuote]
 			MountManiaQuote(randomQuote, false, false)
 		end
-		currentMountForMountManiaID = mountToSummon
-		successCounted = {}
+		MountManiaSendChatMessage(message, nil, nil, not currentMountForMountManiaID[playerMountDataMaster] and not IsInGroup() and not IsInRaid())
+		currentMountForMountManiaID[playerMountDataMaster] = mountToSummon
+		resetTable(successCounted, playerMountDataMaster)
 		MountMania:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "CheckNearbyMounts") -- Detects successful spell casts
-		MountManiaSendChatMessage(message, nil, nil, not IsInGroup() and not IsInRaid())
 		MountManiaSendChatMessage(string.format(L["MOUNTMANIA_QUOTE_MOUNT"], GetMountNameByMountID(mountToSummon)), nil, wait + 1.5)
         MountMania:Print(L["MOUNTMANIA_WARN_RANDOM"])
     else
         MountMania:Print(L["MOUNTMANIA_WARN_NOMOUNT"])
 		if alreadySummonedCount > 0 and alreadySummonedCount == usableCount then
-			alreadySummoned = {}
+			resetTable(alreadySummoned, playerMountDataMaster)
 		end
     end
 	updateMountManiaFrame()
@@ -500,12 +545,12 @@ local function MountManiaSendTopSuccessesMessage()
     local topSuccessCount = 0
 
     -- Iterate through playerMountData.players to find the top success count
-    for GUID, data in pairs(playerMountData.players) do
+    for playerName, data in pairs(playerMountData.players) do
         if data.successes > topSuccessCount then
             topSuccessCount = data.successes
-            topSuccesses = { {name = data.name, successes = data.successes} }
+            topSuccesses = { {name = playerName, successes = data.successes} }
         elseif data.successes == topSuccessCount then
-            table.insert(topSuccesses, {name = data.name, successes = data.successes})
+            table.insert(topSuccesses, {name = playerName, successes = data.successes})
         end
     end
 
@@ -544,24 +589,27 @@ local function MountManiaSendTopSuccessesMessage()
 end
 
 function MountManiaResetGame(keepScore)
+	currentMountForMountManiaID[playerMountDataMaster] = nil
+	resetTable(alreadySummoned, playerMountDataMaster)
 	playerMountDataMaster = nil
-	currentMountForMountManiaID = nil
-	alreadySummoned = {}
 	MountManiaEnder:Hide()
 	if not keepScore then
 		playerMountData.players = {}
 	end
+	MountDataInvitedPlayers = {}
 	MountMania:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 end
 
 function MountManiaEndGame(reset)
-	MountManiaResetGame(not reset)
 	if MountMania_isPlayerCharacter(playerMountDataMaster) then
 		MountMania_sendData(nil, reset or "WINNER")
 		if not reset then
 			MountManiaSendTopSuccessesMessage()
 		end
+	else
+		MountMania_quitGame(playerMountDataMaster)
 	end
+	MountManiaResetGame(not reset)
 end
 
 -- Function to update the MountManiaMatcher button with the correct mount icon and ID
@@ -632,9 +680,10 @@ function MountManiaProcessReceivedMount(sender, mountID)
 		MountManiaQuote("getready", false, true)
 		playerMountDataMaster = sender
 	end
-	if playerMountDataMaster == sender then
-		currentMountForMountManiaID = mountID
-		successCounted = {}
+	if playerMountDataMaster == sender or publicGameJoined == sender then
+		currentMountForMountManiaID[sender] = mountID
+		resetTable(successCounted, sender)
+		updateMountManiaFrame()
 	end
 end
 
@@ -649,15 +698,27 @@ function MountManiaProcessReceivedData(sender, data)
 end
 
 function MountManiaProcessReceivedEnd(sender, winner)
-	if playerMountDataMaster == sender then
+	if playerMountDataMaster == sender or publicGameJoined == sender then
 		if winner then
 			MountManiaQuote("whowon", false, true)
 		else
 			playerMountData.players = {}
 		end
-		playerMountDataMaster = nil
-		currentMountForMountManiaID = nil
+		currentMountForMountManiaID[sender] = nil
 		MountMania:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
-		updateMountManiaFrame()
+	end
+	if playerMountDataMaster == sender then
+		playerMountDataMaster = nil
+	end
+	if publicGameJoined == sender then
+		publicGameJoined = nil
+	end
+	updateMountManiaFrame()
+end
+
+function MountManiaInvitePlayer(player)
+	if currentMountForMountManiaID[playerMountDataMaster] then
+		MountMania_sendData(currentMountForMountManiaID[playerMountDataMaster], nil, player)
+		MountDataInvitedPlayers[player] = true
 	end
 end

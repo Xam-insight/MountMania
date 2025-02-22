@@ -104,6 +104,23 @@ function loadMountManiaOptions()
 							return MountManiaOptionsData["MountManiaChatMessagesInGroup"]
 						end
 					},
+					publicGames = {
+						type = "toggle", order = 3,
+						width = "full",
+						name = L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES"],
+						desc = L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"],
+						set = function(info, val) 
+							MountManiaOptionsData["MountManiaIgnorePublicGames"] = val
+							if val then
+								MountMania_RemoveChatFilter()
+							else
+								MountMania_AddChatFilter()
+							end
+						end,
+						get = function(info)
+							return MountManiaOptionsData["MountManiaIgnorePublicGames"]
+						end
+					},
 				},
 			},
 		},
@@ -114,5 +131,5 @@ function loadMountManiaOptions()
 	MountManiaOptionsLoaded = true
 	
 	ACD:AddToBlizOptions("MountMania", "MountMania")
-	ACD:SetDefaultSize("MountMania", 450, 315)
+	ACD:SetDefaultSize("MountMania", 450, 340)
 end

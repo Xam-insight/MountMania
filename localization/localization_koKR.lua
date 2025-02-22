@@ -26,6 +26,8 @@ L["MOUNTMANIA_OPTIONS_ALLCHATMESSAGES"] = "모든 채팅 메시지"
 L["MOUNTMANIA_OPTIONS_ALLCHATMESSAGES_DESC"] = "Mount Mania를 플레이할 때 모든 채팅 메시지를 보내기."
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES_INGROUP"] = "항상 그룹 내에서"
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES_INGROUP_DESC"] = "플레이어가 그룹에 있을 경우 항상 Mount Mania 메시지를 파티 또는 공격대 채팅으로 보내기."
+L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES"] = "공개 게임 무시"
+L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"] = "주변 플레이어가 시작한 게임을 무시합니다."
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Mount Mania 투명도"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Mount Mania의 투명도를 정의합니다."
 
