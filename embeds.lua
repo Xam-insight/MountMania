@@ -99,3 +99,8 @@ end
 function MountManiaWindow_OnHide()
 	MountManiaWindow["MountManiaHidden"] = true
 end
+
+function MountMania_ResetGame()
+	MountManiaEndGame(true)
+	updateMountManiaFrame()
+end

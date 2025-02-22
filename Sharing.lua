@@ -42,7 +42,7 @@ function MountMania:ReceiveDataFrame_OnEvent(prefix, message, distribution, send
 					MountManiaProcessReceivedData(senderFullName, o.data)
 				end
 				if o.isTheEnd then
-					MountManiaProcessReceivedEnd(senderFullName)
+					MountManiaProcessReceivedEnd(senderFullName, o.isTheEnd == "WINNER")
 				end
 			end
 		end

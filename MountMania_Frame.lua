@@ -34,6 +34,21 @@ function createMountManiaOptionsButton(parent)
 	return optionsButton
 end
 
+function createMountManiaResetButton(parent)
+	local name = "MountManiaResetButton"
+	local tooltip = RESET
+	local tooltipDetail = RESETGAME
+
+	local resetButton = CreateFrame("Button", name, parent, "MountManiaResetButtonTemplate")
+	resetButton:SetScale(0.7)
+	resetButton:SetPoint("RIGHT", MountManiaLine1, "RIGHT", 0, -2)
+	resetButton:SetNormalTexture("Interface\\AddOns\\MountMania\\art\\delete.blp")
+	resetButton:SetAttribute("tooltip", tooltip)
+	resetButton:SetAttribute("tooltipDetail", { tooltipDetail })
+
+	return resetButton
+end
+
 function createMountManiaFrame()
 	--NewMountManiaFrame
 	MountManiaFrame = CreateFrame("Frame", "MountManiaFrame", UIParent, "MountManiaFrameTemplate")
@@ -61,6 +76,7 @@ function createMountManiaFrame()
 		line:EnableMouse(false)
 		MountManiaLines[i] = line
 	end
+	createMountManiaResetButton(MountManiaFrame)
 end
 
 local currentGame = ""
@@ -74,7 +90,7 @@ function updateMountManiaList(playerData)
 		table.sort(charNames)
 
 		MountManiaList = {}
-		currentGame = getMountManiaGameTitle() or currentGame
+		currentGame = getMountManiaGameTitle() or (MountMania_HasPlayersData() and currentGame) or ""
 		table.insert(MountManiaList, currentGame)
 		for k,v in pairs(charNames) do
 			local successes, charName, charId = strsplit("#", v, 3)
@@ -101,6 +117,11 @@ function updateMountManiaFrame()
 				createMountManiaTitleLine(index, MountManiaList[index], aMountManiaLine)
 				aMountManiaLine:SetHeight(MountManiaLineHeight)
 				aMountManiaLine:Show()
+				if MountMania_PlayerIsMaster() or MountMania_HasPlayersData() then
+					MountManiaResetButton:Show()
+				else
+					MountManiaResetButton:Hide()
+				end
 				nbLignes = nbLignes + 1
 			else
 				if aMountManiaLine and MountManiaList[index] then

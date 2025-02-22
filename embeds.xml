@@ -246,6 +246,14 @@
 			<TexCoords left="0" right=".5" top="0" bottom="1" />
 		</CheckedTexture>
 	</CheckButton>
+	<Button name="MountManiaResetButtonTemplate" virtual="true" hidden="true">
+		<Size x="16" y="16" />
+		<Scripts>
+			<OnClick function="MountMania_ResetGame"/>
+			<OnEnter function="MountManiaButtonEnter"/>
+			<OnLeave function="MountManiaButtonLeave"/>
+		</Scripts>
+	</Button>
 	<Frame name="MountManiaFrameTemplate" virtual="true" hidden="true" movable="true" resizable="true" clampedToScreen="true" frameStrata="BACKGROUND">
 		<Size x="145" y="145" />
 		<Attributes>

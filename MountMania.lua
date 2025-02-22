@@ -130,6 +130,14 @@ local difficultyColors = {
 	[PLAYER_DIFFICULTY_MYTHIC_PLUS] = ITEM_QUALITY_COLORS[5].hex,
 }
 
+function MountMania_PlayerIsMaster()
+	return MountMania_isPlayerCharacter(playerMountDataMaster)
+end
+
+function MountMania_HasPlayersData()
+	return next(playerMountData.players) ~= nil
+end
+
 function getMountManiaGameTitle()
 	if playerMountDataMaster then
 		local title = string.format(L["MOUNTMANIA_GAME_MASTER"], MountMania_delRealm(playerMountDataMaster))
@@ -535,15 +543,24 @@ local function MountManiaSendTopSuccessesMessage()
 	MountManiaQuote("comeback", false, false)
 end
 
-function MountManiaEndGame()
+function MountManiaResetGame(keepScore)
+	playerMountDataMaster = nil
+	currentMountForMountManiaID = nil
+	alreadySummoned = {}
+	MountManiaEnder:Hide()
+	if not keepScore then
+		playerMountData.players = {}
+	end
+	MountMania:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+end
+
+function MountManiaEndGame(reset)
+	MountManiaResetGame(not reset)
 	if MountMania_isPlayerCharacter(playerMountDataMaster) then
-		playerMountDataMaster = nil
-		MountMania_sendData(nil, true)
-		currentMountForMountManiaID = nil
-		alreadySummoned = {}
-		MountManiaEnder:Hide()
-		MountMania:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
-		MountManiaSendTopSuccessesMessage()
+		MountMania_sendData(nil, reset or "WINNER")
+		if not reset then
+			MountManiaSendTopSuccessesMessage()
+		end
 	end
 end
 
@@ -631,9 +648,13 @@ function MountManiaProcessReceivedData(sender, data)
 	end
 end
 
-function MountManiaProcessReceivedEnd(sender)
+function MountManiaProcessReceivedEnd(sender, winner)
 	if playerMountDataMaster == sender then
-		MountManiaQuote("whowon", false, true)
+		if winner then
+			MountManiaQuote("whowon", false, true)
+		else
+			playerMountData.players = {}
+		end
 		playerMountDataMaster = nil
 		currentMountForMountManiaID = nil
 		MountMania:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
