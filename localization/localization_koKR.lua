@@ -9,6 +9,7 @@ L["MOUNTMANIA_GAME_MASTER"] = "%s의 게임"
 L["MOUNTMANIA_MOUNTSUMMONER"] = "탈것 소환"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "무작위 탈것을 소환하여|n그룹 내 다른 플레이어들과 경쟁하세요."
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "경고, Mount Mania 게임이 이미 진행 중입니다."
+L["MOUNTMANIA_ONGOING_GAME"] = "그래도 자신의 게임을 시작하시겠습니까?"
 
 L["MOUNTMANIA_ENDER"] = "게임 종료"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "게임을 종료하고 승자(들)를 발표합니다."

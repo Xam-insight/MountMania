@@ -339,8 +339,9 @@ function GetMountNameByMountID(mountID)
     return name or "Unknown Mount"
 end
 
-local function MountMania_CompareMountWithCurrent(master, playerName, mountID, currentMount, classFileName)
+function MountMania_CompareMountWithCurrent(master, playerName, mountID, classFileName)
     -- Check if the spell cast is related to a mount
+	local currentMount = currentMountForMountManiaID[master]
 	if mountID and mountID == currentMount then
 		if not getValue(successCounted, master, playerName) then
 			setValue(successCounted, master, playerName)
@@ -357,7 +358,7 @@ local function MountMania_CompareMountWithCurrent(master, playerName, mountID, c
 			end
 			if publicGameJoined and publicGameJoined == master and playerName ~= publicGameJoined then
 				if isPlayerCharacter then
-					MountMania_sendPlayerSuccess(publicGameJoined)
+					MountMania_sendPlayerSuccess(publicGameJoined, mountID)
 				end
 			end
 		end
@@ -377,8 +378,8 @@ function MountMania:CheckNearbyMounts(event, unit, _, spellID)
 		local _, englishClass = UnitClass(unit)
 		classFileName = englishClass
 	end
-	for k,v in pairs(currentMountForMountManiaID) do
-		MountMania_CompareMountWithCurrent(k, playerName, mountID, v, classFileName)
+	for k in pairs(currentMountForMountManiaID) do
+		MountMania_CompareMountWithCurrent(k, playerName, mountID, classFileName)
 	end
 	updateMountManiaFrame()
 end
@@ -533,7 +534,7 @@ function MountManiaSendChatMessage(message, channel, delay, forceMessage)
 			C_Timer.After(delay, function()
 				MountManiaSendChatMessageNoDelay(message, chatChannel, forceMessage)
 			end)
-		elseif IsInInstance() or forceMessage then
+		elseif chatChannel ~= "SAY" or IsInInstance() or forceMessage then
 			MountManiaSendChatMessageNoDelay(message, chatChannel, forceMessage)
 		end
 	end
@@ -567,8 +568,8 @@ local function MountManiaSendTopSuccessesMessage()
 	MountManiaQuote("whowon", false, true)
 	
 	-- Send the separator as a separate line
-	message = "----------------------------"
-	MountManiaSendChatMessage(message, chatChannel)
+	local separator = "----------------------------"
+	MountManiaSendChatMessage(separator, chatChannel)
 
 	-- Add and send each player's data as a separate message
 	for _, player in ipairs(topSuccesses) do
@@ -579,8 +580,7 @@ local function MountManiaSendTopSuccessesMessage()
 	end
 
 	-- Send the closing separator as a separate line
-	message = "----------------------------"
-	MountManiaSendChatMessage(message, chatChannel, 4.5)
+	MountManiaSendChatMessage(separator, chatChannel, 4.5)
 
 	-- Send the final message of encouragement
 	message = MountManiaAbigailQuotes["comeback"].quote
@@ -639,6 +639,8 @@ function UpdateMountManiaButton(mountID)
 
 	-- Store the mount ID for the click action
 	MountManiaMatcher:SetAttribute("CurrentMount", mountID)
+	
+	DeadpoolTrulyUnequip_Glow(MountManiaMatcher)
 	
 	updateMountManiaFrame()
 end
@@ -701,17 +703,19 @@ function MountManiaProcessReceivedEnd(sender, winner)
 	if playerMountDataMaster == sender or publicGameJoined == sender then
 		if winner then
 			MountManiaQuote("whowon", false, true)
-		else
+		elseif playerMountDataMaster == sender then
 			playerMountData.players = {}
 		end
 		currentMountForMountManiaID[sender] = nil
-		MountMania:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 	end
 	if playerMountDataMaster == sender then
 		playerMountDataMaster = nil
 	end
 	if publicGameJoined == sender then
 		publicGameJoined = nil
+	end
+	if not playerMountDataMaster and not publicGameJoined then
+		MountMania:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 	end
 	updateMountManiaFrame()
 end

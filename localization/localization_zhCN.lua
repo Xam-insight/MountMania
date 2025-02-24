@@ -9,6 +9,7 @@ L["MOUNTMANIA_GAME_MASTER"] = "%s 的游戏"
 L["MOUNTMANIA_MOUNTSUMMONER"] = "召唤坐骑"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "召唤一个随机坐骑，与|n你小队中的其他玩家进行挑战。"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "警告，Mount Mania 游戏已在进行中。"
+L["MOUNTMANIA_ONGOING_GAME"] = "您仍然要开始自己的游戏吗？"
 
 L["MOUNTMANIA_ENDER"] = "结束游戏"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "结束游戏并宣布获胜者。"

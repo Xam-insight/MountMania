@@ -52,6 +52,33 @@ function MountManiaMountSummoner_OnLoad(self)
 	MountManiaButton_UpdateStatus(self)
 end
 
+MountMania_logo = "Mount |cFFFF7744M|r|cFF55AA55a|r|cFFFFCC00N|r|cFFAA77FFi|r|cFFFF5555A|r"
+
+StaticPopupDialogs["ONGOING_GAME"] = {
+	text = MountMania_logo.."|n|n"..L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"].."|n"..L["MOUNTMANIA_ONGOING_GAME"],
+	button1 = YES,
+	button2 = NO,
+	OnAccept = function (self)
+		MountManiaSummonMount()
+	end,
+	OnCancel = function (self)
+		--
+	end,
+	timeout = 0,
+	whileDead = true,
+	hideOnEscape = true,
+	preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
+}
+
+function MountManiaMountSummoner_OnClick(self)
+	-- Check if a game is ongoing
+	if self:GetAttribute("Status") == "Warning" then
+		StaticPopup_Show("ONGOING_GAME")
+	else
+		MountManiaSummonMount()
+	end
+end
+
 function MountManiaEnder_OnLoad(self)
 	self.Icon:SetTexture("Interface\\Icons\\Inv_checkered_flag")
 

@@ -9,6 +9,7 @@ L["MOUNTMANIA_GAME_MASTER"] = "%ss Spiel"
 L["MOUNTMANIA_MOUNTSUMMONER"] = "Reittier beschwören"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "Beschwöre ein zufälliges Reittier, um|nandere Spieler in deiner Gruppe herauszufordern."
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Achtung, ein Mount Mania-Spiel läuft bereits."
+L["MOUNTMANIA_ONGOING_GAME"] = "Möchten Sie trotzdem Ihr eigenes Spiel starten?"
 
 L["MOUNTMANIA_ENDER"] = "Spiel beenden"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "Beendet das Spiel und gibt den/die Gewinner bekannt."

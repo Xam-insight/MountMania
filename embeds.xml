@@ -311,7 +311,7 @@
 			<OnShow function="MountManiaMountSummoner_OnLoad" />
 			<OnClick>
 				if self.Cooldown:GetCooldownDuration() == 0 then
-					MountManiaSummonMount()
+					MountManiaMountSummoner_OnClick(self)
 					MountManiaButton_UpdateCooldown(self)
 					MountManiaButton_UpdateCooldown(MountManiaEnder)
 				end

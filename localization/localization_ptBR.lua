@@ -9,6 +9,7 @@ L["MOUNTMANIA_GAME_MASTER"] = "Jogo de %s"
 L["MOUNTMANIA_MOUNTSUMMONER"] = "Invocar Montaria"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "Invoca uma montaria aleatória para desafiar|noutros jogadores do seu grupo."
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Atenção, um jogo de Mount Mania já está em andamento."
+L["MOUNTMANIA_ONGOING_GAME"] = "Você ainda quer iniciar seu próprio jogo?"
 
 L["MOUNTMANIA_ENDER"] = "Encerrar Jogo"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "Encerra o jogo e anuncia o(s) vencedor(es)."

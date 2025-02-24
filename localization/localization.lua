@@ -9,6 +9,7 @@ L["MOUNTMANIA_GAME_MASTER"] = "%s's game"
 L["MOUNTMANIA_MOUNTSUMMONER"] = "Summon Mount"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "Summon a random mount to challenge|nother players in your group."
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Warning, a Mount Mania game is already in progress."
+L["MOUNTMANIA_ONGOING_GAME"] = "Do you still want to start your own game?"
 
 L["MOUNTMANIA_ENDER"] = "End Game"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "End the game and announce the winner(s)."

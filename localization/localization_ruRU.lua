@@ -9,6 +9,7 @@ L["MOUNTMANIA_GAME_MASTER"] = "Игра %s"
 L["MOUNTMANIA_MOUNTSUMMONER"] = "Вызов средства передвижение"
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP"] = "Призовите случайное средство передвижение, чтобы бросить вызов|nдругим игрокам в вашей группе."
 L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] = "Внимание, игра Ездомания уже идет."
+L["MOUNTMANIA_ONGOING_GAME"] = "Вы все равно хотите начать свою игру?"
 
 L["MOUNTMANIA_ENDER"] = "Конец игры"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "Завершите игру и объявите победителя(ей)."
@@ -47,9 +48,8 @@ L["MOUNTMANIA_ACHIEVEMENT_WINS_DESC"] = "Выиграйте Ездоманию."
 L["MOUNTMANIA_ACHIEVEMENT_xWINS"] = "Коллекционер"
 L["MOUNTMANIA_ACHIEVEMENT_xWINS_DESC"] = "Выиграть Ездоманию %s раз."
 
-L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS_DESC"] = "Сопоставить средство передвижения во время игры в Ездоманию."
+L["MOUNTMANIA_ACHIEVEMENT_MOUNT_DESC"] = "Сопоставить средство передвижения во время игры в Ездоманию."
 L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS"] = "Мастер верховой езды"
 L["MOUNTMANIA_ACHIEVEMENT_xMOUNTS_DESC"] = "Сопоставить %s средств передвижения во время игр в Ездоманию."
-
 
 end

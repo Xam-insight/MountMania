@@ -39,8 +39,9 @@ function MountMania_askToJoin(master)
 end
 
 local playerClassFileName
-function MountMania_sendPlayerSuccess(master)
+function MountMania_sendPlayerSuccess(master, mountID)
 	local info = {}
+	info.mountID = mountID
 	
 	if not playerClassFileName then
 		local _, englishClass = UnitClass("player")
@@ -79,12 +80,16 @@ function MountMania:ReceiveDataFrame_OnEvent(prefix, message, distribution, send
 					end
 				end
 			elseif messageType == "PlayerSuccess" then
+				local mountID
 				local classFileName
 				local success, o = self:Deserialize(messageMessage)
 				if success then
+					mountID = o.mountID
 					classFileName = o.classFileName
 				end
-				MountMania_RecordPlayerData(senderFullName, classFileName)
+				if mountID then
+					MountMania_CompareMountWithCurrent(MountMania_playerCharacter(), senderFullName, mountID, classFileName)
+				end
 			elseif messageType == "JoinGame" then
 				MountManiaInvitePlayer(senderFullName)
 			elseif messageType == "QuitGame" then
