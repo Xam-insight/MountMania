@@ -2,7 +2,7 @@ local function sendInfo(info, messageType, target)
 	local targetChan = getChatChannel()
 	if target or targetChan == "SAY" then
 		local targetToSend = target
-		if not targetToSend then
+		if not targetToSend and UnitIsPlayer("target") then
 			local name, realm = UnitFullName("target")
 			targetToSend = name and MountMania_addRealm(name, realm)
 		end
