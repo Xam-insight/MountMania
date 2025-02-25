@@ -640,7 +640,7 @@ function UpdateMountManiaButton(mountID)
 	-- Store the mount ID for the click action
 	MountManiaMatcher:SetAttribute("CurrentMount", mountID)
 	
-	DeadpoolTrulyUnequip_Glow(MountManiaMatcher)
+	MountManiaButton_Glow(MountManiaMatcher)
 	
 	updateMountManiaFrame()
 end

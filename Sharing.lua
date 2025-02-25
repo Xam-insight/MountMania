@@ -35,7 +35,12 @@ function MountMania_sendData(mountID, isTheEnd, target)
 end
 
 function MountMania_askToJoin(master)
-	MountMania:SendCommMessage(MountManiaGlobal_CommPrefix, "JoinGame#NoData", "WHISPER", master)
+	local target = master
+	if not target and UnitIsPlayer("target") then
+		local name, realm = UnitFullName("target")
+		target = name and MountMania_addRealm(name, realm)
+	end
+	MountMania:SendCommMessage(MountManiaGlobal_CommPrefix, "JoinGame#NoData", "WHISPER", target)
 end
 
 local playerClassFileName
