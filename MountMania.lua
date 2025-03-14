@@ -710,6 +710,7 @@ function MountManiaJoinTargetsGame(self)
 
             if frame == numFrames then
                 frame = 1  -- Reset to first frame
+				self.Texture:SetTexCoord(0, 0.125, 0, 0.25)
                 isAnimating = false
                 self:SetScript("OnUpdate", nil)  -- Stop animation
             else

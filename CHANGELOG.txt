@@ -1,4 +1,6 @@
-﻿- v1.1
+﻿- v1.1.1
+	- Fixed: Eye icon is now fully open at the end of the animation.
+- v1.1
 	- TOC for 11.1.5.
 	- Join the target's game
 - v1.0
