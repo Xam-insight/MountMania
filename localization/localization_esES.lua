@@ -17,6 +17,9 @@ L["MOUNTMANIA_ENDER_TOOLTIP"] = "Termina la partida y anuncia al/los ganador(es)
 L["MOUNTMANIA_MATCHER"] = "Emparejar montura"
 L["MOUNTMANIA_MATCHER_TOOLTIP"] = "Invocar %s."
 
+L["MOUNTMANIA_JOIN"] = "Unirse a la partida del objetivo."
+L["MOUNTMANIA_JOIN_TOOLTIP"] = "Si el objetivo tiene una partida|nde Mount Mania en curso, únete."
+
 L["LOCKBUTTON_TOOLTIP"] = "Bloquear"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Bloquea / desbloquea la ventana."
 

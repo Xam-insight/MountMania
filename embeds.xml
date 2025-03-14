@@ -30,12 +30,22 @@
 	<FontString name="MountManiaPlayerSuccessesTemplate" inherits="GameFontHighlightSmall" virtual="true" justifyH="RIGHT">
 		<Size x="30" y="15" />
 	</FontString>
-	<Button name="MountManiaButtonTemplate" mixin="TalentButtonArtMixin" virtual="true">
+	<Button name="MountManiaButtonTemplateNoBorder" virtual="true">
+		<Size x="40" y="40"/>
+		<Scripts>
+			<OnEnter>
+				MountManiaButtonEnter(self)
+			</OnEnter>
+			<OnLeave>
+				MountManiaButtonLeave(self)
+			</OnLeave>
+		</Scripts>
+	</Button>
+	<Button name="MountManiaButtonTemplate" inherits="MountManiaButtonTemplateNoBorder" mixin="TalentButtonArtMixin" virtual="true">
 		<KeyValues>
 			<KeyValue key="GetEdgeDiameterOffset" value="TalentButtonArtMixin.GetCircleEdgeDiameterOffset" type="global"/>
 			<KeyValue key="artSet" value="TalentButtonArtMixin.ArtSet.Circle" type="global"/>
 		</KeyValues>
-		<Size x="40" y="40"/>
 		<Layers>
 			<Layer level="BACKGROUND">
 				<Texture parentKey="Shadow">
@@ -337,6 +347,26 @@
 			<OnShow function="MountManiaMatcher_OnLoad" />
 			<OnClick>
 				MountManiaSummonMatchingMount(self:GetAttribute("CurrentMount"))
+			</OnClick>
+		</Scripts>
+	</Button>
+	
+	<Button name="MountManiaJoin" parent="UIParent" inherits="MountManiaButtonTemplateNoBorder" hidden="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentTexture"  parentKey="Texture" file="interface/lfgframe/lfg-eye.blp">
+					<Size x="64" y="64"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<TexCoords left="0.0" right="0.125" top="0.0" bottom="0.25"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnShow function="MountManiaJoin_OnLoad" />
+			<OnClick>
+				MountManiaJoinTargetsGame(self)
 			</OnClick>
 		</Scripts>
 	</Button>

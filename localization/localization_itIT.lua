@@ -14,11 +14,14 @@ L["MOUNTMANIA_ONGOING_GAME"] = "Vuoi comunque avviare la tua partita?"
 L["MOUNTMANIA_ENDER"] = "Termina Partita"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "Termina la partita e annuncia il/i vincitore/i."
 
-L["LOCKBUTTON_TOOLTIP"] = "Blocca"
-L["LOCKBUTTON_TOOLTIPDETAIL"] = "Blocca / sblocca la finestra."
-
 L["MOUNTMANIA_MATCHER"] = "Abbina cavalcatura"
 L["MOUNTMANIA_MATCHER_TOOLTIP"] = "Evocare %s."
+
+L["MOUNTMANIA_JOIN"] = "Unisciti alla partita del bersaglio."
+L["MOUNTMANIA_JOIN_TOOLTIP"] = "Se il bersaglio ha una partita|ndi Mount Mania in corso, unisciti a essa."
+
+L["LOCKBUTTON_TOOLTIP"] = "Blocca"
+L["LOCKBUTTON_TOOLTIPDETAIL"] = "Blocca / sblocca la finestra."
 
 L["ENABLE_MOUNTMANIA"] = "Attiva Mount Mania"
 L["ENABLE_MOUNTMANIA_DESC"] = "Mostra/Nasconde la finestra di Mount Mania."

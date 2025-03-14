@@ -211,6 +211,12 @@ function MountMania:OnEnable()
 	MountManiaMatcher:SetPoint("TOPRIGHT", MountManiaFrame, "TOPRIGHT", -35, -5)
 	MountManiaMatcher:SetAlpha(1.0)
 	
+	MountManiaJoin:SetParent(MountManiaFrame)
+	MountManiaJoin:ClearAllPoints()
+	MountManiaJoin:SetScale(0.5)
+	MountManiaJoin:SetPoint("TOPRIGHT", MountManiaFrame, "TOPRIGHT", -35, -5)
+	MountManiaJoin:SetAlpha(1.0)
+	
 	updateMountManiaFrame()
 	
 	MountMania_isPlayerDruid()
@@ -505,6 +511,8 @@ function MountManiaManageButtons()
 	
 	MountManiaMatcher:SetShown(playerMountDataMaster and MountManiaMatcher:GetAttribute("Mount"))
 	MountManiaButton_UpdateStatus(MountManiaMatcher)
+	
+	MountManiaJoin:SetShown(not playerMountDataMaster)
 end
 
 function getChatChannel()
@@ -613,34 +621,39 @@ function MountManiaEndGame(reset)
 end
 
 -- Function to update the MountManiaMatcher button with the correct mount icon and ID
-function UpdateMountManiaButton(mountID)
-	-- Get mount details
-	local name, spellID, icon = C_MountJournal.GetMountInfoByID(mountID)
-	
-	if not spellID or not icon then return end -- Ensure valid mount data
+function UpdateMountManiaMatcherButton(mountID)
+	if mountID then
+		-- Get mount details
+		local name, spellID, icon = C_MountJournal.GetMountInfoByID(mountID)
+		
+		if not spellID or not icon then return end -- Ensure valid mount data
 
-	-- Set the button icon
-	MountManiaMatcher.Icon:SetTexture(icon)
-	MountManiaMatcher:SetAttribute("Mount", true)
-	
-	MountManiaMatcher:SetAttribute("tooltipDetail", { string.format(L["MOUNTMANIA_MATCHER_TOOLTIP"], name) })
-	local _, _, _, _, isUsable, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(mountID)
-	
-	if not isCollected then
-		MountManiaMatcher:SetAttribute("tooltipDetailRed", { MOUNT_JOURNAL_NOT_COLLECTED })
-		MountManiaMatcher:SetAttribute("Status", "Disabled")
-	elseif not isUsable then
-		MountManiaMatcher:SetAttribute("tooltipDetailRed", nil)
-		MountManiaMatcher:SetAttribute("Status", "Disabled")
+		-- Set the button icon
+		MountManiaMatcher.Icon:SetTexture(icon)
+		MountManiaMatcher:SetAttribute("Mount", true)
+		
+		MountManiaMatcher:SetAttribute("tooltipDetail", { string.format(L["MOUNTMANIA_MATCHER_TOOLTIP"], name) })
+		local _, _, _, _, isUsable, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(mountID)
+		
+		if not isCollected then
+			MountManiaMatcher:SetAttribute("tooltipDetailRed", { MOUNT_JOURNAL_NOT_COLLECTED })
+			MountManiaMatcher:SetAttribute("Status", "Disabled")
+		elseif not isUsable then
+			MountManiaMatcher:SetAttribute("tooltipDetailRed", nil)
+			MountManiaMatcher:SetAttribute("Status", "Disabled")
+		else
+			MountManiaMatcher:SetAttribute("tooltipDetailRed", nil)
+			MountManiaMatcher:SetAttribute("Status", nil)
+		end
+
+		-- Store the mount ID for the click action
+		MountManiaMatcher:SetAttribute("CurrentMount", mountID)
+		
+		MountManiaButton_Glow(MountManiaMatcher)
 	else
-		MountManiaMatcher:SetAttribute("tooltipDetailRed", nil)
-		MountManiaMatcher:SetAttribute("Status", nil)
+		MountManiaMatcher:SetAttribute("Mount", nil)
+		MountManiaMatcher:SetAttribute("CurrentMount", nil)
 	end
-
-	-- Store the mount ID for the click action
-	MountManiaMatcher:SetAttribute("CurrentMount", mountID)
-	
-	MountManiaButton_Glow(MountManiaMatcher)
 	
 	updateMountManiaFrame()
 end
@@ -675,9 +688,40 @@ function MountManiaSummonMatchingMount(mountID)
 	--end)
 end
 
+local frame = 2  -- Start at the second frame
+local frameDuration = 0.1  -- 0.1s per frame
+local numFrames = 8  -- Frames 2 to 8
+local isAnimating = false
+
+function MountManiaJoinTargetsGame(self)
+    if isAnimating then return end  -- Prevent restarting mid-animation
+    
+	MountMania_askToJoin()
+    
+	isAnimating = true
+	
+    local elapsedTime = 0  
+    self:SetScript("OnUpdate", function(self, elapsed)
+        elapsedTime = elapsedTime + elapsed
+        if elapsedTime >= frameDuration then
+            elapsedTime = 0  -- Reset timer
+            local left = (frame - 1) * 0.125
+            self.Texture:SetTexCoord(left, left + 0.125, 0, 0.25)
+
+            if frame == numFrames then
+                frame = 1  -- Reset to first frame
+                isAnimating = false
+                self:SetScript("OnUpdate", nil)  -- Stop animation
+            else
+                frame = frame + 1  -- Next frame
+            end
+        end
+    end)
+end
+
 function MountManiaProcessReceivedMount(sender, mountID)
 	MountMania:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "CheckNearbyMounts")
-	UpdateMountManiaButton(mountID)
+	UpdateMountManiaMatcherButton(mountID)
 	if not playerMountDataMaster then
 		MountManiaQuote("getready", false, true)
 		playerMountDataMaster = sender
@@ -714,8 +758,13 @@ function MountManiaProcessReceivedEnd(sender, winner)
 	if publicGameJoined == sender then
 		publicGameJoined = nil
 	end
-	if not playerMountDataMaster and not publicGameJoined then
-		MountMania:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+	if not publicGameJoined then
+		if not playerMountDataMaster or MountMania_isPlayerCharacter(playerMountDataMaster) then
+			UpdateMountManiaMatcherButton()
+		end
+		if not playerMountDataMaster then
+			MountMania:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+		end
 	end
 	updateMountManiaFrame()
 end

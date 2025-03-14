@@ -17,6 +17,9 @@ L["MOUNTMANIA_ENDER_TOOLTIP"] = "结束游戏并宣布获胜者。"
 L["MOUNTMANIA_MATCHER"] = "匹配坐骑"
 L["MOUNTMANIA_MATCHER_TOOLTIP"] = "召唤 %s。"
 
+L["MOUNTMANIA_JOIN"] = "加入目标的游戏。"
+L["MOUNTMANIA_JOIN_TOOLTIP"] = "如果目标正在进行 Mount Mania 游戏，请加入。"
+
 L["LOCKBUTTON_TOOLTIP"] = "锁定"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "锁定/解锁窗口。"
 

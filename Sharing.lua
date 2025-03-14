@@ -36,11 +36,13 @@ end
 
 function MountMania_askToJoin(master)
 	local target = master
-	if not target and UnitIsPlayer("target") then
+	if not target and UnitIsPlayer("target") and not UnitIsUnit("target", "player") then
 		local name, realm = UnitFullName("target")
 		target = name and MountMania_addRealm(name, realm)
 	end
-	MountMania:SendCommMessage(MountManiaGlobal_CommPrefix, "JoinGame#NoData", "WHISPER", target)
+	if target then
+		MountMania:SendCommMessage(MountManiaGlobal_CommPrefix, "JoinGame#NoData", "WHISPER", target)
+	end
 end
 
 local playerClassFileName

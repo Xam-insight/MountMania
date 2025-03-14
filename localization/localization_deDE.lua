@@ -17,6 +17,9 @@ L["MOUNTMANIA_ENDER_TOOLTIP"] = "Beendet das Spiel und gibt den/die Gewinner bek
 L["MOUNTMANIA_MATCHER"] = "Reittier zuordnen"
 L["MOUNTMANIA_MATCHER_TOOLTIP"] = "%s beschwören."
 
+L["MOUNTMANIA_JOIN"] = "Dem Spiel des Ziels beitreten."
+L["MOUNTMANIA_JOIN_TOOLTIP"] = "Falls das Ziel ein laufendes|nMount Mania-Spiel hat, tritt ihm bei."
+
 L["LOCKBUTTON_TOOLTIP"] = "Sperren"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Sperrt / entsperrt das Fenster."
 

@@ -14,11 +14,14 @@ L["MOUNTMANIA_ONGOING_GAME"] = "그래도 자신의 게임을 시작하시겠습
 L["MOUNTMANIA_ENDER"] = "게임 종료"
 L["MOUNTMANIA_ENDER_TOOLTIP"] = "게임을 종료하고 승자(들)를 발표합니다."
 
-L["LOCKBUTTON_TOOLTIP"] = "잠금"
-L["LOCKBUTTON_TOOLTIPDETAIL"] = "창을 잠그거나 잠금을 해제합니다."
-
 L["MOUNTMANIA_MATCHER"] = "탈것 맞추기"
 L["MOUNTMANIA_MATCHER_TOOLTIP"] = "%s 소환하기."
+
+L["MOUNTMANIA_JOIN"] = "대상의 게임에 참여합니다."
+L["MOUNTMANIA_JOIN_TOOLTIP"] = "대상이 진행 중인 Mount Mania 게임이 있다면 참여하세요."
+
+L["LOCKBUTTON_TOOLTIP"] = "잠금"
+L["LOCKBUTTON_TOOLTIPDETAIL"] = "창을 잠그거나 잠금을 해제합니다."
 
 L["ENABLE_MOUNTMANIA"] = "Mount Mania 활성화"
 L["ENABLE_MOUNTMANIA_DESC"] = "Mount Mania 창을 표시하거나 숨깁니다."

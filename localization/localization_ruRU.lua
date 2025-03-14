@@ -17,6 +17,9 @@ L["MOUNTMANIA_ENDER_TOOLTIP"] = "Завершите игру и объявите
 L["MOUNTMANIA_MATCHER"] = "Сопоставить маунта"
 L["MOUNTMANIA_MATCHER_TOOLTIP"] = "Призвать %s."
 
+L["MOUNTMANIA_JOIN"] = "Присоединиться к игре цели."
+L["MOUNTMANIA_JOIN_TOOLTIP"] = "Если у цели уже идёт игра в Mount Mania,|nприсоединитесь к ней."
+
 L["LOCKBUTTON_TOOLTIP"] = "Замок"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Блокирует/разблокирует окно."
 

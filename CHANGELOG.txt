@@ -1,2 +1,5 @@
-﻿- v1.0.0
+﻿- v1.1
+	- TOC for 11.1.5.
+	- Join the target's game
+- v1.0
 	- Initialization.

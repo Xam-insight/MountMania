@@ -94,6 +94,11 @@ function MountManiaMatcher_OnLoad(self)
 	MountManiaButton_UpdateStatus(self)
 end
 
+function MountManiaJoin_OnLoad(self)
+	self:SetAttribute("tooltip", L["MOUNTMANIA_JOIN"])
+	self:SetAttribute("tooltipDetail", { L["MOUNTMANIA_JOIN_TOOLTIP"] })
+end
+
 function MountManiaButton_UpdateStatus(self)
 	if self:GetAttribute("Status") == "Warning" then
 		self:ApplyVisualState(TalentButtonUtil.BaseVisualState.RefundInvalid)
