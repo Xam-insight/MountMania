@@ -16,6 +16,8 @@ L["MOUNTMANIA_ENDER_TOOLTIP"] = "게임을 종료하고 승자(들)를 발표합
 
 L["MOUNTMANIA_MATCHER"] = "탈것 맞추기"
 L["MOUNTMANIA_MATCHER_TOOLTIP"] = "%s 소환하기."
+L["MOUNTMANIA_MATCHER_TOOLTIP_MESSAGE"] = "클릭하면 채팅에 메시지를 보냅니다."
+L["MOUNTMANIA_MATCHER_MESSAGE"] = "이건 없는데!"
 
 L["MOUNTMANIA_JOIN"] = "대상의 게임에 참여합니다."
 L["MOUNTMANIA_JOIN_TOOLTIP"] = "대상이 진행 중인 Mount Mania 게임이 있다면 참여하세요."

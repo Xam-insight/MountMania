@@ -16,6 +16,8 @@ L["MOUNTMANIA_ENDER_TOOLTIP"] = "结束游戏并宣布获胜者。"
 
 L["MOUNTMANIA_MATCHER"] = "匹配坐骑"
 L["MOUNTMANIA_MATCHER_TOOLTIP"] = "召唤 %s。"
+L["MOUNTMANIA_MATCHER_TOOLTIP_MESSAGE"] = "如果点击，你将在聊天中发送消息。"
+L["MOUNTMANIA_MATCHER_MESSAGE"] = "这只我没有！"
 
 L["MOUNTMANIA_JOIN"] = "加入目标的游戏。"
 L["MOUNTMANIA_JOIN_TOOLTIP"] = "如果目标正在进行 Mount Mania 游戏，请加入。"

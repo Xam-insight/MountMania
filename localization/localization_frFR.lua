@@ -16,6 +16,8 @@ L["MOUNTMANIA_ENDER_TOOLTIP"] = "Terminer la partie et annoncer le(s) gagnant(s)
 
 L["MOUNTMANIA_MATCHER"] = "Assortir monture"
 L["MOUNTMANIA_MATCHER_TOOLTIP"] = "Invoquer %s."
+L["MOUNTMANIA_MATCHER_TOOLTIP_MESSAGE"] = "Si vous cliquez, vous enverrez un message dans le chat."
+L["MOUNTMANIA_MATCHER_MESSAGE"] = "Je l'ai pas celle-là !"
 
 L["MOUNTMANIA_JOIN"] = "Rejoindre la partie de la cible"
 L["MOUNTMANIA_JOIN_TOOLTIP"] = "Si la cible a une partie de Mount Mania|nen cours, rejoignez-là."

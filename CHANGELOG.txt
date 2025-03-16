@@ -1,4 +1,6 @@
-﻿- v1.1.1
+﻿- v1.1.2
+	- Added: You can click on the summon button to send a message if you don't own the mount.
+- v1.1.1
 	- Fixed: Eye icon is now fully open at the end of the animation.
 - v1.1
 	- TOC for 11.1.5.

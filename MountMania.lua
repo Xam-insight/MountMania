@@ -621,8 +621,10 @@ function MountManiaEndGame(reset)
 end
 
 -- Function to update the MountManiaMatcher button with the correct mount icon and ID
+local notOwnedMountMessageSent
 function UpdateMountManiaMatcherButton(mountID)
 	if mountID then
+		notOwnedMountMessageSent = nil
 		-- Get mount details
 		local name, spellID, icon = C_MountJournal.GetMountInfoByID(mountID)
 		
@@ -637,6 +639,7 @@ function UpdateMountManiaMatcherButton(mountID)
 		
 		if not isCollected then
 			MountManiaMatcher:SetAttribute("tooltipDetailRed", { MOUNT_JOURNAL_NOT_COLLECTED })
+			MountManiaMatcher:SetAttribute("tooltipDetailBlue", { L["MOUNTMANIA_MATCHER_TOOLTIP_MESSAGE"] })
 			MountManiaMatcher:SetAttribute("Status", "Disabled")
 		elseif not isUsable then
 			MountManiaMatcher:SetAttribute("tooltipDetailRed", nil)
@@ -660,7 +663,13 @@ end
 
 -- Function to summon the selected mount
 function MountManiaSummonMatchingMount(mountID)
-    if not mountID then return end
+    if not mountID then 
+		if not notOwnedMountMessageSent then
+			MountManiaSendChatMessage(L["MOUNTMANIA_MATCHER_MESSAGE"])
+			notOwnedMountMessageSent = true
+		end
+		return
+	end
 	
 	local alert = MountMania_testPossibleSummonning()
     if alert then
