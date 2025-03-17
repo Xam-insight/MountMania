@@ -346,7 +346,7 @@
 		<Scripts>
 			<OnShow function="MountManiaMatcher_OnLoad" />
 			<OnClick>
-				MountManiaSummonMatchingMount(self:GetAttribute("CurrentMount"))
+				MountManiaSummonMatchingMount(self:GetAttribute("CurrentMount"), self:GetAttribute("NotCollected"))
 			</OnClick>
 		</Scripts>
 	</Button>

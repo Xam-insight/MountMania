@@ -641,12 +641,15 @@ function UpdateMountManiaMatcherButton(mountID)
 			MountManiaMatcher:SetAttribute("tooltipDetailRed", { MOUNT_JOURNAL_NOT_COLLECTED })
 			MountManiaMatcher:SetAttribute("tooltipDetailBlue", { L["MOUNTMANIA_MATCHER_TOOLTIP_MESSAGE"] })
 			MountManiaMatcher:SetAttribute("Status", "Disabled")
+			MountManiaMatcher:SetAttribute("NotCollected", true)
 		elseif not isUsable then
 			MountManiaMatcher:SetAttribute("tooltipDetailRed", nil)
 			MountManiaMatcher:SetAttribute("Status", "Disabled")
+			MountManiaMatcher:SetAttribute("NotCollected", nil)
 		else
 			MountManiaMatcher:SetAttribute("tooltipDetailRed", nil)
 			MountManiaMatcher:SetAttribute("Status", nil)
+			MountManiaMatcher:SetAttribute("NotCollected", nil)
 		end
 
 		-- Store the mount ID for the click action
@@ -662,11 +665,15 @@ function UpdateMountManiaMatcherButton(mountID)
 end
 
 -- Function to summon the selected mount
-function MountManiaSummonMatchingMount(mountID)
-    if not mountID then 
+function MountManiaSummonMatchingMount(mountID, notCollected)
+    if not mountID then return end
+	
+	if notCollected then
 		if not notOwnedMountMessageSent then
 			MountManiaSendChatMessage(L["MOUNTMANIA_MATCHER_MESSAGE"])
 			notOwnedMountMessageSent = true
+		else
+			DoEmote("cry", "target")
 		end
 		return
 	end
