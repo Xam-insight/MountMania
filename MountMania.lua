@@ -548,21 +548,28 @@ function MountManiaSendChatMessage(message, channel, delay, forceMessage)
 	end
 end
 
-local function MountManiaSendTopSuccessesMessage()
-    -- Prepare the player data
+local function MountManiaGetWinners()
+	-- Prepare the player data
     local topSuccesses = {}
-    local topSuccessCount = 0
+    local topSuccessValue = 0
 
     -- Iterate through playerMountData.players to find the top success count
     for playerName, data in pairs(playerMountData.players) do
-        if data.successes > topSuccessCount then
-            topSuccessCount = data.successes
-            topSuccesses = { {name = playerName, successes = data.successes} }
-        elseif data.successes == topSuccessCount then
-            table.insert(topSuccesses, {name = playerName, successes = data.successes})
+        if data.successes > topSuccessValue then
+			topSuccesses = {}
+            topSuccessValue = data.successes
+            topSuccesses[playerName] = data.successes
+        elseif data.successes == topSuccessValue then
+			topSuccesses[playerName] = data.successes
         end
     end
+	
+	return topSuccesses
+end
 
+local function MountManiaSendTopSuccessesMessage()
+
+    local topSuccesses = MountManiaGetWinners()
     -- If no player has any success, exit the function
     if #topSuccesses == 0 then
         return
@@ -580,11 +587,11 @@ local function MountManiaSendTopSuccessesMessage()
 	MountManiaSendChatMessage(separator, chatChannel)
 
 	-- Add and send each player's data as a separate message
-	for _, player in ipairs(topSuccesses) do
-		message = player.name .. " - " .. player.successes
+	for player, successes in ipairs(topSuccesses) do
+		message = player .. " - " .. successes
 		MountManiaSendChatMessage(message, chatChannel, 4, MountManiaOptionsData["MountManiaChatMessagesDisabled"] or (not IsInGroup() and not IsInRaid()))
-		incrementMountManiaAchievementsData(player.name, MOUNTMANIA_WINS)
-		incrementMountManiaAchievementsData(player.name, MOUNTMANIA_10WINS)
+		incrementMountManiaAchievementsData(player, MOUNTMANIA_WINS)
+		incrementMountManiaAchievementsData(player, MOUNTMANIA_10WINS)
 	end
 
 	-- Send the closing separator as a separate line
@@ -673,7 +680,8 @@ function MountManiaSummonMatchingMount(mountID, notCollected)
 			MountManiaSendChatMessage(L["MOUNTMANIA_MATCHER_MESSAGE"])
 			notOwnedMountMessageSent = true
 		else
-			DoEmote("cry", "target")
+			Dismount()
+			DoEmote("CRY", "target")
 		end
 		return
 	end
@@ -760,10 +768,20 @@ function MountManiaProcessReceivedData(sender, data)
 	end
 end
 
+local winEmotes = { "CHEER", "WAVE" }
+local loseEmotes = { "APPLAUD", "CRY", "BOW" }
 function MountManiaProcessReceivedEnd(sender, winner)
 	if playerMountDataMaster == sender or publicGameJoined == sender then
 		if winner then
 			MountManiaQuote("whowon", false, true)
+			local topSuccesses = MountManiaGetWinners()
+			if topSuccesses[MountMania_playerCharacter()] then
+				local randomEmote = winEmotes[math.random(#winEmotes)]
+				DoEmote(randomEmote, "none")
+			else
+				local randomEmote = loseEmotes[math.random(#loseEmotes)]
+				DoEmote(randomEmote, "none")
+			end
 		elseif playerMountDataMaster == sender then
 			playerMountData.players = {}
 		end
