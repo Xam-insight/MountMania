@@ -777,10 +777,14 @@ function MountManiaProcessReceivedEnd(sender, winner)
 			local topSuccesses = MountManiaGetWinners()
 			if topSuccesses[MountMania_playerCharacter()] then
 				local randomEmote = winEmotes[math.random(#winEmotes)]
-				DoEmote(randomEmote, "none")
+				C_Timer.After(4, function()
+					DoEmote(randomEmote, "none")
+				end)
 			else
 				local randomEmote = loseEmotes[math.random(#loseEmotes)]
-				DoEmote(randomEmote, "none")
+				C_Timer.After(4, function()
+					DoEmote(randomEmote, "none")
+				end)
 			end
 		elseif playerMountDataMaster == sender then
 			playerMountData.players = {}
