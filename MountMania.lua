@@ -362,10 +362,8 @@ function MountMania_CompareMountWithCurrent(master, playerName, mountID, classFi
 				-- Record the player's data
 				MountMania_RecordPlayerData(playerName, classFileName)
 			end
-			if publicGameJoined and publicGameJoined == master and playerName ~= publicGameJoined then
-				if isPlayerCharacter then
-					MountMania_sendPlayerSuccess(publicGameJoined, mountID)
-				end
+			if isPlayerCharacter then
+				MountMania_sendPlayerSuccess(master, mountID)
 			end
 		end
 	end
