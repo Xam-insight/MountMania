@@ -37,7 +37,7 @@ L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"] = "忽略附近玩家发起的游戏�
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Mount Mania 透明度"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "定义 Mount Mania 的透明度"
 
-L["MOUNTMANIA_WARN_PARTY"] = "您不在队伍或团队中。此挑战只能检测您的目标或焦点。"
+L["MOUNTMANIA_WARN_PARTY"] = "您不在队伍中。只能检测您的目标或焦点，但使用 Mount Mania 的人除外。"
 L["MOUNTMANIA_WARN_RANDOM"] = "召唤一个随机坐骑！"
 L["MOUNTMANIA_WARN_NOMOUNT"] = "您没有可用的坐骑！"
 

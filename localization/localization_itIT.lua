@@ -37,7 +37,7 @@ L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"] = "Ignora le partite avviate dai gioca
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Trasparenza di Mount Mania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Definisci la trasparenza di Mount Mania."
 
-L["MOUNTMANIA_WARN_PARTY"] = "Non sei in un gruppo o in una raid. Solo il tuo obiettivo o focus possono essere rilevati per questa sfida."
+L["MOUNTMANIA_WARN_PARTY"] = "Non sei in un gruppo. Solo il tuo bersaglio o focus è rilevabile, tranne per chi usa Mount Mania."
 L["MOUNTMANIA_WARN_RANDOM"] = "Evocazione di una cavalcatura casuale!"
 L["MOUNTMANIA_WARN_NOMOUNT"] = "Non hai cavalcature utilizzabili!"
 

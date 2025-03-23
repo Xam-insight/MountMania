@@ -37,7 +37,7 @@ L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"] = "Ignore games started by nearby play
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Mount Mania alpha"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define Mount Mania's alpha"
 
-L["MOUNTMANIA_WARN_PARTY"] = "You are not in a party or raid. Only your target or focus can be detected for this challenge."
+L["MOUNTMANIA_WARN_PARTY"] = "You are not in a group. Only your target or focus can be detected, except for those using Mount Mania."
 L["MOUNTMANIA_WARN_RANDOM"] = "Summoning a random mount!"
 L["MOUNTMANIA_WARN_NOMOUNT"] = "You have no usable mounts!"
 

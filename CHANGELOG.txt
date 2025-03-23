@@ -1,6 +1,7 @@
-﻿- v1.2.1
+﻿- v1.2.2
 	- Added: MountMania hidden in combat.
 	- Added: Addon category (Minigames).
+	- Fixed: Alert when not in group is more accurate.
 - v1.2
 	- Fixed: The mount is now counted even if the player is far away.
 - v1.1.4

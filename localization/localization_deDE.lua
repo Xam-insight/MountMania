@@ -37,7 +37,7 @@ L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"] = "Ignoriert Spiele, die von nahegeleg
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Mount Mania-Transparenz"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Legt die Transparenz von Mount Mania fest."
 
-L["MOUNTMANIA_WARN_PARTY"] = "Sie befinden sich nicht in einer Gruppe oder einem Schlachtzug. Nur Ihr Ziel oder Fokus können für diese Herausforderung erkannt werden!"
+L["MOUNTMANIA_WARN_PARTY"] = "Sie sind nicht in einer Gruppe. Nur Ihr Ziel oder Fokus ist erkennbar, außer für diejenigen, die Mount Mania nutzen."
 L["MOUNTMANIA_WARN_RANDOM"] = "Ein zufälliges Reittier wird beschworen!"
 L["MOUNTMANIA_WARN_NOMOUNT"] = "Sie haben keine verwendbaren Reittiere!"
 

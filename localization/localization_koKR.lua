@@ -37,7 +37,7 @@ L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"] = "주변 플레이어가 시작한 �
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Mount Mania 투명도"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Mount Mania의 투명도를 정의합니다."
 
-L["MOUNTMANIA_WARN_PARTY"] = "파티나 공격대에 없습니다. 이 도전은 대상 또는 집중을 통해서만 감지할 수 있습니다."
+L["MOUNTMANIA_WARN_PARTY"] = "그룹에 속해 있지 않습니다. 대상이나 주시만 감지됩니다. Mount Mania를 사용하는 사람은 예외입니다."
 L["MOUNTMANIA_WARN_RANDOM"] = "무작위 탈것을 소환합니다!"
 L["MOUNTMANIA_WARN_NOMOUNT"] = "사용할 수 있는 탈것이 없습니다!"
 

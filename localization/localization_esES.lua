@@ -37,7 +37,7 @@ L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"] = "Ignora los juegos iniciados por jug
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Transparencia de Mount Mania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Define la transparencia de Mount Mania."
 
-L["MOUNTMANIA_WARN_PARTY"] = "No está en un grupo o banda. Solo su objetivo o foco pueden ser detectados para este desafío."
+L["MOUNTMANIA_WARN_PARTY"] = "No estás en grupo. Solo tu objetivo o foco es detectable, excepto para quienes usan Mount Mania."
 L["MOUNTMANIA_WARN_RANDOM"] = "¡Invocando una montura aleatoria!"
 L["MOUNTMANIA_WARN_NOMOUNT"] = "¡No tiene monturas utilizables!"
 

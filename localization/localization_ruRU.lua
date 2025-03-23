@@ -37,7 +37,7 @@ L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"] = "Игнорировать игры, 
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Ездомания альфа"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Определите альфу Ездомании"
 
-L["MOUNTMANIA_WARN_PARTY"] = "Вы не в группе или рейде. Только ваша цель или фокус могут быть обнаружены для этого испытания."
+L["MOUNTMANIA_WARN_PARTY"] = "Вы не в группе. Обнаруживается только ваша цель или фокус, кроме тех, кто использует Mount Mania."
 L["MOUNTMANIA_WARN_RANDOM"] = "Вызов случайного средства передвижения!"
 L["MOUNTMANIA_WARN_NOMOUNT"] = "У вас нет пригодных средств передвижения!"
 

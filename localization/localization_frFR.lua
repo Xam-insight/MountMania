@@ -37,7 +37,7 @@ L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"] = "Ignorer les parties lancées par le
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Transparence de Mount Mania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Definit la transparence de Mount Mania"
 
-L["MOUNTMANIA_WARN_PARTY"] = "Vous n'êtes pas dans un groupe ou un raid. Seul votre cible ou focus peut être détecté pour ce défi."
+L["MOUNTMANIA_WARN_PARTY"] = "Vous n'êtes pas en groupe. Seule votre cible ou focalisation est détectable, sauf pour ceux qui utilisent Mount Mania."
 L["MOUNTMANIA_WARN_RANDOM"] = "Invocation d'une monture aléatoire !"
 L["MOUNTMANIA_WARN_NOMOUNT"] = "Vous n'avez pas de montures utilisables !"
 

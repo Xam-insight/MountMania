@@ -463,7 +463,7 @@ function MountManiaSummonMount()
 	
     -- Summon a random mount if any are usable
     if #usableMounts > 0 then
-		if not IsInGroup() and not IsInRaid() then
+		if not IsInGroup() and not IsInRaid() and not playerMountDataMaster then
 			MountMania:Print(L["MOUNTMANIA_WARN_PARTY"])
 		end
 	

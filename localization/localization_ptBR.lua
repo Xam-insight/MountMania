@@ -37,7 +37,7 @@ L["MOUNTMANIA_OPTIONS_PUBLIC_GAMES_DESC"] = "Ignora jogos iniciados por jogadore
 L["MOUNTMANIA_OPTIONS_ALPHA"] = "Transparência do Mount Mania"
 L["MOUNTMANIA_OPTIONS_ALPHA_DESC"] = "Defina a transparência do Mount Mania."
 
-L["MOUNTMANIA_WARN_PARTY"] = "Você não está em um grupo ou raid. Apenas seu alvo ou foco podem ser detectados para este desafio."
+L["MOUNTMANIA_WARN_PARTY"] = "Você não está em um grupo. Apenas seu alvo ou foco é detectável, exceto para quem usa Mount Mania."
 L["MOUNTMANIA_WARN_RANDOM"] = "Invocando uma montaria aleatória!"
 L["MOUNTMANIA_WARN_NOMOUNT"] = "Você não tem montarias utilizáveis!"
 
