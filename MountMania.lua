@@ -40,6 +40,9 @@ end
 
 function MountMania:OnInitialize()
 	-- Called when the addon is loaded
+	self:RegisterEvent("PLAYER_REGEN_DISABLED", "MountManiaPlayerEntersCombat")
+	self:RegisterEvent("PLAYER_REGEN_ENABLED", "MountManiaPlayerLeavesCombat")
+
 	self:RegisterComm(MountManiaGlobal_CommPrefix, "ReceiveDataFrame_OnEvent")
 end
 
@@ -388,6 +391,15 @@ function MountMania:CheckNearbyMounts(event, unit, _, spellID)
 	updateMountManiaFrame()
 end
 
+function MountMania:MountManiaPlayerEntersCombat(event)
+	MountManiaFrame:Hide()
+end
+
+function MountMania:MountManiaPlayerLeavesCombat(event)
+	if not MountManiaWindow["MountManiaHidden"] then
+		MountManiaFrame:Show()
+	end
+end
 
 local function MountMania_testPossibleSummonning()
 	if not IsOutdoors() or UnitOnTaxi("player") or IsFlying() then
