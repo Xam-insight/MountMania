@@ -269,8 +269,10 @@ function MountMania:MountManiaChatCommand(param)
 		MountMania_OpenOptions()
 	elseif MountManiaFrame:IsShown() then
 		MountManiaFrame:Hide()
+		MountManiaWindow["MountManiaIsHidden"] = true
 	else
 		MountManiaFrame:Show()
+		MountManiaWindow["MountManiaIsHidden"] = nil
 	end
 end
 
