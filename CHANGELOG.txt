@@ -1,4 +1,7 @@
-﻿- v1.2.2
+﻿- v1.2.3
+	- Added: /mountmania command.
+	- Fixed: MountMania reappears after combat.
+- v1.2.2
 	- Added: MountMania hidden in combat.
 	- Added: Addon category (Minigames).
 	- Fixed: Alert when not in group is more accurate.

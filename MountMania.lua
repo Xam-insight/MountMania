@@ -183,6 +183,7 @@ end
 
 function MountMania:OnEnable()
 	self:RegisterChatCommand("mnt", "MountManiaChatCommand")
+	self:RegisterChatCommand("mountmania", "MountManiaChatCommand")
 	self:Print(L["MOUNTMANIA_WELCOME"])
 	
 	if not MountManiaAchievementsData then

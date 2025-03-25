@@ -125,11 +125,11 @@ end
 
 function MountManiaWindow_OnShow(self)
 	updateMountManiaFrame()
-	MountManiaWindow["MountManiaHidden"] = nil
+	--MountManiaWindow["MountManiaHidden"] = nil
 end
 
 function MountManiaWindow_OnHide()
-	MountManiaWindow["MountManiaHidden"] = true
+	--MountManiaWindow["MountManiaHidden"] = true
 end
 
 function MountMania_ResetGame()
