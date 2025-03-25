@@ -22,7 +22,7 @@ function loadMountManiaOptions()
 						name = L["ENABLE_MOUNTMANIA"],
 						desc = L["ENABLE_MOUNTMANIA_DESC"],
 						set = function(info, val) 
-							MountManiaWindow["MountManiaHidden"] = not val
+							MountManiaWindow["MountManiaIsHidden"] = not val
 							if val then
 								MountManiaFrame:Show()
 							else
@@ -31,8 +31,8 @@ function loadMountManiaOptions()
 						end,
 						get = function(info)
 							local enabled = true
-							if MountManiaWindow["MountManiaHidden"] ~= nil then
-								enabled = not MountManiaWindow["MountManiaHidden"]
+							if MountManiaWindow["MountManiaIsHidden"] ~= nil then
+								enabled = not MountManiaWindow["MountManiaIsHidden"]
 							end
 							return enabled
 						end

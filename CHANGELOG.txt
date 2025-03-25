@@ -1,4 +1,4 @@
-﻿- v1.2.3
+﻿- v1.2.4
 	- Added: /mountmania command.
 	- Fixed: MountMania reappears after combat.
 - v1.2.2

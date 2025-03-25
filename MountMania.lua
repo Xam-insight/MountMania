@@ -193,7 +193,7 @@ function MountMania:OnEnable()
 	if not MountManiaFrame then
         createMountManiaFrame()
     end
-	if not MountManiaWindow["MountManiaHidden"] then
+	if not MountManiaWindow["MountManiaIsHidden"] then
 		MountManiaFrame:Show()
 	end
 	
@@ -397,7 +397,7 @@ function MountMania:MountManiaPlayerEntersCombat(event)
 end
 
 function MountMania:MountManiaPlayerLeavesCombat(event)
-	if not MountManiaWindow["MountManiaHidden"] then
+	if not MountManiaWindow["MountManiaIsHidden"] then
 		MountManiaFrame:Show()
 	end
 end
