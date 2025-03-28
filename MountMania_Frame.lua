@@ -135,6 +135,8 @@ function updateMountManiaFrame()
 			end
 		end
 		MountManiaFrame:SetHeight(58 + nbLignes * MountManiaLineHeight)
+		
+		MountMania_updateMountCounter()
 	end
 	MountManiaManageButtons()
 end

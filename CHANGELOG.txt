@@ -1,4 +1,6 @@
-﻿- v1.2.5
+﻿- v1.2.6
+	- Added: Mount counter.
+- v1.2.5
 	- Added: /mountmania command.
 	- Fixed: MountMania reappears after combat.
 - v1.2.2

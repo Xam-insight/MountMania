@@ -64,6 +64,7 @@ function MountMania_Test()
 	
 	playerMountDataMaster = MountMania_playerCharacter()
 	playerMountData.difficulty = PLAYER_DIFFICULTY6
+	playerMountData.mountsNumber = 15
 	playerMountData.players = {
 		["Xamhunter"] = {
 			["classFileName"] = "HUNTER",
@@ -181,6 +182,25 @@ local function MountMania_isPlayerShapeShiftedDruid()
 	return false
 end
 
+function MountMania_updateMountCounter()
+	if MountCounterFrame then
+		local mountsNumber = playerMountData and playerMountData.mountsNumber
+		if mountsNumber then
+			local player = MountMania_playerCharacter()
+			local successes = (playerMountDataMaster == player and mountsNumber)
+				or (playerMountData and playerMountData.players and playerMountData.players[player] and playerMountData.players[player].successes) or 0
+		
+			
+			MountCounterStatusBar:SetMinMaxValues(0, mountsNumber)
+			MountCounterStatusBar:SetValue(successes)
+			MountCounterStatusBarText:SetText(successes .. "/" .. mountsNumber)
+			MountCounterFrame:Show()
+		else
+			MountCounterFrame:Hide()
+		end
+	end
+end
+
 function MountMania:OnEnable()
 	self:RegisterChatCommand("mnt", "MountManiaChatCommand")
 	self:RegisterChatCommand("mountmania", "MountManiaChatCommand")
@@ -220,6 +240,29 @@ function MountMania:OnEnable()
 	MountManiaJoin:SetScale(0.5)
 	MountManiaJoin:SetPoint("TOPRIGHT", MountManiaFrame, "TOPRIGHT", -35, -5)
 	MountManiaJoin:SetAlpha(1.0)
+	
+	local frame = CreateFrame("Frame", "MountCounterFrame", MountManiaFrame, "BackdropTemplate")
+	frame:SetSize(145, 15)
+	frame:SetPoint("BOTTOM", MountManiaFrame, "BOTTOM", 0, 10)
+	frame:SetBackdrop({
+		bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
+		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+		edgeSize = 12,
+		insets = { left = 2, right = 2, top = 2, bottom = 2 }
+	})
+	frame:SetBackdropColor(0, 0, 0, 0.5)
+	frame:SetBackdropBorderColor(1, 1, 1, 1)
+
+	local statusBar = CreateFrame("StatusBar", "MountCounterStatusBar", frame)
+	statusBar:SetSize(141, 12)
+	statusBar:SetPoint("CENTER")
+	statusBar:SetStatusBarTexture("Interface\\TARGETINGFRAME\\UI-StatusBar")
+	statusBar:SetStatusBarColor(0.2, 0.6, 1)
+
+	local text = statusBar:CreateFontString("MountCounterStatusBarText", "OVERLAY", "GameFontHighlight")
+	text:SetPoint("CENTER")
+	text:SetFont("Fonts\\FRIZQT__.TTF", 10, "OUTLINE")
+	text:SetText("0/10")
 	
 	updateMountManiaFrame()
 	
@@ -478,6 +521,7 @@ function MountManiaSummonMount()
 		end
 		playerMountDataMaster = MountMania_playerCharacter()
 		C_Timer.After(wait, function()
+			playerMountData.mountsNumber = (playerMountData.mountsNumber and playerMountData.mountsNumber + 1) or 1
 			MountMania_sendData(mountToSummon)
 			CancelShapeshiftForm()
 			C_MountJournal.SummonByID(mountToSummon)
@@ -620,6 +664,7 @@ function MountManiaResetGame(keepScore)
 	currentMountForMountManiaID[playerMountDataMaster] = nil
 	resetTable(alreadySummoned, playerMountDataMaster)
 	playerMountDataMaster = nil
+	playerMountData.mountsNumber = nil
 	MountManiaEnder:Hide()
 	if not keepScore then
 		playerMountData.players = {}
