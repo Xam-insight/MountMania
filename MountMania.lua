@@ -60,6 +60,7 @@ function MountMania_Test()
 	local tempMaster = playerMountDataMaster
 	local tempData = {}
 	tempData.difficulty = playerMountData.difficulty
+	tempData.mountsNumber = playerMountData.mountsNumber
 	tempData.players = playerMountData.players
 	
 	playerMountDataMaster = MountMania_playerCharacter()
@@ -112,6 +113,7 @@ function MountMania_Test()
 	C_Timer.After(20, function()
 		playerMountDataMaster = tempMaster
 		playerMountData.difficulty = tempData.difficulty
+		playerMountData.mountsNumber = tempData.mountsNumber
 		playerMountData.players = tempData.players
 		updateMountManiaFrame()
 	end)
@@ -521,7 +523,6 @@ function MountManiaSummonMount()
 		end
 		playerMountDataMaster = MountMania_playerCharacter()
 		C_Timer.After(wait, function()
-			playerMountData.mountsNumber = (playerMountData.mountsNumber and playerMountData.mountsNumber + 1) or 1
 			MountMania_sendData(mountToSummon)
 			CancelShapeshiftForm()
 			C_MountJournal.SummonByID(mountToSummon)
@@ -529,6 +530,7 @@ function MountManiaSummonMount()
 		local message = L["MOUNTMANIA_QUOTE_GETREADY"]
 		if not currentMountForMountManiaID[playerMountDataMaster] then
 			playerMountData.players = {}
+			playerMountData.mountsNumber = nil
 			MountDataInvitedPlayers = {}
 			MountManiaSetDifficulty(#usableMounts, #mountIDs)
 			MountManiaQuote("getready", false, true)
@@ -537,12 +539,13 @@ function MountManiaSummonMount()
 			message = L["MOUNTMANIA_QUOTE_NEXT"..randomQuote]
 			MountManiaQuote(randomQuote, false, false)
 		end
+		playerMountData.mountsNumber = (playerMountData.mountsNumber and playerMountData.mountsNumber + 1) or 1
 		MountManiaSendChatMessage(message, nil, nil, not currentMountForMountManiaID[playerMountDataMaster] and not IsInGroup() and not IsInRaid())
 		currentMountForMountManiaID[playerMountDataMaster] = mountToSummon
 		resetTable(successCounted, playerMountDataMaster)
 		MountMania:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "CheckNearbyMounts") -- Detects successful spell casts
 		MountManiaSendChatMessage(string.format(L["MOUNTMANIA_QUOTE_MOUNT"], GetMountNameByMountID(mountToSummon)), nil, wait + 1.5)
-        MountMania:Print(L["MOUNTMANIA_WARN_RANDOM"])
+        --MountMania:Print(L["MOUNTMANIA_WARN_RANDOM"])
     else
         MountMania:Print(L["MOUNTMANIA_WARN_NOMOUNT"])
 		if alreadySummonedCount > 0 and alreadySummonedCount == usableCount then
