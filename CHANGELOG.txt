@@ -1,4 +1,6 @@
-﻿- v1.2.6
+﻿- v1.2.7
+	- Fixed: Winner announcement works properly again.
+- v1.2.6
 	- Added: Mount counter.
 - v1.2.5
 	- Added: /mountmania command.

@@ -631,7 +631,7 @@ local function MountManiaSendTopSuccessesMessage()
 
     local topSuccesses = MountManiaGetWinners()
     -- If no player has any success, exit the function
-    if #topSuccesses == 0 then
+    if MountMania_countTableElements(topSuccesses) == 0 then
         return
     end
 
@@ -647,7 +647,7 @@ local function MountManiaSendTopSuccessesMessage()
 	MountManiaSendChatMessage(separator, chatChannel)
 
 	-- Add and send each player's data as a separate message
-	for player, successes in ipairs(topSuccesses) do
+	for player, successes in pairs(topSuccesses) do
 		message = player .. " - " .. successes
 		MountManiaSendChatMessage(message, chatChannel, 4, MountManiaOptionsData["MountManiaChatMessagesDisabled"] or (not IsInGroup() and not IsInRaid()))
 		incrementMountManiaAchievementsData(player, MOUNTMANIA_WINS)
