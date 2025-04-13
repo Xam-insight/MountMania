@@ -1,4 +1,6 @@
-﻿- v1.2.7
+﻿- v1.2.8
+	- [CustomAchiever] v1.5.2 integration.
+- v1.2.7
 	- Fixed: Winner announcement works properly again.
 - v1.2.6
 	- Added: Mount counter.
