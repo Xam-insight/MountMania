@@ -25,6 +25,9 @@ L["MOUNTMANIA_JOIN_TOOLTIP"] = "如果目标正在进行 Mount Mania 游戏，�
 L["LOCKBUTTON_TOOLTIP"] = "锁定"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "锁定/解锁窗口。"
 
+L["MOUNTMANIA_LEFTCLICK"] = "左键点击：%s"
+L["MOUNTMANIA_RIGHTCLICK"] = "右键点击：%s"
+
 L["ENABLE_MOUNTMANIA"] = "切换 Mount Mania"
 L["ENABLE_MOUNTMANIA_DESC"] = "显示/隐藏 Mount Mania 窗口"
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES"] = "聊天消息"

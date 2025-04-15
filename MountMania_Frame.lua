@@ -22,7 +22,8 @@ function createMountManiaOptionsButton(parent)
 	local name = "MountManiaOptionsButton"
 	local iconPath = "Interface\\GossipFrame\\BinderGossipIcon"
 	local tooltip = OPTIONS
-	local tooltipDetail = OPTIONS_MENU
+	local tooltipDetail = string.format(L["MOUNTMANIA_LEFTCLICK"], OPTIONS_MENU)
+	local tooltipDetailRed = string.format(L["MOUNTMANIA_RIGHTCLICK"], CLOSE)
 
 	local optionsButton = CreateFrame("Button", name, parent, "MountManiaOptionsButtonTemplate")
 	optionsButton:SetScale(0.7)
@@ -30,6 +31,8 @@ function createMountManiaOptionsButton(parent)
 	optionsButton:SetNormalTexture(iconPath)
 	optionsButton:SetAttribute("tooltip", tooltip)
 	optionsButton:SetAttribute("tooltipDetail", { tooltipDetail })
+	optionsButton:SetAttribute("tooltipDetailRed", { tooltipDetailRed })
+	optionsButton:RegisterForClicks("LeftButtonUp", "RightButtonUp")
 
 	return optionsButton
 end

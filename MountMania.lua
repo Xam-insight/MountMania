@@ -321,11 +321,15 @@ function MountMania:MountManiaChatCommand(param)
 	end
 end
 
-function MountMania_OpenOptions()
-	if not MountManiaOptionsLoaded then
-		loadMountManiaOptions()
-	end
-	ACD:Open("MountMania")
+function MountMania_OpenOptions(self, button)
+	if button == "LeftButton" then
+        if not MountManiaOptionsLoaded then
+			loadMountManiaOptions()
+		end
+		ACD:Open("MountMania")
+    elseif button == "RightButton" then
+        MountManiaFrame:Hide()
+    end
 end
 
 function incrementMountManiaAchievementsData(player, achievementsData)

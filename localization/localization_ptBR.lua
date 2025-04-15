@@ -25,6 +25,9 @@ L["MOUNTMANIA_JOIN_TOOLTIP"] = "Se o alvo tiver um jogo de Mount Mania|nem andam
 L["LOCKBUTTON_TOOLTIP"] = "Bloquear"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Bloqueia / desbloqueia a janela."
 
+L["MOUNTMANIA_LEFTCLICK"] = "Clique esquerdo: %s"
+L["MOUNTMANIA_RIGHTCLICK"] = "Clique direito: %s"
+
 L["ENABLE_MOUNTMANIA"] = "Ativar Mount Mania"
 L["ENABLE_MOUNTMANIA_DESC"] = "Mostrar/Ocultar a janela do Mount Mania."
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES"] = "Mensagens de chat"

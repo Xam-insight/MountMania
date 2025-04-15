@@ -25,6 +25,9 @@ L["MOUNTMANIA_JOIN_TOOLTIP"] = "대상이 진행 중인 Mount Mania 게임이 �
 L["LOCKBUTTON_TOOLTIP"] = "잠금"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "창을 잠그거나 잠금을 해제합니다."
 
+L["MOUNTMANIA_LEFTCLICK"] = "왼쪽 클릭: %s"
+L["MOUNTMANIA_RIGHTCLICK"] = "오른쪽 클릭: %s"
+
 L["ENABLE_MOUNTMANIA"] = "Mount Mania 활성화"
 L["ENABLE_MOUNTMANIA_DESC"] = "Mount Mania 창을 표시하거나 숨깁니다."
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES"] = "채팅 메시지"

@@ -25,6 +25,9 @@ L["MOUNTMANIA_JOIN_TOOLTIP"] = "If the target has an ongoing|nMount Mania game, 
 L["LOCKBUTTON_TOOLTIP"] = "Lock"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Locks / unlocks the window."
 
+L["MOUNTMANIA_LEFTCLICK"] = "Left click: %s"
+L["MOUNTMANIA_RIGHTCLICK"] = "Right click: %s"
+
 L["ENABLE_MOUNTMANIA"] = "Toggle Mount Mania"
 L["ENABLE_MOUNTMANIA_DESC"] = "Show/Hide Mount Mania's frame"
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES"] = "Chat messages"

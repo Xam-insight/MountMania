@@ -25,6 +25,9 @@ L["MOUNTMANIA_JOIN_TOOLTIP"] = "Falls das Ziel ein laufendes|nMount Mania-Spiel 
 L["LOCKBUTTON_TOOLTIP"] = "Sperren"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Sperrt / entsperrt das Fenster."
 
+L["MOUNTMANIA_LEFTCLICK"] = "Linksklick: %s"
+L["MOUNTMANIA_RIGHTCLICK"] = "Rechtsklick: %s"
+
 L["ENABLE_MOUNTMANIA"] = "Mount Mania umschalten"
 L["ENABLE_MOUNTMANIA_DESC"] = "Mount Mania-Fenster ein-/ausblenden"
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES"] = "Chatnachrichten"

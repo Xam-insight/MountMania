@@ -25,6 +25,9 @@ L["MOUNTMANIA_JOIN_TOOLTIP"] = "Если у цели уже идёт игра в
 L["LOCKBUTTON_TOOLTIP"] = "Замок"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Блокирует/разблокирует окно."
 
+L["MOUNTMANIA_LEFTCLICK"] = "ЛКМ: %s"
+L["MOUNTMANIA_RIGHTCLICK"] = "ПКМ: %s"
+
 L["ENABLE_MOUNTMANIA"] = "Переключить Ездоманию"
 L["ENABLE_MOUNTMANIA_DESC"] = "Показать/скрыть окно Ездомании"
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES"] = "Сообщения в чат"

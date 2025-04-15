@@ -25,6 +25,9 @@ L["MOUNTMANIA_JOIN_TOOLTIP"] = "Si la cible a une partie de Mount Mania|nen cour
 L["LOCKBUTTON_TOOLTIP"] = "Verrouiller"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Vérouille / dévérouille la fenêtre."
 
+L["MOUNTMANIA_LEFTCLICK"] = "Clic gauche : %s"
+L["MOUNTMANIA_RIGHTCLICK"] = "Clic droit : %s"
+
 L["ENABLE_MOUNTMANIA"] = "Affiche/Cache Mount Mania"
 L["ENABLE_MOUNTMANIA_DESC"] = "Affiche/Cache la fenêtre Mount Mania"
 L["MOUNTMANIA_OPTIONS_CHATMESSAGES"] = "Messages de chat"
