@@ -664,7 +664,9 @@ local function MountManiaSendTopSuccessesMessage()
 end
 
 function MountManiaResetGame(keepScore)
-	currentMountForMountManiaID[playerMountDataMaster] = nil
+	if currentMountForMountManiaID[playerMountDataMaster] then
+		currentMountForMountManiaID[playerMountDataMaster] = nil
+	end
 	resetTable(alreadySummoned, playerMountDataMaster)
 	playerMountDataMaster = nil
 	playerMountData.mountsNumber = nil
