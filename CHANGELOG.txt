@@ -1,4 +1,6 @@
-﻿- v1.2.10
+﻿- v1.2.11
+	- TOC for 11.1.7.
+- v1.2.10
 	- Added: Right click on the options button closes Mount Mania.
 - v1.2.9
 	- Fixed: The reset button now erase scores when the game has ended.

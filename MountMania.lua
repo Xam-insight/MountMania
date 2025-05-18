@@ -4,6 +4,8 @@ local ACD = LibStub("AceConfigDialog-3.0")
 
 MountManiaGlobal_CommPrefix = "MountMania"
 
+--MountManiaGlobal_Debug = true
+
 MOUNTMANIA_WINS     = "MountManiaWins"
 MOUNTMANIA_10WINS   = "MountMania10Wins"
 MOUNTMANIA_MOUNT    = "MountManiaMount"
@@ -55,6 +57,8 @@ local playerMountDataMaster
 local playerMountData = {}
 playerMountData.players = {}
 MountDataInvitedPlayers = {}
+
+if MountManiaGlobal_Debug then
 
 function MountMania_Test()
 	local tempMaster = playerMountDataMaster
@@ -117,6 +121,8 @@ function MountMania_Test()
 		playerMountData.players = tempData.players
 		updateMountManiaFrame()
 	end)
+end
+
 end
 
 local difficultyColors = {
