@@ -1,4 +1,6 @@
-﻿- v1.2.11
+﻿- v1.2.12
+	- Fixed: You can now reset another player's game after it has ended, in order to hide the score list.
+- v1.2.11
 	- TOC for 11.1.7.
 - v1.2.10
 	- Added: Right click on the options button closes Mount Mania.

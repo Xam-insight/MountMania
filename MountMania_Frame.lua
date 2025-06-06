@@ -120,10 +120,10 @@ function updateMountManiaFrame()
 				createMountManiaTitleLine(index, MountManiaList[index], aMountManiaLine)
 				aMountManiaLine:SetHeight(MountManiaLineHeight)
 				aMountManiaLine:Show()
-				if MountMania_PlayerMaster() then
-					MountManiaResetButton:Show()
-				else
+				if not MountManiaList[index] or MountManiaList[index] == "" then
 					MountManiaResetButton:Hide()
+				else
+					MountManiaResetButton:Show()
 				end
 				nbLignes = nbLignes + 1
 			else
