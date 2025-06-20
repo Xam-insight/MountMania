@@ -223,6 +223,8 @@ function MountMania:OnEnable()
     end
 	if not MountManiaWindow["MountManiaIsHidden"] then
 		MountManiaFrame:Show()
+	else
+		MountManiaFrame:Hide()
 	end
 	
 	MountManiaMountSummoner:SetParent(MountManiaFrame)
@@ -334,7 +336,9 @@ function MountMania_OpenOptions(self, button)
 		end
 		ACD:Open("MountMania")
     elseif button == "RightButton" then
-        MountManiaFrame:Hide()
+		local targetVisibility = not MountManiaFrame:IsShown()
+        MountManiaFrame:SetShown(targetVisibility)
+		MountManiaWindow["MountManiaIsHidden"] = (not targetVisibility) or nil
     end
 end
 
@@ -730,12 +734,11 @@ function UpdateMountManiaMatcherButton(mountID)
 			MountManiaMatcher:SetAttribute("tooltipDetailRed", nil)
 			MountManiaMatcher:SetAttribute("Status", nil)
 			MountManiaMatcher:SetAttribute("NotCollected", nil)
+			MountManiaButton_Glow(MountManiaMatcher)
 		end
 
 		-- Store the mount ID for the click action
 		MountManiaMatcher:SetAttribute("CurrentMount", mountID)
-		
-		MountManiaButton_Glow(MountManiaMatcher)
 	else
 		MountManiaMatcher:SetAttribute("Mount", nil)
 		MountManiaMatcher:SetAttribute("CurrentMount", nil)
@@ -746,6 +749,13 @@ end
 
 -- Function to summon the selected mount
 function MountManiaSummonMatchingMount(mountID, notCollected)
+	if MountManiaFrame:IsShown() == false then
+		MountManiaFrame:Show()
+		MountManiaWindow["MountManiaIsHidden"] = nil
+		MountManiaMatcher:SetParent(MountManiaFrame)
+		MountManiaMatcher:SetPoint("TOPRIGHT", MountManiaFrame, "TOPRIGHT", -35, -5)
+	end
+
     if not mountID then return end
 	
 	if notCollected then
@@ -823,6 +833,16 @@ function MountManiaProcessReceivedMount(sender, mountID)
 	if not playerMountDataMaster then
 		MountManiaQuote("getready", false, true)
 		playerMountDataMaster = sender
+		if MountManiaFrame:IsShown() == false then
+			MountManiaMatcher:SetParent(UIParent)
+			MountManiaMatcher:Show()
+			MountManiaButton_Glow(MountManiaMatcher)
+
+			-- After 7 seconds, reset parent and hide again
+			C_Timer.After(7, function()
+				MountManiaMatcher:SetParent(MountManiaFrame)
+			end)
+		end
 	end
 	if playerMountDataMaster == sender or publicGameJoined == sender then
 		currentMountForMountManiaID[sender] = mountID
@@ -861,6 +881,7 @@ function MountManiaProcessReceivedEnd(sender, winner)
 			end
 		elseif playerMountDataMaster == sender then
 			playerMountData.players = {}
+			playerMountData.mountsNumber = nil
 		end
 		currentMountForMountManiaID[sender] = nil
 	end

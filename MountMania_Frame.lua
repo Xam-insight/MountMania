@@ -214,6 +214,8 @@ end
 function applyMountManiaWindowOptions()
 	setMountManiaFrameAlpha()
     MountManiaFrame:SetWidth(MountMania_ALLCOLS_WIDTH + 15)
+	MountManiaMatcher:SetParent(MountManiaFrame)
+	MountManiaMatcher:SetPoint("TOPRIGHT", MountManiaFrame, "TOPRIGHT", -35, -5)
 	
 	retOK, ret = pcall(callbackMountManiaWindow, MountManiaFrame)
     

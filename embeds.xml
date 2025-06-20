@@ -291,10 +291,10 @@
 		</Frames>
 		<Scripts>
 			<OnLoad>
+				applyMountManiaWindowOptions()
 				self:RegisterForDrag("LeftButton")
 			</OnLoad>
 			<OnShow>
-				applyMountManiaWindowOptions()
 				MountManiaWindow_OnShow(self)
 			</OnShow>
 			<OnHide function="MountManiaWindow_OnHide" />
