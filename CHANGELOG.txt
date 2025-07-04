@@ -1,4 +1,6 @@
-﻿- v1.2.13
+﻿- v1.2.14
+	- TOC for 11.2.0.
+- v1.2.13
 	- Added: The mount matcher button now glows only when you can match the mount.
 	- Added: The mount matcher button also glows when MountMania is hidden.
 	- Added: Right-clicking the AddOns dropdown in the top-right corner of the screen can now open MountMania.
