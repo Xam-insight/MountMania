@@ -1,4 +1,6 @@
-﻿- v1.2.14
+﻿- v1.2.15
+	- TOC for 11.2.5.
+- v1.2.14
 	- TOC for 11.2.0.
 - v1.2.13
 	- Added: The mount matcher button now glows only when you can match the mount.
