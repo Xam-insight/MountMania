@@ -1,4 +1,6 @@
-﻿- v1.2.16
+﻿- v1.2.17
+	- [CustomAchiever] v1.5.8 integration.
+- v1.2.16
 	- TOC for 11.2.7.
 - v1.2.15
 	- TOC for 11.2.5.
