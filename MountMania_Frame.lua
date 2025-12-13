@@ -1,4 +1,5 @@
 local L = LibStub("AceLocale-3.0"):GetLocale("MountMania", true)
+local XITK = LibStub("XamInsightToolKit")
 
 MountManiaFramePool = {}
 
@@ -107,7 +108,7 @@ function updateMountManiaFrame()
 	maxSuccesses = 0
 	if MountManiaFrame and MountManiaFrame:IsShown() then
 		updateMountManiaList(getPlayerMountData().players)
-		local numItems = MountMania_countTableElements(MountManiaList)
+		local numItems = XITK.countTableElements(MountManiaList)
 		if numItems > 11 then
 			MountManiaLineHeight = 10
 		else

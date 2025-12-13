@@ -1,6 +1,7 @@
 MountMania = LibStub("AceAddon-3.0"):NewAddon("MountMania", "AceConsole-3.0", "AceEvent-3.0", "AceComm-3.0", "AceSerializer-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("MountMania", true)
 local ACD = LibStub("AceConfigDialog-3.0")
+local XITK = LibStub("XamInsightToolKit")
 
 MountManiaGlobal_CommPrefix = "MountMania"
 
@@ -30,12 +31,12 @@ MountManiaAbigailQuotes = {
 
 function MountManiaQuote(quote, talkingHead, sound)
 	if talkingHead then
-		EZBlizzUiPop_npcDialog("ABIGAIL", MountManiaAbigailQuotes[quote].quote)
+		EZBUP.npcDialog(224220, MountManiaAbigailQuotes[quote].quote)
 	end
 	if sound then
-		local willPlay -- [Sound is absent] = MountMania_PlaySoundFileId(MountManiaAbigailQuotes[quote].sound, "Dialog")
+		local willPlay -- [Sound is absent] = XITK.PlaySoundFileId(MountManiaAbigailQuotes[quote].sound, "Dialog")
 		if not willPlay then
-			MountMania_PlaySoundFile(MountManiaAbigailQuotes[quote].sound, "Dialog")
+			XITK.PlaySoundFile(MountManiaAbigailQuotes[quote].sound, "Dialog")
 		end
 	end
 end
@@ -67,7 +68,7 @@ function MountMania_Test()
 	tempData.mountsNumber = playerMountData.mountsNumber
 	tempData.players = playerMountData.players
 	
-	playerMountDataMaster = MountMania_playerCharacter()
+	playerMountDataMaster = XITK.playerCharacter()
 	playerMountData.difficulty = PLAYER_DIFFICULTY6
 	playerMountData.mountsNumber = 15
 	playerMountData.players = {
@@ -142,7 +143,7 @@ end
 
 function getMountManiaGameTitle()
 	if playerMountDataMaster then
-		local title = string.format(L["MOUNTMANIA_GAME_MASTER"], MountMania_delRealm(playerMountDataMaster))
+		local title = string.format(L["MOUNTMANIA_GAME_MASTER"], XITK.delRealm(playerMountDataMaster))
 		if playerMountData.difficulty then
 			title = difficultyColors[playerMountData.difficulty]..title.."|r ("..playerMountData.difficulty..")"
 		end
@@ -194,7 +195,7 @@ function MountMania_updateMountCounter()
 	if MountCounterFrame then
 		local mountsNumber = playerMountData and playerMountData.mountsNumber
 		if mountsNumber then
-			local player = MountMania_playerCharacter()
+			local player = XITK.playerCharacter()
 			local successes = (playerMountDataMaster == player and mountsNumber)
 				or (playerMountData and playerMountData.players and playerMountData.players[player] and playerMountData.players[player].successes) or 0
 		
@@ -298,7 +299,7 @@ end
 local publicGameJoined
 local function MountManiaChatFilter(self, event, msg, author, ...)
 	-- Check if the message starts with "[MountMania]"
-	if not MountMania_isPlayerCharacter(author) then
+	if not XITK.isPlayerCharacter(author) then
 		if string.match(msg, "^%[MountMania%]") then
 			MountMania_askToJoin(author)
 			publicGameJoined = author
@@ -416,7 +417,7 @@ function MountMania_CompareMountWithCurrent(master, playerName, mountID, classFi
 	if mountID and mountID == currentMount then
 		if not getValue(successCounted, master, playerName) then
 			setValue(successCounted, master, playerName)
-			local isPlayerCharacter = MountMania_isPlayerCharacter(playerName)
+			local isPlayerCharacter = XITK.isPlayerCharacter(playerName)
 			if isPlayerCharacter then
 				setValue(alreadySummoned, master, mountID)
 				C_Timer.After(2, function()
@@ -436,12 +437,12 @@ end
 
 -- Function to compare another player's mount with the player's current mount
 function MountMania:CheckNearbyMounts(event, unit, _, spellID)
-    if MountMania_countTableElements(currentMountForMountManiaID) == 0 then
+    if XITK.countTableElements(currentMountForMountManiaID) == 0 then
         return -- Skip if the player has no mount currently set
     end
 
     local mountID = C_MountJournal.GetMountFromSpell(spellID)
-	local playerName = MountMania_fullName(unit)
+	local playerName = XITK.fullName(unit)
 	local classFileName
 	if playerName ~= playerMountDataMaster then
 		local _, englishClass = UnitClass(unit)
@@ -535,7 +536,7 @@ function MountManiaSummonMount()
 			wait = 1
 			Dismount()
 		end
-		playerMountDataMaster = MountMania_playerCharacter()
+		playerMountDataMaster = XITK.playerCharacter()
 		C_Timer.After(wait, function()
 			MountMania_sendData(mountToSummon)
 			CancelShapeshiftForm()
@@ -547,7 +548,7 @@ function MountManiaSummonMount()
 			playerMountData.mountsNumber = nil
 			MountDataInvitedPlayers = {}
 			MountManiaSetDifficulty(#usableMounts, #mountIDs)
-			MountManiaQuote("getready", false, true)
+			MountManiaQuote("getready", false, not MountManiaOptionsData["MountManiaSoundsDisabled"])
 		else
 			local randomQuote = ""..math.random(1, 2)
 			message = L["MOUNTMANIA_QUOTE_NEXT"..randomQuote]
@@ -571,7 +572,7 @@ end
 
 function MountManiaManageButtons()
 	MountManiaMountSummoner:SetShown(true)
-	if playerMountDataMaster and not MountMania_isPlayerCharacter(playerMountDataMaster) then
+	if playerMountDataMaster and not XITK.isPlayerCharacter(playerMountDataMaster) then
 		MountManiaMountSummoner:SetAttribute("tooltipDetailRed", { L["MOUNTMANIA_MOUNTSUMMONER_TOOLTIP_RED"] })
 		MountManiaMountSummoner:SetAttribute("Status", "Warning")
 	else
@@ -581,7 +582,7 @@ function MountManiaManageButtons()
 	MountManiaButton_UpdateStatus(MountManiaMountSummoner)
 	
 	
-	MountManiaEnder:SetShown(playerMountDataMaster and MountMania_isPlayerCharacter(playerMountDataMaster) and MountMania_doTableContainsElements(playerMountData.players))
+	MountManiaEnder:SetShown(playerMountDataMaster and XITK.isPlayerCharacter(playerMountDataMaster) and MountMania_doTableContainsElements(playerMountData.players))
 	
 	MountManiaMatcher:SetShown(playerMountDataMaster and MountManiaMatcher:GetAttribute("Mount"))
 	MountManiaButton_UpdateStatus(MountManiaMatcher)
@@ -645,7 +646,7 @@ local function MountManiaSendTopSuccessesMessage()
 
     local topSuccesses = MountManiaGetWinners()
     -- If no player has any success, exit the function
-    if MountMania_countTableElements(topSuccesses) == 0 then
+    if XITK.countTableElements(topSuccesses) == 0 then
         return
     end
 
@@ -654,7 +655,7 @@ local function MountManiaSendTopSuccessesMessage()
     -- Send the title as a separate line
     local message = MountManiaAbigailQuotes["whowon"].quote
     MountManiaSendChatMessage(message, chatChannel)
-	MountManiaQuote("whowon", false, true)
+	MountManiaQuote("whowon", false, not MountManiaOptionsData["MountManiaSoundsDisabled"])
 	
 	-- Send the separator as a separate line
 	local separator = "----------------------------"
@@ -693,7 +694,7 @@ function MountManiaResetGame(keepScore)
 end
 
 function MountManiaEndGame(reset)
-	if MountMania_isPlayerCharacter(playerMountDataMaster) then
+	if XITK.isPlayerCharacter(playerMountDataMaster) then
 		MountMania_sendData(nil, reset or "WINNER")
 		if not reset then
 			MountManiaSendTopSuccessesMessage()
@@ -831,7 +832,7 @@ function MountManiaProcessReceivedMount(sender, mountID)
 	MountMania:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "CheckNearbyMounts")
 	UpdateMountManiaMatcherButton(mountID)
 	if not playerMountDataMaster then
-		MountManiaQuote("getready", false, true)
+		MountManiaQuote("getready", false, not MountManiaOptionsData["MountManiaSoundsDisabled"])
 		playerMountDataMaster = sender
 		if MountManiaFrame:IsShown() == false then
 			MountManiaMatcher:SetParent(UIParent)
@@ -866,9 +867,9 @@ local loseEmotes = { "APPLAUD", "CRY", "BOW" }
 function MountManiaProcessReceivedEnd(sender, winner)
 	if playerMountDataMaster == sender or publicGameJoined == sender then
 		if winner then
-			MountManiaQuote("whowon", false, true)
+			MountManiaQuote("whowon", false, not MountManiaOptionsData["MountManiaSoundsDisabled"])
 			local topSuccesses = MountManiaGetWinners()
-			if topSuccesses[MountMania_playerCharacter()] then
+			if topSuccesses[XITK.playerCharacter()] then
 				local randomEmote = winEmotes[math.random(#winEmotes)]
 				C_Timer.After(4, function()
 					DoEmote(randomEmote, "none")
@@ -892,7 +893,7 @@ function MountManiaProcessReceivedEnd(sender, winner)
 		publicGameJoined = nil
 	end
 	if not publicGameJoined then
-		if not playerMountDataMaster or MountMania_isPlayerCharacter(playerMountDataMaster) then
+		if not playerMountDataMaster or XITK.isPlayerCharacter(playerMountDataMaster) then
 			UpdateMountManiaMatcherButton()
 		end
 		if not playerMountDataMaster then

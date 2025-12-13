@@ -1,10 +1,12 @@
+local XITK = LibStub("XamInsightToolKit")
+
 local function sendInfo(info, messageType, target)
 	local targetChan = getChatChannel()
 	if target or targetChan == "SAY" then
 		local targetToSend = target
 		if not targetToSend and UnitIsPlayer("target") then
 			local name, realm = UnitFullName("target")
-			targetToSend = name and MountMania_addRealm(name, realm)
+			targetToSend = name and XITK.addRealm(name, realm)
 		end
 		
 		if targetToSend then
@@ -38,7 +40,7 @@ function MountMania_askToJoin(master)
 	local target = master
 	if not target and UnitIsPlayer("target") and not UnitIsUnit("target", "player") then
 		local name, realm = UnitFullName("target")
-		target = name and MountMania_addRealm(name, realm)
+		target = name and XITK.addRealm(name, realm)
 	end
 	if target then
 		MountMania:SendCommMessage(MountManiaGlobal_CommPrefix, "JoinGame#NoData", "WHISPER", target)
@@ -66,10 +68,10 @@ end
 
 function MountMania:ReceiveDataFrame_OnEvent(prefix, message, distribution, sender)
 	if prefix == MountManiaGlobal_CommPrefix then
-		local senderFullName = MountMania_addRealm(sender)
+		local senderFullName = XITK.addRealm(sender)
 		--MountMania:Print(time().." - Received message from "..senderFullName..".")
 		local messageType, messageMessage = strsplit("#", message, 2)
-		if not MountMania_isPlayerCharacter(senderFullName) then
+		if not XITK.isPlayerCharacter(senderFullName) then
 			if messageType == "Data" then
 				local success, o = self:Deserialize(messageMessage)
 				if success == false then
@@ -95,7 +97,7 @@ function MountMania:ReceiveDataFrame_OnEvent(prefix, message, distribution, send
 					classFileName = o.classFileName
 				end
 				if mountID then
-					MountMania_CompareMountWithCurrent(MountMania_playerCharacter(), senderFullName, mountID, classFileName)
+					MountMania_CompareMountWithCurrent(XITK.playerCharacter(), senderFullName, mountID, classFileName)
 				end
 			elseif messageType == "JoinGame" then
 				MountManiaInvitePlayer(senderFullName)

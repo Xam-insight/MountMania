@@ -12,6 +12,7 @@ externals:
 	Libs/Ace3/CallbackHandler-1.0: https://repos.wowace.com/wow/ace3/trunk/CallbackHandler-1.0
 	Libs/Ace3/LibStub: https://repos.wowace.com/wow/ace3/trunk/LibStub
 	Libs/LibDataBroker-1.1: https://repos.wowace.com/wow/libdatabroker-1-1
+	Libs/XamInsightToolKit: https://github.com/Xam-insight/XamInsightToolKit
 	Libs/EZBlizzardUiPopups: https://github.com/Xam-insight/EZBlizzardUiPopups
 	../CustomAchiever: https://github.com/Xam-insight/CustomAchiever
 	../CustomAchiever/Libs/Ace3/AceAddon-3.0: https://repos.wowace.com/wow/ace3/trunk/AceAddon-3.0
@@ -29,11 +30,14 @@ externals:
 	../CustomAchiever/Libs/LibDBIcon-1.0: https://repos.wowace.com/wow/libdbicon-1-0/trunk/LibDBIcon-1.0
 	../CustomAchiever/Libs/UTF8: https://repos.wowace.com/wow/utf8/trunk
 	#CustomAchiever/Libs/LibUIDropDownMenu: https://repos.wowace.com/wow/libuidropdownmenu/trunk/LibUIDropDownMenu
+	../CustomAchiever/Libs/XamInsightToolKit: https://github.com/Xam-insight/XamInsightToolKit
 	../CustomAchiever/Libs/EZBlizzardUiPopups: https://github.com/Xam-insight/EZBlizzardUiPopups
 
 ignore:
+	- Libs/XamInsightToolKit/XamInsightToolKit.toc
 	- Libs/EZBlizzardUiPopups/EZBlizzardUiPopups.toc
 	- Libs/EZBlizzardUiPopups/CHANGELOG.txt
+	- ../CustomAchiever/Libs/XamInsightToolKit/XamInsightToolKit.toc
 	- ../CustomAchiever/Libs/EZBlizzardUiPopups/EZBlizzardUiPopups.toc
 	- ../CustomAchiever/Libs/EZBlizzardUiPopups/CHANGELOG.txt
 	- sound/6023952_original.ogg

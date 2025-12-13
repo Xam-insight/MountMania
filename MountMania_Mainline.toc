@@ -1,8 +1,8 @@
-## Interface: 110207
+## Interface: 110207,120000
 ## Title: Mount |cFFFF7744M|cFF55AA55a|cFFFFCC00N|cFFAA77FFi|cFFFF5555A|r
 ## IconTexture: Interface\Icons\achievement_guildperk_mountup.blp
 ## AddonCompartmentFunc: MountMania_OpenOptions
-## Version: 1.2.17
+## Version: 1.2.18
 ## Author: Xam_insight
 ## Category-enUS: Minigames
 ## Category-deDE: Minispiele
@@ -19,6 +19,8 @@
 
 Libs\Ace3\LibStub\LibStub.lua
 Libs\Ace3\AceLocale-3.0\AceLocale-3.0.xml
+Libs\XamInsightToolKit\XamInsightToolKit.lua
+Libs\EZBlizzardUiPopups\EZBlizzardUiPopups_db.lua
 Libs\EZBlizzardUiPopups\EZBlizzardUiPopups.lua
 
 embeds.xml
