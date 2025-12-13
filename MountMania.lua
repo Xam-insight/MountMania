@@ -36,7 +36,7 @@ function MountManiaQuote(quote, talkingHead, sound)
 	if sound then
 		local willPlay -- [Sound is absent] = XITK.PlaySoundFileId(MountManiaAbigailQuotes[quote].sound, "Dialog")
 		if not willPlay then
-			XITK.PlaySoundFile(MountManiaAbigailQuotes[quote].sound, "Dialog")
+			XITK.PlaySoundFile("MountMania", MountManiaAbigailQuotes[quote].sound, "Dialog")
 		end
 	end
 end
