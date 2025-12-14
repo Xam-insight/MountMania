@@ -5,8 +5,7 @@ local function sendInfo(info, messageType, target)
 	if target or targetChan == "SAY" then
 		local targetToSend = target
 		if not targetToSend and UnitIsPlayer("target") then
-			local name, realm = UnitFullName("target")
-			targetToSend = name and XITK.addRealm(name, realm)
+			targetToSend = XITK.fullName("target")
 		end
 		
 		if targetToSend then
@@ -39,8 +38,7 @@ end
 function MountMania_askToJoin(master)
 	local target = master
 	if not target and UnitIsPlayer("target") and not UnitIsUnit("target", "player") then
-		local name, realm = UnitFullName("target")
-		target = name and XITK.addRealm(name, realm)
+		target = XITK.fullName("target")
 	end
 	if target then
 		MountMania:SendCommMessage(MountManiaGlobal_CommPrefix, "JoinGame#NoData", "WHISPER", target)
