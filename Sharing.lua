@@ -4,7 +4,7 @@ local function sendInfo(info, messageType, target)
 	local targetChan = getChatChannel()
 	if target or targetChan == "SAY" then
 		local targetToSend = target
-		if not targetToSend and UnitIsPlayer("target") then
+		if not targetToSend and XITK.IsPlayerUnitSafe("target") then
 			targetToSend = XITK.fullName("target")
 		end
 		
@@ -37,7 +37,7 @@ end
 
 function MountMania_askToJoin(master)
 	local target = master
-	if not target and UnitIsPlayer("target") and not UnitIsUnit("target", "player") then
+	if not target and XITK.IsPlayerUnitSafe("target") and not UnitIsUnit("target", "player") then
 		target = XITK.fullName("target")
 	end
 	if target then
