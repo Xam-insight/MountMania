@@ -29,6 +29,17 @@ MountManiaAbigailQuotes = {
 	["2"]        = { quote = L["MOUNTMANIA_QUOTE_NEXT2"],    sound = 6023954 },
 }
 
+MountManiaClassMountsList = {
+	17, 41, 83, 84, 149, 150, 221, 236, 338, 350, 351, 367, 368, 780, 861,
+	864, 865, 866, 867, 868, 870, 872, 884, 885, 888, 889, 890, 891, 892,
+	893, 894, 898, 930, 931, 1046, 1047, 1225, 1568, 2233, 2720, 2721,
+	2723, 2724, 2725, 2726, 2727, 2728, 2729, 2730, 2731,
+}
+MountManiaClassMounts = {}
+for _, mountID in ipairs(MountManiaClassMountsList) do
+    MountManiaClassMounts[mountID] = true
+end
+
 function MountManiaQuote(quote, talkingHead, sound)
 	if talkingHead then
 		EZBUP.npcDialog(224220, MountManiaAbigailQuotes[quote].quote)
@@ -510,11 +521,11 @@ function MountManiaSummonMount()
 	local alreadySummonedCount = 0
 	local activeMountID
     for _, mountID in ipairs(mountIDs) do
-		local _, _, _, isActive, isUsable, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(mountID)
+		local _, _, _, isActive, isUsable, _, _, isFactionSpecific, _, _, isCollected = C_MountJournal.GetMountInfoByID(mountID)
 		if isActive then
 			activeMountID = mountID
 		end
-		if isUsable and isCollected then
+		if isUsable and isCollected and not isFactionSpecific and not MountManiaClassMounts[mountID] then
 			usableCount = usableCount + 1
 			if getValue(alreadySummoned, playerMountDataMaster, mountID) then
 				alreadySummonedCount = alreadySummonedCount + 1
