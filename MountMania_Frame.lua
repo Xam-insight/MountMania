@@ -156,10 +156,11 @@ function getFontStringFromMountManiaFramePool(id, name, template, aMountManiaLin
 end
 
 local function GetSuccessColor(successes)
-    local clampedSuccesses = math.max(0, math.min(successes, maxSuccesses)) -- Ensure the value is between 0 and maxSuccesses
+	local securedMaxSuccesses = math.max(1, maxSuccesses) -- Ensure maxSuccesses > 0
+    local clampedSuccesses = math.max(0, math.min(successes, securedMaxSuccesses)) -- Ensure the value is between 0 and maxSuccesses
     local color = {
-        r = (maxSuccesses - clampedSuccesses) / maxSuccesses, -- Red decreases as successes increase
-        g = clampedSuccesses / maxSuccesses, -- Green increases as successes increase
+        r = (securedMaxSuccesses - clampedSuccesses) / securedMaxSuccesses, -- Red decreases as successes increase
+        g = clampedSuccesses / securedMaxSuccesses, -- Green increases as successes increase
         b = 0
     }
     return color
