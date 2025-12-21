@@ -321,7 +321,7 @@ end
 	
 function MountMania_AddChatFilter()
 	-- Register the filter for the SAY channel
-	ChatFrame_AddMessageEventFilter("CHAT_MSG_SAY", MountManiaChatFilter)
+	ChatFrameUtil.AddMessageEventFilter("CHAT_MSG_SAY", MountManiaChatFilter)
 end
 
 function MountMania_RemoveChatFilter()
