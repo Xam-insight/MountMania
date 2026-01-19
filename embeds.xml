@@ -242,7 +242,7 @@
 				self:GetParent():EnableMouse(not locked)
 				self:GetParent().alphaFunc()
 				MountManiaWindow[self:GetParent():GetAttribute("LockOptionParam")] = locked
-				MountMania_PlaySound(SOUNDKIT.UI_70_ARTIFACT_FORGE_APPEARANCE_LOCKED, "SFX", true)
+				PlaySound(SOUNDKIT.UI_70_ARTIFACT_FORGE_APPEARANCE_LOCKED, "SFX")
 			</OnClick>
 			<OnEnter>
 				MountManiaButtonEnter(self)
