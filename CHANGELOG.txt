@@ -2,7 +2,6 @@
 	- TOC for 12.0.0.
 	- Class and faction mounts are not summoned anymore.
 	- Code optimization.
-	- [ACE3] 12.0.0 changes integration.
 - v1.2.17
 	- [CustomAchiever] v1.5.8 integration.
 - v1.2.16
