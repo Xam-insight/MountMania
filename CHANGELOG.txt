@@ -1,4 +1,6 @@
-﻿- v1.2.19
+﻿- v1.2.20
+	- Fixed: No more secret value error on UNIT_SPELLCAST_SUCCEEDED.
+- v1.2.19
 	- TOC for 12.0.1.
 - v1.2.18
 	- TOC for 12.0.0.

@@ -446,23 +446,47 @@ function MountMania_CompareMountWithCurrent(master, playerName, mountID, classFi
 	end
 end
 
+local function PrepareDataAndCompare(unit, master, mountID)
+	if unit and master and mountID then
+		local playerName = XITK.fullName(unit)
+		local classFileName
+		if playerName ~= playerMountDataMaster then
+			local _, englishClass = UnitClass(unit)
+			classFileName = englishClass
+		end
+		MountMania_CompareMountWithCurrent(master, playerName, mountID, classFileName, "CheckNearbyMounts")
+		updateMountManiaFrame()
+	end
+end
+
 -- Function to compare another player's mount with the player's current mount
 function MountMania:CheckNearbyMounts(event, unit, _, spellID)
     if XITK.countTableElements(currentMountForMountManiaID) == 0 then
         return -- Skip if the player has no mount currently set
     end
-
-    local mountID = C_MountJournal.GetMountFromSpell(spellID)
-	local playerName = XITK.fullName(unit)
-	local classFileName
-	if playerName ~= playerMountDataMaster then
-		local _, englishClass = UnitClass(unit)
-		classFileName = englishClass
+	
+	local secureSpellID = spellID
+	if issecretvalue and issecretvalue(secureSpellID) then
+		AuraUtil.ForEachAura(unit, "HELPFUL", nil, function(aura)
+			local spellIdFromAura = aura.spellId
+			if spellIdFromAura then
+				local mountIDFromSpellID = C_MountJournal.GetMountFromSpell(spellIdFromAura)
+				if mountIDFromSpellID then
+					for k in pairs(currentMountForMountManiaID) do
+						local currentMount = currentMountForMountManiaID[k]
+						if currentMount and mountIDFromSpellID == currentMount then
+							PrepareDataAndCompare(unit, k, mountIDFromSpellID)
+						end
+					end
+				end
+			end
+		end, true)
+	else
+		local mountID = C_MountJournal.GetMountFromSpell(secureSpellID)
+		for k in pairs(currentMountForMountManiaID) do
+			PrepareDataAndCompare(unit, k, mountID)
+		end
 	end
-	for k in pairs(currentMountForMountManiaID) do
-		MountMania_CompareMountWithCurrent(k, playerName, mountID, classFileName)
-	end
-	updateMountManiaFrame()
 end
 
 function MountMania:MountManiaPlayerEntersCombat(event)
