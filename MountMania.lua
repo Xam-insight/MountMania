@@ -471,7 +471,7 @@ function MountMania:CheckNearbyMounts(event, unit, _, spellID)
 			local spellIdFromAura = aura.spellId
 			if spellIdFromAura then
 				local mountIDFromSpellID = C_MountJournal.GetMountFromSpell(spellIdFromAura)
-				if mountIDFromSpellID then
+				if mountIDFromSpellID and (not issecretvalue or not issecretvalue(mountIDFromSpellID)) then
 					for k in pairs(currentMountForMountManiaID) do
 						local currentMount = currentMountForMountManiaID[k]
 						if currentMount and mountIDFromSpellID == currentMount then
