@@ -1,4 +1,4 @@
-﻿- v1.2.22
+﻿- v1.2.23
 	- Fixed: No more emote errors while in combat.
 - v1.2.21
 	- Fixed: No more secret value error on UNIT_SPELLCAST_SUCCEEDED.
