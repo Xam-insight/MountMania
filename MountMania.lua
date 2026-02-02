@@ -432,7 +432,7 @@ function MountMania_CompareMountWithCurrent(master, playerName, mountID, classFi
 			if isPlayerCharacter then
 				setValue(alreadySummoned, master, mountID)
 				C_Timer.After(2, function()
-					DoEmote("MOUNTSPECIAL")
+					XITK.DoEmote("MOUNTSPECIAL")
 				end)
 			end
 			if playerMountDataMaster and playerMountDataMaster == master and playerName ~= playerMountDataMaster then
@@ -800,7 +800,7 @@ function MountManiaSummonMatchingMount(mountID, notCollected)
 			notOwnedMountMessageSent = true
 		else
 			Dismount()
-			DoEmote("CRY", "target")
+			XITK.DoEmote("CRY", "target")
 		end
 		return
 	end
@@ -827,7 +827,7 @@ function MountManiaSummonMatchingMount(mountID, notCollected)
 	end)
 	
 	--C_Timer.After(wait + 3.5, function()
-	--	DoEmote("MOUNTSPECIAL")
+	--	XITK.DoEmote("MOUNTSPECIAL")
 	--end)
 end
 
@@ -907,12 +907,12 @@ function MountManiaProcessReceivedEnd(sender, winner)
 			if topSuccesses[XITK.playerCharacter()] then
 				local randomEmote = winEmotes[math.random(#winEmotes)]
 				C_Timer.After(4, function()
-					DoEmote(randomEmote, "none")
+					XITK.DoEmote(randomEmote, "none")
 				end)
 			else
 				local randomEmote = loseEmotes[math.random(#loseEmotes)]
 				C_Timer.After(4, function()
-					DoEmote(randomEmote, "none")
+					XITK.DoEmote(randomEmote, "none")
 				end)
 			end
 		elseif playerMountDataMaster == sender then
