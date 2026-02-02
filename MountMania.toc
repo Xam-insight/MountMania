@@ -1,6 +1,6 @@
 ## Interface: 120000,120001
 ## Title: Mount Mania
-## Version: 1.2.23
+## Version: 1.2.25
 ## Notes: This file exists only to support packaging systems.
 ## LoadOnDemand: 1
 

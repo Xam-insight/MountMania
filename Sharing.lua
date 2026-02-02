@@ -1,11 +1,11 @@
-local XITK = LibStub("XamInsightToolKit")
+local XITK = LibStub("XamInsightToolKit-2.0")
 
 local function sendInfo(info, messageType, target)
 	local targetChan = getChatChannel()
 	if target or targetChan == "SAY" then
 		local targetToSend = target
-		if not targetToSend and XITK.IsPlayerUnitSafe("target") then
-			targetToSend = XITK.fullName("target")
+		if not targetToSend and XITK:IsPlayerUnitSafe("target") then
+			targetToSend = XITK:fullName("target")
 		end
 		
 		if targetToSend then
@@ -37,8 +37,8 @@ end
 
 function MountMania_askToJoin(master)
 	local target = master
-	if not target and XITK.IsPlayerUnitSafe("target") and not UnitIsUnit("target", "player") then
-		target = XITK.fullName("target")
+	if not target and XITK:IsPlayerUnitSafe("target") and not UnitIsUnit("target", "player") then
+		target = XITK:fullName("target")
 	end
 	if target then
 		MountMania:SendCommMessage(MountManiaGlobal_CommPrefix, "JoinGame#NoData", "WHISPER", target)
@@ -66,10 +66,10 @@ end
 
 function MountMania:ReceiveDataFrame_OnEvent(prefix, message, distribution, sender)
 	if prefix == MountManiaGlobal_CommPrefix then
-		local senderFullName = XITK.addRealm(sender)
+		local senderFullName = XITK:addRealm(sender)
 		--MountMania:Print(time().." - Received message from "..senderFullName..".")
 		local messageType, messageMessage = strsplit("#", message, 2)
-		if not XITK.isPlayerCharacter(senderFullName) then
+		if not XITK:isPlayerCharacter(senderFullName) then
 			if messageType == "Data" then
 				local success, o = self:Deserialize(messageMessage)
 				if success == false then
@@ -95,7 +95,7 @@ function MountMania:ReceiveDataFrame_OnEvent(prefix, message, distribution, send
 					classFileName = o.classFileName
 				end
 				if mountID then
-					MountMania_CompareMountWithCurrent(XITK.playerCharacter(), senderFullName, mountID, classFileName)
+					MountMania_CompareMountWithCurrent(XITK:playerCharacter(), senderFullName, mountID, classFileName)
 				end
 			elseif messageType == "JoinGame" then
 				MountManiaInvitePlayer(senderFullName)
