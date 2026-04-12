@@ -1,4 +1,6 @@
-﻿- v1.2.25
+﻿- v1.2.26
+	- TOC for 12.0.5.
+- v1.2.25
 	- LibStub usage adjustments.
 	- Fixed: No more emote errors while in combat.
 - v1.2.21
