@@ -20,7 +20,7 @@ L["MOUNTMANIA_MATCHER_TOOLTIP_MESSAGE"] = "Si vous cliquez, vous enverrez un mes
 L["MOUNTMANIA_MATCHER_MESSAGE"] = "Je l'ai pas celle-là !"
 
 L["MOUNTMANIA_JOIN"] = "Rejoindre la partie de la cible"
-L["MOUNTMANIA_JOIN_TOOLTIP"] = "Si la cible a une partie de Mount Mania|nen cours, rejoignez-là."
+L["MOUNTMANIA_JOIN_TOOLTIP"] = "Si la cible a une partie de Mount Mania|nen cours, rejoignez-la."
 
 L["LOCKBUTTON_TOOLTIP"] = "Verrouiller"
 L["LOCKBUTTON_TOOLTIPDETAIL"] = "Vérouille / dévérouille la fenêtre."

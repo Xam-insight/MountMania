@@ -1,4 +1,7 @@
-﻿- v1.2.26
+﻿- v1.2.27
+	- TOC for 12.1.0.
+	- [LibUIDropDownMenu] v4.27 integration.
+- v1.2.26
 	- TOC for 12.0.5.
 - v1.2.25
 	- LibStub usage adjustments.
