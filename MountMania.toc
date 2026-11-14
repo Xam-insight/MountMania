@@ -1,6 +1,6 @@
-## Interface: 120105
+## Interface: 120105,120107
 ## Title: Mount Mania
-## Version: 1.2.28
+## Version: 1.2.29
 ## Notes: This file exists only to support packaging systems.
 ## LoadOnDemand: 1
 
